@@ -8,7 +8,7 @@
 			<div class="login-bg"><img src="@/assets/login.png" alt="" /></div>
 		</div>
 		<div class="login-form">
-			<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules">
+			<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" @keyup.enter="onLogin">
 				<div class="login-title">{{ $t('app.signIn') }}</div>
 				<el-form-item prop="username">
 					<el-input v-model="loginForm.username" :prefix-icon="User" :placeholder="$t('app.username')"></el-input>
@@ -18,7 +18,7 @@
 				</el-form-item>
 				<el-form-item prop="captcha" class="login-captcha">
 					<el-input v-model="loginForm.captcha" :placeholder="$t('app.captcha')" :prefix-icon="Key"></el-input>
-					<img src="@/assets/captcha.gif" />
+					<img :src="captchaBase64" @click="onCaptcha" />
 				</el-form-item>
 				<el-form-item class="login-button">
 					<el-button type="primary" @click="onLogin()">{{ $t('app.signIn') }}</el-button>
@@ -29,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { User, Lock, Key } from '@element-plus/icons-vue'
 import store from '@/store'
+import { getCaptcha } from '@/api/oauth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
@@ -39,10 +40,12 @@ const router = useRouter()
 const { t } = useI18n()
 const loginFormRef: any = ref(null)
 
-const loginForm = ref({
+const loginForm = reactive({
+	grant_type: 'password',
 	username: 'admin',
 	password: 'admin',
-	captcha: 'UMTA8'
+	key: '',
+	captcha: ''
 })
 
 const loginRules = ref({
@@ -51,6 +54,17 @@ const loginRules = ref({
 	captcha: [{ required: true, message: t('required'), trigger: 'blur' }]
 })
 
+onMounted(() => {
+	onCaptcha()
+})
+
+let captchaBase64 = ref(null)
+const onCaptcha = async () => {
+	const { data } = await getCaptcha()
+	loginForm.key = data.key
+	captchaBase64.value = data.image
+}
+
 const onLogin = () => {
 	loginFormRef.value.validate((valid: boolean) => {
 		if (!valid) {
@@ -58,9 +72,14 @@ const onLogin = () => {
 		}
 
 		// 用户登录
-		store.userStore.loginAction(loginForm).then(() => {
-			router.push({ path: '/home' })
-		})
+		store.userStore
+			.loginAction(loginForm)
+			.then(() => {
+				router.push({ path: '/home' })
+			})
+			.catch(() => {
+				onCaptcha()
+			})
 	})
 }
 </script>

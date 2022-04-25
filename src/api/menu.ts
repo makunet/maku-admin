@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getMenu() {
 	return request({
-		url: '/data/menu.json',
+		url: '/sys/menu/nav',
 		method: 'get'
 	})
 }

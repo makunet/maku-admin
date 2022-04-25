@@ -16,8 +16,8 @@ export const validateEmail = (rule: any, value: any, callback: (e?: Error) => an
 }
 
 export const validatePassword = (rule: any, value: any, callback: (e?: Error) => any) => {
-	if (value.length < 6) {
-		callback(new Error(i18n.global.t('error.password', { len: 6 })))
+	if (value.length < 4) {
+		callback(new Error(i18n.global.t('error.password', { len: 4 })))
 	} else {
 		callback()
 	}

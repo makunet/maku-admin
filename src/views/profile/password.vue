@@ -19,18 +19,21 @@
 </template>
 
 <script setup lang="ts" name="ProfilePassword">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { reactive, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import store from '@/store'
 import { useI18n } from 'vue-i18n'
 import { validatePassword } from '@/utils/validate'
 import { updatePassword } from '@/api/user'
+import { ElMessage } from 'element-plus'
+import { closeTab } from '@/utils/tabs'
 
 const router = useRouter()
+const route = useRoute()
 const { t } = useI18n()
 const dataFormRef: any = ref(null)
 
-const dataForm = ref({
+const dataForm = reactive({
 	password: '',
 	newPassword: '',
 	confirmPassword: ''
@@ -49,8 +52,10 @@ const handleDataForm = () => {
 		}
 
 		// 修改密码
-		updatePassword(dataForm).then((data: any) => {
-			console.log(data)
+		updatePassword(dataForm).then(() => {
+			ElMessage.success('修改成功')
+			// 关闭当前tab
+			closeTab(router, route)
 		})
 	})
 }
