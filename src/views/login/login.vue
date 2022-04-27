@@ -32,13 +32,14 @@
 import { ref, reactive, onMounted } from 'vue'
 import { User, Lock, Key } from '@element-plus/icons-vue'
 import store from '@/store'
-import { getCaptcha } from '@/api/oauth'
+import { useCaptchaApi } from '@/api/oauth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
 const { t } = useI18n()
-const loginFormRef: any = ref(null)
+const loginFormRef = ref()
+const captchaBase64 = ref()
 
 const loginForm = reactive({
 	grant_type: 'password',
@@ -58,9 +59,8 @@ onMounted(() => {
 	onCaptcha()
 })
 
-let captchaBase64 = ref(null)
 const onCaptcha = async () => {
-	const { data } = await getCaptcha()
+	const { data } = await useCaptchaApi()
 	loginForm.key = data.key
 	captchaBase64.value = data.image
 }

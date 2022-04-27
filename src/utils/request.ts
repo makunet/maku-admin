@@ -55,8 +55,7 @@ service.interceptors.response.use(
 
 		// 没有权限，如：未登录、登录过期等，需要跳转到登录页
 		if (res.code === 401) {
-			const userStore = store.userStore
-			userStore.setToken('')
+			store.userStore?.setToken('')
 			location.reload()
 		}
 

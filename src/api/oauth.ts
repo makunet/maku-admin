@@ -1,30 +1,21 @@
-import request from '@/utils/request'
+import service from '@/utils/request'
 
-export function getCaptcha() {
-	return request({
-		url: '/oauth/captcha',
-		method: 'get'
-	})
+export const useCaptchaApi = () => {
+	return service.get('/oauth/captcha')
 }
 
-export function login(data: any) {
-	return request({
-		url: '/oauth/token',
-		method: 'post',
+export const useLoginApi = (data: any) => {
+	return service.post('/oauth/token', data, {
 		auth: {
 			username: 'web',
 			password: '123456'
 		},
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
-		},
-		data
+		}
 	})
 }
 
-export function logout() {
-	return request({
-		url: '/oauth/logout',
-		method: 'post'
-	})
+export const useLogoutApi = () => {
+	return service.post('/oauth/logout')
 }

@@ -1,16 +1,9 @@
-import request from '@/utils/request'
+import service from '@/utils/request'
 
-export function getUserInfo() {
-	return request({
-		url: '/sys/user/info',
-		method: 'get'
-	})
+export const useUserInfoApi = () => {
+	return service.get('/sys/user/info')
 }
 
-export function updatePassword(data: any) {
-	return request({
-		url: '/sys/user/password',
-		method: 'put',
-		data
-	})
+export const updatePasswordApi = (data: any) => {
+	return service.put('/sys/user/password', data)
 }

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { login, logout } from '@/api/oauth'
-import { getUserInfo } from '@/api/user'
+import { useLoginApi, useLogoutApi } from '@/api/oauth'
+import { useUserInfoApi } from '@/api/user'
 import cache from '@/utils/cache'
 
 export const userStore = defineStore('userStore', {
@@ -23,17 +23,17 @@ export const userStore = defineStore('userStore', {
 		},
 		// 用户登录
 		async loginAction(loginForm: any) {
-			const res: any = await login(loginForm)
+			const res: any = await useLoginApi(loginForm)
 			this.setToken(res.access_token)
 		},
 		// 获取用户信息
 		async getUserInfoAction() {
-			const { data } = await getUserInfo()
+			const { data } = await useUserInfoApi()
 			this.setUser(data)
 		},
 		// 用户退出
 		async logoutAction() {
-			await logout()
+			await useLogoutApi()
 
 			// 移除 token
 			this.setToken(null)

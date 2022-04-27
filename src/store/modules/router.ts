@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getMenu } from '@/api/menu'
+import { useMenuNavApi } from '@/api/menu'
 import { generateRoutes } from '@/router'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -10,7 +10,7 @@ export const routerStore = defineStore('routerStore', {
 	}),
 	actions: {
 		async getMenuRoutes() {
-			const { data } = await getMenu()
+			const { data } = await useMenuNavApi()
 			const routes = generateRoutes(data)
 
 			this.menuRoutes.push(...routes)
