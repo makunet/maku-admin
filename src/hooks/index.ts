@@ -101,7 +101,7 @@ export const useCrud = (options: IHooksOptions) => {
 		query()
 	}
 
-	const deleteHandle = (id: Number | String) => {
+	const deleteHandle = (key: number | string) => {
 		if (!state.deleteUrl) {
 			return
 		}
@@ -112,7 +112,7 @@ export const useCrud = (options: IHooksOptions) => {
 			type: 'warning'
 		})
 			.then(() => {
-				service.delete(state.deleteUrl + '/' + id).then(() => {
+				service.delete(state.deleteUrl + '/' + key).then(() => {
 					ElMessage.success('删除成功')
 
 					query()
@@ -121,10 +121,10 @@ export const useCrud = (options: IHooksOptions) => {
 			.catch(() => {})
 	}
 
-	const deleteBatchHandle = (id?: Number | String) => {
+	const deleteBatchHandle = (key?: number | string) => {
 		let data: any[] = []
-		if (id) {
-			data = [id]
+		if (key) {
+			data = [key]
 		} else {
 			data = state.dataListSelections ? state.dataListSelections : []
 

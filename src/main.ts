@@ -11,6 +11,9 @@ import '@/styles/index.scss'
 import 'element-plus/theme-chalk/src/message.scss'
 import 'element-plus/theme-chalk/src/message-box.scss'
 
+import FastTableColumn from '@/components/fast-table-column'
+import FastRadioGroup from '@/components/fast-radio-group'
+import FastSelect from '@/components/fast-select'
 const app = createApp(App)
 
 app.use(createPinia())
@@ -18,4 +21,7 @@ app.use(createPinia())
 registerStore()
 app.use(router)
 app.use(i18n)
+app.use(FastTableColumn)
+app.use(FastRadioGroup)
+app.use(FastSelect)
 app.mount('#app')

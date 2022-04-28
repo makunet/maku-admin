@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ITheme } from '@/store/theme/interface'
 import cache from '@/utils/cache'
+import { useDictTypeAllApi } from '@/api/dict'
 
 export const appStore = defineStore('appStore', {
 	state: () => ({
@@ -10,6 +11,8 @@ export const appStore = defineStore('appStore', {
 		language: cache.getLanguage(),
 		// 组件大小
 		componentSize: cache.getComponentSize(),
+		// 字典列表
+		dictList: [],
 		// 主题
 		theme: cache.getTheme()
 	}),
@@ -25,6 +28,10 @@ export const appStore = defineStore('appStore', {
 		setComponentSize(size: string) {
 			this.componentSize = size
 			cache.setComponentSize(size)
+		},
+		async getDictListAction() {
+			const { data } = await useDictTypeAllApi()
+			this.dictList = data || []
 		},
 		setTheme(theme: ITheme) {
 			this.theme = theme

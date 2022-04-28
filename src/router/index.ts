@@ -79,6 +79,8 @@ router.beforeEach(async (to, from, next) => {
 			// 用户信息不存在，则重新拉取用户等信息
 			if (!store.userStore.user.id) {
 				await store.userStore.getUserInfoAction()
+				await store.userStore.getAuthorityListAction()
+				await store.appStore.getDictListAction()
 				const menuRoutes = await store.routerStore.getMenuRoutes()
 
 				// 根据后端菜单路由，生成KeepAlive路由

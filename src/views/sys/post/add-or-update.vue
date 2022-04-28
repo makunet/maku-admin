@@ -1,17 +1,17 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="80px" @keyup.enter="submitHandle()">
-			<el-form-item prop="dictValue" label="字典值">
-				<el-input v-model="dataForm.dictValue" placeholder="字典值"></el-input>
+			<el-form-item label="岗位编码" prop="postCode">
+				<el-input v-model="dataForm.postCode"></el-input>
 			</el-form-item>
-			<el-form-item prop="dictLabel" label="字典标签">
-				<el-input v-model="dataForm.dictLabel" placeholder="字典标签"></el-input>
+			<el-form-item label="岗位名称" prop="postName">
+				<el-input v-model="dataForm.postName"></el-input>
 			</el-form-item>
-			<el-form-item prop="sort" label="排序">
-				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" label="排序"></el-input-number>
+			<el-form-item label="排序" prop="sort">
+				<el-input-number v-model="dataForm.sort" :min="0"></el-input-number>
 			</el-form-item>
-			<el-form-item prop="remark" label="备注">
-				<el-input v-model="dataForm.remark" placeholder="备注"></el-input>
+			<el-form-item label="状态" prop="status">
+				<fast-radio-group v-model="dataForm.status" dict-type="post_status"></fast-radio-group>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -24,27 +24,22 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useDictDataApi, useDictDataSubmitApi } from '@/api/dict'
+import { usePostApi, usePostSubmitApi } from '@/api/post'
 
 const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
 const dataFormRef = ref()
+
 const dataForm = reactive({
 	id: '',
-	dictTypeId: 0,
-	dictLabel: '',
-	dictValue: '',
+	postCode: '',
+	postName: '',
 	sort: 0,
-	remark: ''
+	status: 1
 })
 
-const dataRules = ref({
-	dictLabel: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-	dictValue: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
-})
-
-const init = (id?: Number) => {
+const init = (id?: number) => {
 	visible.value = true
 	dataForm.id = ''
 
@@ -55,15 +50,20 @@ const init = (id?: Number) => {
 
 	// id 存在则为修改
 	if (id) {
-		getDictData(id)
+		getPost(id)
 	}
 }
 
-const getDictData = (id: Number) => {
-	useDictDataApi(id).then(res => {
+const getPost = (id: number) => {
+	usePostApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 	})
 }
+
+const dataRules = ref({
+	postCode: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	postName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+})
 
 // 表单提交
 const submitHandle = () => {
@@ -72,7 +72,7 @@ const submitHandle = () => {
 			return false
 		}
 
-		useDictDataSubmitApi(dataForm).then(() => {
+		usePostSubmitApi(dataForm).then(() => {
 			ElMessage.success({
 				message: '操作成功',
 				duration: 500,
@@ -86,7 +86,6 @@ const submitHandle = () => {
 }
 
 defineExpose({
-	init,
-	dataForm
+	init
 })
 </script>

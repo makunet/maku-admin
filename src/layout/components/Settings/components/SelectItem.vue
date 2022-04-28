@@ -1,16 +1,16 @@
 <template>
 	<div class="settings-select">
-		<span> {{ props.title }}</span>
-		<el-select v-model="value" size="default" style="width: 100px" :disabled="props.disabled" @change="handleChange">
-			<el-option v-for="option in props.options" :key="option.value" :label="option.label" :value="option.value"></el-option>
+		<span> {{ title }}</span>
+		<el-select :model-value="modelValue" size="default" style="width: 100px" :disabled="disabled" @change="handleChange($event)">
+			<el-option v-for="option in options" :key="option.value" :label="option.label" :value="option.value"></el-option>
 		</el-select>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
+import { PropType } from 'vue'
 
-const props = defineProps({
+defineProps({
 	modelValue: {
 		type: String,
 		required: true
@@ -29,11 +29,9 @@ const props = defineProps({
 	}
 })
 
-const value = ref(props.modelValue)
-
 const emit = defineEmits(['update:modelValue', 'change'])
-const handleChange = () => {
-	emit('update:modelValue', value)
+const handleChange = (val: any) => {
+	emit('update:modelValue', val)
 	emit('change')
 }
 </script>

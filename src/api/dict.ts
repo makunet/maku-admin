@@ -1,5 +1,9 @@
 import service from '@/utils/request'
 
+export const useDictTypeAllApi = () => {
+	return service.get('/sys/dict/type/all')
+}
+
 export const useDictTypeApi = (id: Number) => {
 	return service.get('/sys/dict/type/' + id)
 }

@@ -1,6 +1,6 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
-		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="120px" @keyup.enter="submitHandle()">
+		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="80px" @keyup.enter="submitHandle()">
 			<el-form-item prop="dictType" label="字典类型">
 				<el-input v-model="dataForm.dictType" placeholder="字典类型"></el-input>
 			</el-form-item>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
 import { useDictTypeApi, useDictTypeSubmitApi } from '@/api/dict'
 
@@ -45,19 +45,17 @@ const dataRules = ref({
 
 const init = (id?: Number) => {
 	visible.value = true
-	nextTick(() => {
-		// 重置表单数据
-		if (dataFormRef.value) {
-			dataFormRef.value.resetFields()
-		}
+	dataForm.id = ''
 
-		// id 存在则为修改
-		if (id) {
-			getDictType(id)
-		} else {
-			dataForm.id = ''
-		}
-	})
+	// 重置表单数据
+	if (dataFormRef.value) {
+		dataFormRef.value.resetFields()
+	}
+
+	// id 存在则为修改
+	if (id) {
+		getDictType(id)
+	}
 }
 
 const getDictType = (id: Number) => {

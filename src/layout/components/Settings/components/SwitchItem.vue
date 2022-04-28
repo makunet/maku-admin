@@ -1,14 +1,12 @@
 <template>
 	<div class="settings-switch">
-		<span> {{ props.title }}</span>
-		<el-switch v-model="value" :disabled="props.disabled" @change="handleChange"></el-switch>
+		<span> {{ title }}</span>
+		<el-switch :model-value="modelValue" :disabled="disabled" @change="handleChange($event)"></el-switch>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const props = defineProps({
+defineProps({
 	modelValue: {
 		type: Boolean,
 		required: true
@@ -22,11 +20,9 @@ const props = defineProps({
 	}
 })
 
-const value = ref(props.modelValue)
-
 const emit = defineEmits(['update:modelValue', 'change'])
-const handleChange = () => {
-	emit('update:modelValue', value)
+const handleChange = (val: any) => {
+	emit('update:modelValue', val)
 	emit('change')
 }
 </script>

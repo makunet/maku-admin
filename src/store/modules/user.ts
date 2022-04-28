@@ -2,15 +2,19 @@ import { defineStore } from 'pinia'
 import { useLoginApi, useLogoutApi } from '@/api/oauth'
 import { useUserInfoApi } from '@/api/user'
 import cache from '@/utils/cache'
+import { useAuthorityListApi } from '@/api/menu'
 
 export const userStore = defineStore('userStore', {
 	state: () => ({
+		// 用户信息
 		user: {
 			id: '',
 			username: '',
-			email: '',
 			avatar: ''
 		},
+		// 权限列表
+		authorityList: [],
+		// 登录token
 		token: cache.getToken()
 	}),
 	actions: {
@@ -30,6 +34,11 @@ export const userStore = defineStore('userStore', {
 		async getUserInfoAction() {
 			const { data } = await useUserInfoApi()
 			this.setUser(data)
+		},
+		// 获取权限
+		async getAuthorityListAction() {
+			const { data } = await useAuthorityListApi()
+			this.authorityList = data || []
 		},
 		// 用户退出
 		async logoutAction() {

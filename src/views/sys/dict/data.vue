@@ -1,33 +1,28 @@
 <template>
 	<div>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList">
-			<el-form-item>
-				<el-input v-model="state.queryForm.dictLabel" placeholder="字典标签" clearable></el-input>
-			</el-form-item>
-			<el-form-item>
-				<el-input v-model="state.queryForm.dictValue" placeholder="字典值" clearable></el-input>
-			</el-form-item>
-			<el-form-item>
-				<el-button @click="getDataList">查询</el-button>
-			</el-form-item>
+		<el-form :inline="true" :model="state.queryForm">
 			<el-form-item>
 				<el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
 			</el-form-item>
-			<el-form-item>
-				<el-button type="danger" @click="deleteBatchHandle()">删除</el-button>
-			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%">
+		<el-table
+			v-loading="state.dataListLoading"
+			:data="state.dataList"
+			border
+			style="width: 100%"
+			@selection-change="selectionChangeHandle"
+			@sort-change="sortChangeHandle"
+		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="dictLabel" label="字典标签" header-align="center" align="center"> </el-table-column>
 			<el-table-column prop="dictValue" label="字典值" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="dictLabel" label="字典标签" header-align="center" align="center"> </el-table-column>
 			<el-table-column prop="sort" label="排序" sortable="custom" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="remark" label="备注" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="createTime" label="创建时间" sortable="custom" header-align="center" align="center" width="180"></el-table-column>
+			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-					<el-button type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
+					<el-button type="text" size="small" @click="deleteBatchHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -63,9 +58,7 @@ const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/dict/data/page',
 	deleteUrl: '/sys/dict/data',
 	queryForm: {
-		dictTypeId: props.dictTypeId,
-		dictLabel: '',
-		dictValue: ''
+		dictTypeId: props.dictTypeId
 	}
 })
 
@@ -75,5 +68,5 @@ const addOrUpdateHandle = (id?: Number) => {
 	addOrUpdateRef.value.init(id)
 }
 
-const { getDataList, sizeChangeHandle, currentChangeHandle, deleteHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, sizeChangeHandle, selectionChangeHandle, sortChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
 </script>

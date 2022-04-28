@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { getIconList } from '@/utils/tool'
 import { ElMessage } from 'element-plus/es'
 import { useMenuApi, useMenuListApi, useMenuSubmitApi } from '@/api/menu'
@@ -122,25 +122,23 @@ const dataForm = reactive({
 
 const init = (id?: Number) => {
 	visible.value = true
-	nextTick(() => {
-		// 重置表单数据
-		if (dataFormRef.value) {
-			dataFormRef.value.resetFields()
-		}
+	dataForm.id = ''
 
-		// id 存在则为修改
-		if (id) {
-			getMenu(id)
-		} else {
-			dataForm.id = ''
-		}
+	// 重置表单数据
+	if (dataFormRef.value) {
+		dataFormRef.value.resetFields()
+	}
 
-		// 菜单列表
-		getMenuList()
+	// id 存在则为修改
+	if (id) {
+		getMenu(id)
+	}
 
-		// icon列表
-		iconList.value = getIconList()
-	})
+	// 菜单列表
+	getMenuList()
+
+	// icon列表
+	iconList.value = getIconList()
 }
 
 // 菜单类型改变
