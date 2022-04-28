@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<div class="navbar-settings">
 		<svg-icon icon="icon-ellipsis-v" @click="visible = true"></svg-icon>
 		<el-drawer v-model="visible" :title="$t('settings.title')" :destroy-on-close="true" :size="280">
-			<el-scrollbar class="navbar-settings">
+			<el-scrollbar class="settings-container">
 				<el-space direction="vertical" alignment="flex-start">
 					<el-space>
 						<el-tooltip key="dark" effect="dark" :content="$t('settings.sidebarDark')" placement="top">
@@ -155,6 +155,11 @@ const handleResetConfig = async () => {
 
 <style lang="scss" scoped>
 .navbar-settings {
+	::v-deep(.el-drawer) {
+		--el-drawer-padding-primary: unset !important;
+	}
+}
+.settings-container {
 	padding: 15px;
 	color: #444444;
 	.settings-box-item {

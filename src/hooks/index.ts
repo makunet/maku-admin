@@ -9,14 +9,16 @@ export const useCrud = (options: IHooksOptions) => {
 		dataListUrl: '',
 		isPage: true,
 		deleteUrl: '',
+		primaryKey: 'id',
 		exportUrl: '',
 		queryForm: {},
 		dataList: [],
 		order: '',
-		orderField: '',
+		asc: false,
 		page: 1,
 		limit: 10,
 		total: 0,
+		pageSizes: [1, 10, 20, 50, 100, 200],
 		dataListLoading: false,
 		dataListSelections: []
 	}
@@ -48,9 +50,9 @@ export const useCrud = (options: IHooksOptions) => {
 
 		service
 			.get(state.dataListUrl, {
-				data: {
+				params: {
 					order: state.order,
-					orderField: state.orderField,
+					asc: state.asc,
 					page: state.isPage ? state.page : null,
 					limit: state.isPage ? state.limit : null,
 					...state.queryForm
@@ -66,6 +68,36 @@ export const useCrud = (options: IHooksOptions) => {
 
 	const getDataList = () => {
 		state.page = 1
+		query()
+	}
+
+	const sizeChangeHandle = (val: number) => {
+		state.page = 1
+		state.limit = val
+		query()
+	}
+
+	const currentChangeHandle = (val: number) => {
+		state.page = val
+		query()
+	}
+
+	// 多选
+	const selectionChangeHandle = (selections: any[]) => {
+		state.dataListSelections = selections.map((item: any) => state.primaryKey && item[state.primaryKey])
+	}
+
+	// 排序
+	const sortChangeHandle = (data: any) => {
+		const { prop, order } = data
+
+		if (prop && order) {
+			state.order = prop
+			state.asc = order === 'ascending'
+		} else {
+			state.order = ''
+		}
+
 		query()
 	}
 
@@ -89,14 +121,25 @@ export const useCrud = (options: IHooksOptions) => {
 			.catch(() => {})
 	}
 
-	const deleteBatchHandle = () => {
+	const deleteBatchHandle = (id?: Number | String) => {
+		let data: any[] = []
+		if (id) {
+			data = [id]
+		} else {
+			data = state.dataListSelections ? state.dataListSelections : []
+
+			if (data.length === 0) {
+				ElMessage.warning('请选择删除记录')
+				return
+			}
+		}
+
 		ElMessageBox.confirm('确定进行删除操作?', '提示', {
 			confirmButtonText: '确定',
 			cancelButtonText: '取消',
 			type: 'warning'
 		})
 			.then(() => {
-				const data = state.dataListSelections
 				if (state.deleteUrl) {
 					service.delete(state.deleteUrl, { data }).then(() => {
 						ElMessage.success('删除成功')
@@ -108,5 +151,5 @@ export const useCrud = (options: IHooksOptions) => {
 			.catch(() => {})
 	}
 
-	return { getDataList, deleteHandle, deleteBatchHandle }
+	return { getDataList, sizeChangeHandle, currentChangeHandle, selectionChangeHandle, sortChangeHandle, deleteHandle, deleteBatchHandle }
 }

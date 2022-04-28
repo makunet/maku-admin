@@ -73,9 +73,7 @@
   justify-content: flex-end;
 }
 
-.el-drawer {
-  --el-drawer-padding-primary: unset !important;
-  .el-drawer__header {
+.el-drawer .el-drawer__header {
     display: flex;
     align-items: center;
     height: var(--theme-header-height);
@@ -84,10 +82,5 @@
     color: #595959;
     font-size: 15px;
     border-bottom: 1px solid #f4f4f4;
-  }
-  .el-drawer__body {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-  }
 }
+

@@ -22,7 +22,7 @@
 			<el-table-column prop="openStyle" label="打开方式" header-align="center" align="center">
 				<template #default="scope">
 					<span v-if="scope.row.type !== 0"></span>
-					<el-tag v-else-if="scope.row.openStyle === 1">内部打开</el-tag>
+					<el-tag v-else-if="scope.row.openStyle === 0">内部打开</el-tag>
 					<el-tag v-else type="info">外部打开</el-tag>
 				</template>
 			</el-table-column>

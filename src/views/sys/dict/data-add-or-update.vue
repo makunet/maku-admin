@@ -1,0 +1,94 @@
+<template>
+	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
+		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="120px" @keyup.enter="submitHandle()">
+			<el-form-item prop="dictLabel" label="字典标签">
+				<el-input v-model="dataForm.dictLabel" placeholder="字典标签"></el-input>
+			</el-form-item>
+			<el-form-item prop="dictValue" label="字典值">
+				<el-input v-model="dataForm.dictValue" placeholder="字典值"></el-input>
+			</el-form-item>
+			<el-form-item prop="sort" label="排序">
+				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" label="排序"></el-input-number>
+			</el-form-item>
+			<el-form-item prop="remark" label="备注">
+				<el-input v-model="dataForm.remark" placeholder="备注"></el-input>
+			</el-form-item>
+		</el-form>
+		<template #footer>
+			<el-button @click="visible = false">取消</el-button>
+			<el-button type="primary" @click="submitHandle()">确定</el-button>
+		</template>
+	</el-dialog>
+</template>
+
+<script setup lang="ts">
+import { nextTick, reactive, ref } from 'vue'
+import { ElMessage } from 'element-plus/es'
+import { useDictDataApi, useDictDataSubmitApi } from '@/api/dict'
+
+const emit = defineEmits(['refreshDataList'])
+
+const visible = ref(false)
+const dataFormRef = ref()
+const dataForm = reactive({
+	id: '',
+	dictTypeId: 0,
+	dictLabel: '',
+	dictValue: '',
+	sort: 0,
+	remark: ''
+})
+
+const dataRules = ref({
+	dictLabel: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	dictValue: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+})
+
+const init = (id?: Number) => {
+	visible.value = true
+	nextTick(() => {
+		// 重置表单数据
+		if (dataFormRef.value) {
+			dataFormRef.value.resetFields()
+		}
+
+		// id 存在则为修改
+		if (id) {
+			getDictData(id)
+		} else {
+			dataForm.id = ''
+		}
+	})
+}
+
+const getDictData = (id: Number) => {
+	useDictDataApi(id).then(res => {
+		Object.assign(dataForm, res.data)
+	})
+}
+
+// 表单提交
+const submitHandle = () => {
+	dataFormRef.value.validate((valid: boolean) => {
+		if (!valid) {
+			return false
+		}
+
+		useDictDataSubmitApi(dataForm).then(() => {
+			ElMessage.success({
+				message: '操作成功',
+				duration: 500,
+				onClose: () => {
+					visible.value = false
+					emit('refreshDataList')
+				}
+			})
+		})
+	})
+}
+
+defineExpose({
+	init,
+	dataForm
+})
+</script>
