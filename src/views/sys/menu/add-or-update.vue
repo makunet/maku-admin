@@ -11,15 +11,8 @@
 			<el-form-item prop="name" label="名称">
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
-			<el-form-item prop="parentName" label="上级菜单" class="menu-list">
-				<el-popover
-					ref="menuListPopover"
-					v-model:visible="menuListVisible"
-					placement="bottom-start"
-					trigger="click"
-					:width="400"
-					popper-class="popover-pop"
-				>
+			<el-form-item prop="parentName" label="上级菜单" class="popover-list">
+				<el-popover ref="menuListPopover" v-model:visible="menuListVisible" placement="bottom-start" trigger="click" :width="400">
 					<template #reference>
 						<el-input v-model="dataForm.parentName" :readonly="true" placeholder="上级菜单" @click="menuListVisible = true">
 							<template #suffix>
@@ -27,7 +20,7 @@
 							</template>
 						</el-input>
 					</template>
-					<div class="popover-pop-body">
+					<div>
 						<el-tree
 							ref="menuListTree"
 							:data="menuList"
@@ -58,15 +51,16 @@
 				</el-radio-group>
 			</el-form-item>
 			<el-form-item prop="authority" label="授权标识">
-				<el-input v-model="dataForm.authority" placeholder="多个用逗号分隔，如：sys:menu:list,sys:menu:save"></el-input>
+				<el-input v-model="dataForm.authority" placeholder="多个用逗号分隔，如：sys:menu:save,sys:menu:update"></el-input>
 			</el-form-item>
-			<el-form-item v-if="dataForm.type === 0" prop="icon" label="图标" class="icon-list">
+			<el-form-item v-if="dataForm.type === 0" prop="icon" label="图标" class="popover-list">
 				<el-popover
 					ref="iconListPopover"
 					v-model:visible="iconListVisible"
 					placement="top-start"
 					trigger="click"
-					popper-class="popover-pop mod__menu-icon-popover"
+					:width="450"
+					popper-class="mod__menu-icon-popover"
 				>
 					<template #reference>
 						<el-input v-model="dataForm.icon" :readonly="true" placeholder="图标" @click="iconListVisible = true"> </el-input>
@@ -120,7 +114,7 @@ const dataForm = reactive({
 	openStyle: 0
 })
 
-const init = (id?: Number) => {
+const init = (id?: number) => {
 	visible.value = true
 	dataForm.id = ''
 
@@ -132,6 +126,8 @@ const init = (id?: Number) => {
 	// id 存在则为修改
 	if (id) {
 		getMenu(id)
+	} else {
+		treeSetDefaultHandle()
 	}
 
 	// 菜单列表
@@ -155,7 +151,7 @@ const getMenuList = () => {
 }
 
 // 获取信息
-const getMenu = (id: Number) => {
+const getMenu = (id: number) => {
 	useMenuApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 
@@ -215,22 +211,21 @@ defineExpose({
 })
 </script>
 
-<style lang="scss">
-.el-popover.el-popper {
-	overflow-x: hidden;
-}
+<style lang="scss" scoped>
 .mod__menu {
-	.menu-list,
-	.icon-list {
-		.el-input__inner,
-		.el-input__suffix {
+	::v-deep(.el-popover.el-popper) {
+		overflow-x: hidden;
+	}
+
+	.popover-list {
+		::v-deep(.el-input__inner) {
+			cursor: pointer;
+		}
+		::v-deep(.el-input__suffix) {
 			cursor: pointer;
 		}
 	}
-	&-icon-popover {
-		width: 458px !important;
-		overflow-y: hidden !important;
-	}
+
 	&-icon-inner {
 		width: 100%;
 		max-height: 260px;

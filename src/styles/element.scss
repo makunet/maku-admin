@@ -73,6 +73,10 @@
   justify-content: flex-end;
 }
 
+.el-form--inline .el-form-item{
+  margin-right: 16px !important;
+}
+
 .el-drawer .el-drawer__header {
     display: flex;
     align-items: center;

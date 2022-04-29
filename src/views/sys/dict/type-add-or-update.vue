@@ -43,7 +43,7 @@ const dataRules = ref({
 	dictName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
-const init = (id?: Number) => {
+const init = (id?: number) => {
 	visible.value = true
 	dataForm.id = ''
 
@@ -58,7 +58,7 @@ const init = (id?: Number) => {
 	}
 }
 
-const getDictType = (id: Number) => {
+const getDictType = (id: number) => {
 	useDictTypeApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 	})

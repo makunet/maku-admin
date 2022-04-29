@@ -60,7 +60,7 @@ const state: IHooksOptions = reactive({
 })
 
 const addOrUpdateRef = ref()
-const addOrUpdateHandle = (id?: Number) => {
+const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
 }
 

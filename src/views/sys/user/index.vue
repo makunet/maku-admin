@@ -2,13 +2,13 @@
 	<div>
 		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
 			<el-form-item>
-				<el-input v-model="state.queryForm.postCode" placeholder="岗位编码" clearable></el-input>
+				<el-input v-model="state.queryForm.username" placeholder="用户名" clearable></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-input v-model="state.queryForm.postName" placeholder="岗位名称" clearable></el-input>
+				<el-input v-model="state.queryForm.mobile" placeholder="手机号" clearable></el-input>
 			</el-form-item>
 			<el-form-item>
-				<fast-select v-model="state.queryForm.status" dict-type="post_status" placeholder="状态"></fast-select>
+				<fast-select v-model="state.queryForm.gender" dict-type="user_gender" placeholder="性别"></fast-select>
 			</el-form-item>
 			<el-form-item>
 				<el-button @click="getDataList()">查询</el-button>
@@ -22,10 +22,14 @@
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="postCode" label="岗位编码" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="postName" label="岗位名称" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="sort" label="排序" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="status" label="状态" dict-type="post_status"></fast-table-column>
+			<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
+			<fast-table-column prop="gender" label="性别" dict-type="user_gender"></fast-table-column>
+			<el-table-column prop="mobile" label="手机号" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="email" label="邮箱" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="orgName" label="所属机构" header-align="center" align="center"></el-table-column>
+			<fast-table-column prop="status" label="状态" dict-type="user_status"></fast-table-column>
+			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
@@ -54,14 +58,15 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
+import FastSelect from '@/components/fast-select/src/fast-select.vue'
 
 const state: IHooksOptions = reactive({
-	dataListUrl: '/sys/post/page',
-	deleteUrl: '/sys/post',
+	dataListUrl: '/sys/user/page',
+	deleteUrl: '/sys/user',
 	queryForm: {
-		postCode: '',
-		postName: '',
-		status: ''
+		username: '',
+		mobile: '',
+		gender: ''
 	}
 })
 

@@ -11,3 +11,7 @@ export const usePostSubmitApi = (dataForm: any) => {
 		return service.post('/sys/post', dataForm)
 	}
 }
+
+export const usePostListApi = () => {
+	return service.get('/sys/post/list')
+}
