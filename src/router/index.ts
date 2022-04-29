@@ -132,7 +132,7 @@ export const getKeepAliveRoutes = (rs: RouteRecordRaw[], breadcrumb: string[]): 
 			routerList.push(item)
 		}
 
-		breadcrumb = []
+		breadcrumb.pop()
 	})
 	return routerList
 }
@@ -144,7 +144,7 @@ const layoutModules = import.meta.glob('/src/views/**/*.vue')
 const getDynamicComponent = (path: string): any => {
 	const component = layoutModules[`/src/views/${path}.vue`]
 	if (!component) {
-		console.error('component error', path)
+		console.error('组件不存在，路径为：', path)
 	}
 	return component
 }
