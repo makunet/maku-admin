@@ -17,9 +17,9 @@ export default {
 	app: {
 		title: 'Fast Admin',
 		description:
-			'基于Vue3、TypeScript、Element Plus、Vue Router、Pinia、Axios、i18n、Vite等开发的后台管理模板，使用门槛极低，采用MIT开源协议，完全免费开源，可免费用于商业项目等场景！',
+			'基于Vue3、TypeScript、Element Plus、Vue Router、Pinia、Axios、i18n、Vite等开发的后台管理，使用门槛极低，采用MIT开源协议，完全免费开源且终生免费，可免费用于商业项目等场景！',
 		logoText: 'Fast Admin',
-		miniLogoText: 'Admin',
+		miniLogoText: 'Fast',
 		username: '用户名',
 		password: '密码',
 		captcha: '验证码',
