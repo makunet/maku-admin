@@ -58,7 +58,6 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
-import FastSelect from '@/components/fast-select/src/fast-select.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/user/page',
