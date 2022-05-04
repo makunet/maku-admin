@@ -60,8 +60,8 @@ import { useRoleListApi } from '@/api/role'
 const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
-const postList = ref([])
-const roleList = ref([])
+const postList = ref<any[]>([])
+const roleList = ref<any[]>([])
 const orgList = ref([])
 const dataFormRef = ref()
 

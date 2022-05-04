@@ -1,4 +1,4 @@
-import { App } from 'vue'
+import type { App, Plugin } from 'vue'
 
 // 把路径转换成驼峰命名
 export const pathToCamel = (path: string): string => {
