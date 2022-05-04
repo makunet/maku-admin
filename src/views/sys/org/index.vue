@@ -2,7 +2,7 @@
 	<div>
 		<el-form :inline="true">
 			<el-form-item>
-				<el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
+				<el-button v-auth="'sys:org:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
 			</el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" row-key="id" border style="width: 100%">
@@ -11,8 +11,8 @@
 			<el-table-column prop="sort" label="排序" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button type="text" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-					<el-button type="text" @click="deleteHandle(scope.row.id)">删除</el-button>
+					<el-button v-auth="'sys:org:update'" type="text" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button v-auth="'sys:org:delete'" type="text" @click="deleteHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>

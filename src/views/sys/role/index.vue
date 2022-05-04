@@ -8,10 +8,10 @@
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
+				<el-button v-auth="'sys:role:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="danger" @click="deleteBatchHandle()">删除</el-button>
+				<el-button v-auth="'sys:role:delete'" type="danger" @click="deleteBatchHandle()">删除</el-button>
 			</el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
@@ -21,8 +21,8 @@
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-					<el-button type="text" size="small" @click="deleteBatchHandle(scope.row.id)">删除</el-button>
+					<el-button v-auth="'sys:role:update'" type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button v-auth="'sys:role:delete'" type="text" size="small" @click="deleteBatchHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
