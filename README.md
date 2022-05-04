@@ -24,6 +24,9 @@ npm run build
 ## 后端
 FastBoot：https://gitee.com/makunet/fast-boot
 
+## 支持
+如果觉得框架还不错，或者已经在使用了，希望你可以去 [Gitee](https://gitee.com/makunet/fast-admin) 帮作者点个 ⭐ Star，这将是对作者极大的鼓励与支持。
+
 ## 效果图
 ![输入图片说明](public/images/1.png)
 
@@ -35,7 +38,4 @@ FastBoot：https://gitee.com/makunet/fast-boot
 
 ![输入图片说明](public/images/5.png)
 
-
-## 支持
-如果觉得框架还不错，或者已经在使用了，希望你可以去 [Gitee](https://gitee.com/makunet/fast-admin) 帮作者点个 ⭐ Star，这将是对作者极大的鼓励与支持。
 
