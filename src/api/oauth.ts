@@ -1,11 +1,11 @@
 import service from '@/utils/request'
 
 export const useCaptchaApi = () => {
-	return service.get('/oauth/captcha')
+	return service.get('/sys/oauth/captcha')
 }
 
 export const useLoginApi = (data: any) => {
-	return service.post('/oauth/token', data, {
+	return service.post('/sys/oauth/token', data, {
 		auth: {
 			username: 'web',
 			password: '123456'
@@ -17,5 +17,5 @@ export const useLoginApi = (data: any) => {
 }
 
 export const useLogoutApi = () => {
-	return service.post('/oauth/logout')
+	return service.post('/sys/oauth/logout')
 }
