@@ -1,12 +1,20 @@
 ## 介绍
 - 基于Vue3、TypeScript、Element Plus、Vue Router、Pinia、Axios、i18n、Vite等开发的后台管理，使用门槛极低，采用MIT开源协议，完全免费开源且终身免费，可免费用于商业项目等场景。
-- 目前已实现fast-admin后端接口的有：[FastBoot](https://gitee.com/makunet/fast-boot) 和 [FastCloud](https://gitee.com/makunet/fast-cloud) 2个后端开源项目。
+- 目前已实现fast-admin后端接口的有：【FastBoot】 和 【FastCloud】 2个后端开源项目。
 - 开发文档：[https://maku.net/docs/fast-admin](https://maku.net/docs/fast-admin)
 
 
-## 演示环境
-- FastBoot：https://demo.maku.net/fast-boot
-- FastCloud：https://demo.maku.net/fast-cloud
+## FastBoot
+- Github仓库：https://github.com/makunet/fast-boot
+- Gitee仓库：https://gitee.com/makunet/fast-boot
+- 演示环境：https://demo.maku.net/fast-boot
+
+
+## FastCloud
+- Github仓库：https://github.com/makunet/fast-cloud
+- Gitee仓库：https://gitee.com/makunet/fast-cloud
+- 演示环境：https://demo.maku.net/fast-cloud
+
 
 ## 安装
 注意：需使用 nodejs 长期维护版本，如：[12.x、14.x、16.x]，能保证项目的稳定运行。
