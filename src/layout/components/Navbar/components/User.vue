@@ -25,7 +25,10 @@ const router = useRouter()
 
 const logout = () => {
 	store.userStore.logoutAction().then(() => {
-		router.push({ path: '/login' })
+		// router.push({ path: '/login' })
+
+		// 刷新页面
+		location.reload()
 	})
 }
 </script>
