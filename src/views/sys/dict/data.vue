@@ -21,8 +21,8 @@
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-					<el-button type="text" size="small" @click="deleteBatchHandle(scope.row.id)">删除</el-button>
+					<el-button type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>

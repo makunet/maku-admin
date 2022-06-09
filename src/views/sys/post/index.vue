@@ -28,8 +28,8 @@
 			<fast-table-column prop="status" label="状态" dict-type="post_status"></fast-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'sys:post:update'" type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-					<el-button v-auth="'sys:post:delete'" type="text" size="small" @click="deleteBatchHandle(scope.row.id)">删除</el-button>
+					<el-button v-auth="'sys:post:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button v-auth="'sys:post:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>

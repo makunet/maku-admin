@@ -38,8 +38,8 @@
 			></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'sys:menu:update'" type="text" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-					<el-button v-auth="'sys:menu:delete'" type="text" @click="deleteHandle(scope.row.id)">删除</el-button>
+					<el-button v-auth="'sys:menu:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button v-auth="'sys:menu:delete'" type="primary" link @click="deleteHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
