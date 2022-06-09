@@ -18,7 +18,7 @@ import { RouteRecordRaw } from 'vue-router'
 
 defineProps({
 	menu: {
-		type: Object as PropType<RouteRecordRaw>,
+		type: Object as PropType<any>,
 		required: true
 	}
 })
