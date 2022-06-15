@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-home">
+	<el-card class="layout-home">
 		<h2>介绍</h2>
 		<p>基于Vue3、TypeScript、Element Plus、Vue Router、Pinia、Axios、i18n、Vite等开发的后台管理</p>
 		<p>使用门槛极低，采用MIT开源协议，完全免费开源且终身免费，可免费用于商业项目等场景</p>
@@ -74,7 +74,7 @@
 			<el-link href="https://gitee.com/makunet" :underline="false" type="primary" target="_blank">Gitee</el-link>
 			帮作者点个 ⭐ Star，这将是对作者极大的鼓励与支持。
 		</p>
-	</div>
+	</el-card>
 </template>
 
 <style scoped>

@@ -40,6 +40,7 @@ export default {
 		navbarTheme: 'Theme Navbar',
 		interface: 'Interface Settings',
 		uniqueOpened: 'Unique Opened',
+		dark: 'Enable Dark',
 		logo: 'Enable Logo',
 		breadcrumb: 'Enable Breadcrumb',
 		tabs: 'Enable Tabs',

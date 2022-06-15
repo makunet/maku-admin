@@ -41,5 +41,6 @@ const handleChange = (val: any) => {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	color: var(--el-text-color-primary);
 }
 </style>

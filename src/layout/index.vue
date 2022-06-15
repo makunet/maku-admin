@@ -9,14 +9,14 @@
 			<el-scrollbar>
 				<el-main class="layout-main">
 					<el-scrollbar class="layout-scrollbar">
-						<el-card class="layout-card" :style="layoutMainHeight">
+						<div class="layout-card" :style="layoutMainHeight">
 							<router-view v-slot="{ Component, route }">
 								<keep-alive v-if="theme.isTabsCache" :include="[...store.tabsStore.cachedViews]">
 									<component :is="Component" :key="route.name" />
 								</keep-alive>
 								<component :is="Component" v-else :key="route.name" />
 							</router-view>
-						</el-card>
+						</div>
 					</el-scrollbar>
 				</el-main>
 			</el-scrollbar>

@@ -21,7 +21,7 @@ defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
-const handleChange = (val: any) => {
+const handleChange = (val: boolean) => {
 	emit('update:modelValue', val)
 	emit('change')
 }
@@ -33,6 +33,6 @@ const handleChange = (val: any) => {
 	justify-content: space-between;
 	align-items: center;
 	padding-bottom: 15px;
-	color: #444;
+	color: var(--el-text-color-primary);
 }
 </style>

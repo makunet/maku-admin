@@ -125,12 +125,10 @@ const onClose = (type: string) => {
 <style lang="scss" scoped>
 .tabs-container {
 	display: flex;
-	background-color: var(--el-color-white);
 	position: relative;
 	z-index: 6;
 	height: 40px;
 	.tabs-item {
-		background: #fff;
 		transition: left 0.3s;
 		flex-grow: 1;
 		overflow: hidden;

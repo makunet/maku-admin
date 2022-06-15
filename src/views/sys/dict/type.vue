@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<el-card>
 		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList">
 			<el-form-item>
 				<el-input v-model="state.queryForm.dictType" placeholder="字典类型" clearable></el-input>
@@ -55,7 +55,7 @@
 		<el-drawer v-if="dictDataVisible" v-model="dictDataVisible" :title="dictDataTitle" :size="800" :close-on-press-escape="false">
 			<dict-data :dict-type-id="dictTypeId"></dict-data>
 		</el-drawer>
-	</div>
+	</el-card>
 </template>
 
 <script setup lang="ts">

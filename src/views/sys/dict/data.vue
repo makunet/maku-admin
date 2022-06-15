@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<el-card>
 		<el-form :inline="true" :model="state.queryForm">
 			<el-form-item>
 				<el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
@@ -38,7 +38,7 @@
 		</el-pagination>
 		<!-- 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
-	</div>
+	</el-card>
 </template>
 
 <script setup lang="ts">

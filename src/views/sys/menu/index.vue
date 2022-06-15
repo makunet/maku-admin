@@ -1,5 +1,5 @@
 <template>
-	<div class="mod__menu">
+	<el-card class="mod__menu">
 		<el-form :inline="true">
 			<el-form-item>
 				<el-button v-auth="'sys:menu:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
@@ -44,7 +44,7 @@
 			</el-table-column>
 		</el-table>
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
-	</div>
+	</el-card>
 </template>
 
 <script setup lang="ts">

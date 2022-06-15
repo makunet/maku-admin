@@ -50,6 +50,7 @@
 
 				<el-divider content-position="left">{{ $t('settings.interface') }}</el-divider>
 
+				<SwitchItem v-model="isDark" :title="$t('settings.dark')" />
 				<SwitchItem v-model="theme.uniqueOpened" :title="$t('settings.uniqueOpened')" @change="handleOtherTheme" />
 				<SwitchItem v-model="theme.isLogo" :title="$t('settings.logo')" @change="handleOtherTheme" />
 				<SwitchItem v-model="theme.isBreadcrumb" :title="$t('settings.breadcrumb')" @change="handleOtherTheme" />
@@ -80,7 +81,7 @@ import store from '@/store'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { CopyDocument, RefreshRight } from '@element-plus/icons-vue'
-import { useClipboard } from '@vueuse/core'
+import { useClipboard, useDark } from '@vueuse/core'
 import SwitchItem from './components/SwitchItem.vue'
 import SelectItem from './components/SelectItem.vue'
 import { ElMessage } from 'element-plus'
@@ -125,6 +126,9 @@ const handleHeaderTheme = (style: string) => {
 	theme.value.headerStyle = style
 	cache.setTheme(theme.value)
 }
+
+// 处理暗黑模式
+const isDark = useDark()
 
 // 处理其他主题
 const handleOtherTheme = () => {

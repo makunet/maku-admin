@@ -47,7 +47,7 @@
     "vuejs",
     "vite",
     "element-plus",
-    "fast-ui"
+    "fast-admin"
   ],
   "license": "MIT"
 }

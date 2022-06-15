@@ -39,6 +39,7 @@ export default {
 		navbarLight: '亮色顶栏',
 		navbarTheme: '主题色顶栏',
 		interface: '界面设置',
+		dark: '开启暗黑模式',
 		uniqueOpened: '侧栏排他展开',
 		logo: '开启LOGO',
 		breadcrumb: '开启面包屑',

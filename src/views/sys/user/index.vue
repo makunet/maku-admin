@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<el-card>
 		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
 			<el-form-item>
 				<el-input v-model="state.queryForm.username" placeholder="用户名" clearable></el-input>
@@ -50,7 +50,7 @@
 
 		<!-- 弹窗, 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
-	</div>
+	</el-card>
 </template>
 
 <script setup lang="ts">
