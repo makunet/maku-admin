@@ -34,7 +34,7 @@
 						</el-tree>
 					</div>
 					<el-row justify="end">
-						<el-button size="small" type="text" style="margin-right: 15px" @click="orgListVisible = false">关闭</el-button>
+						<el-button type="primary" link style="margin-right: 15px" @click="orgListVisible = false">关闭</el-button>
 					</el-row>
 				</el-popover>
 			</el-form-item>

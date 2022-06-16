@@ -9,13 +9,13 @@
 			</el-form-item>
 			<el-row>
 				<el-col :span="12">
-					<el-form-item size="small" label="菜单权限">
+					<el-form-item label="菜单权限">
 						<el-tree ref="menuListTree" :data="menuList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox>
 						</el-tree>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
-					<el-form-item size="small" label="数据权限">
+					<el-form-item label="数据权限">
 						<el-tree ref="orgListTree" :data="orgList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox>
 						</el-tree>
 					</el-form-item>
