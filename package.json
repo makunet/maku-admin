@@ -8,17 +8,17 @@
     "lint": "eslint --fix --ext .vue,.jsx,.ts,.tsx ."
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.0.4",
+    "@element-plus/icons-vue": "2.0.5",
     "@vueuse/core": "^8.2.6",
     "axios": "^0.26.1",
-    "element-plus": "^2.2.5",
-    "mitt": "^3.0.0",
-    "nprogress": "^0.2.0",
-    "pinia": "^2.0.14",
+    "element-plus": "2.2.6",
+    "mitt": "3.0.0",
+    "nprogress": "0.2.0",
+    "pinia": "2.0.14",
     "qs": "^6.10.3",
     "vue": "^3.2.37",
-    "vue-i18n": "^9.1.9",
-    "vue-router": "^4.0.15"
+    "vue-i18n": "9.1.9",
+    "vue-router": "4.0.15"
   },
   "devDependencies": {
     "@babel/types": "^7.17.0",
