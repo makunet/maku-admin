@@ -21,7 +21,9 @@
     "vue-router": "4.0.15",
     "qrcode.vue": "^3.3.3",
     "print-js": "^1.6.0",
-    "cropperjs": "^1.5.12"
+    "cropperjs": "^1.5.12",
+    "@wangeditor/editor": "^5.1.1",
+    "@wangeditor/editor-for-vue": "^5.1.11"
   },
   "devDependencies": {
     "@babel/types": "^7.17.0",

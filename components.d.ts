@@ -61,6 +61,8 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./src/components/svg-icon/index.vue')['default']
+    Wangeditor: typeof import('./src/components/wangeditor/index.vue')['default']
+    WangEditor: typeof import('./src/components/wang-editor/index.vue')['default']
   }
 }
 

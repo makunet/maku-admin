@@ -90,6 +90,13 @@ export const constantMenu = [
 				url: 'demo/cropper/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1005,
+				name: '富文本编辑器',
+				url: 'demo/wangeditor/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
 			}
 		]
 	}
