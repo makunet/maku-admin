@@ -13,7 +13,10 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client"],
+    "types": [
+      "web-bluetooth",
+      "vite/client"
+    ],
     "paths": {
       "@/*": ["./src/*"]
     },

@@ -8,22 +8,22 @@
     "lint": "eslint --fix --ext .vue,.jsx,.ts,.tsx ."
   },
   "dependencies": {
-    "@element-plus/icons-vue": "2.0.5",
-    "@vueuse/core": "^8.2.6",
-    "axios": "^0.26.1",
+    "@element-plus/icons-vue": "2.0.6",
+    "@vueuse/core": "8.7.5",
+    "axios": "0.27.2",
     "element-plus": "2.2.8",
     "mitt": "3.0.0",
     "nprogress": "0.2.0",
     "pinia": "2.0.14",
-    "qs": "^6.10.3",
+    "qs": "6.10.3",
     "vue": "^3.2.37",
     "vue-i18n": "9.1.9",
     "vue-router": "4.0.15",
-    "qrcode.vue": "^3.3.3",
-    "print-js": "^1.6.0",
-    "cropperjs": "^1.5.12",
-    "@wangeditor/editor": "^5.1.1",
-    "@wangeditor/editor-for-vue": "^5.1.11"
+    "qrcode.vue": "3.3.3",
+    "print-js": "1.6.0",
+    "cropperjs": "1.5.12",
+    "@wangeditor/editor": "5.1.1",
+    "@wangeditor/editor-for-vue": "5.1.12"
   },
   "devDependencies": {
     "@babel/types": "^7.17.0",
