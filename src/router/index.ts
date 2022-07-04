@@ -83,6 +83,13 @@ export const constantMenu = [
 				url: 'demo/printJs/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1004,
+				name: '图片裁剪',
+				url: 'demo/cropper/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
 			}
 		]
 	}
