@@ -54,6 +54,26 @@ const asyncRoutes: RouteRecordRaw = {
 	]
 }
 
+// 配置常量菜单
+export const constantMenu = [
+	{
+		id: 1000,
+		name: 'Demo',
+		url: null,
+		openStyle: 0,
+		icon: 'icon-windows',
+		children: [
+			{
+				id: 1001,
+				name: 'Icon 图标',
+				url: 'demo/icons/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
+			}
+		]
+	}
+]
+
 export const errorRoute: RouteRecordRaw = {
 	path: '/:pathMatch(.*)',
 	redirect: '/404'

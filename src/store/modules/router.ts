@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useMenuNavApi } from '@/api/menu'
-import { generateRoutes } from '@/router'
+import { generateRoutes, constantMenu } from '@/router'
 import { RouteRecordRaw } from 'vue-router'
 
 export const routerStore = defineStore('routerStore', {
@@ -14,6 +14,10 @@ export const routerStore = defineStore('routerStore', {
 			const routes = generateRoutes(data)
 
 			this.menuRoutes.push(...routes)
+
+			// 常量菜单
+			const constantRoutes = generateRoutes(constantMenu)
+			this.menuRoutes.push(...constantRoutes)
 
 			return this.menuRoutes
 		},

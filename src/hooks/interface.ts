@@ -1,5 +1,5 @@
 export interface IHooksOptions {
-	// 否在创建页面时，调用数据列表接口
+	// 是否在创建页面时，调用数据列表接口
 	createdIsNeed?: boolean
 	// 数据列表 Url
 	dataListUrl?: string
