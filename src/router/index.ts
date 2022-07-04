@@ -69,6 +69,13 @@ export const constantMenu = [
 				url: 'demo/icons/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1002,
+				name: '二维码生成',
+				url: 'demo/qrcode/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
 			}
 		]
 	}
