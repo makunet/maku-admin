@@ -76,6 +76,13 @@ export const constantMenu = [
 				url: 'demo/qrcode/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1003,
+				name: '页面打印',
+				url: 'demo/printJs/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
 			}
 		]
 	}

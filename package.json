@@ -19,7 +19,8 @@
     "vue": "^3.2.37",
     "vue-i18n": "9.1.9",
     "vue-router": "4.0.15",
-    "qrcode.vue": "^3.3.3"
+    "qrcode.vue": "^3.3.3",
+    "print-js": "^1.6.0"
   },
   "devDependencies": {
     "@babel/types": "^7.17.0",
