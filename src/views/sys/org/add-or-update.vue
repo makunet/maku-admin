@@ -5,16 +5,9 @@
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item prop="parentName" label="上级机构" class="org-list">
-				<el-popover
-					ref="orgListPopover"
-					v-model:visible="orgListVisible"
-					placement="bottom-start"
-					trigger="click"
-					:width="400"
-					popper-class="popover-pop"
-				>
+				<el-popover ref="orgListPopover" placement="bottom-start" trigger="click" :width="400" popper-class="popover-pop">
 					<template #reference>
-						<el-input v-model="dataForm.parentName" :readonly="true" placeholder="上级机构" @click="orgListVisible = true">
+						<el-input v-model="dataForm.parentName" :readonly="true" placeholder="上级机构">
 							<template #suffix>
 								<svg-icon v-if="dataForm.pid !== '0'" icon="icon-close-circle" @click.stop="treeSetDefaultHandle()"></svg-icon>
 							</template>
@@ -33,9 +26,6 @@
 						>
 						</el-tree>
 					</div>
-					<el-row justify="end">
-						<el-button type="primary" link style="margin-right: 15px" @click="orgListVisible = false">关闭</el-button>
-					</el-row>
 				</el-popover>
 			</el-form-item>
 			<el-form-item prop="sort" label="排序">
@@ -57,10 +47,10 @@ import { useOrgApi, useOrgListApi, useOrgSubmitApi } from '@/api/orgs'
 const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
-const orgListVisible = ref(false)
 const orgList = ref([])
 const orgListTree = ref()
 const dataFormRef = ref()
+const orgListPopover = ref()
 
 const dataForm = reactive({
 	id: '',
@@ -119,7 +109,7 @@ const treeSetDefaultHandle = () => {
 const treeCurrentChange = (data: any) => {
 	dataForm.pid = data.id
 	dataForm.parentName = data.name
-	orgListVisible.value = false
+	orgListPopover.value.hide()
 }
 
 const dataRules = ref({

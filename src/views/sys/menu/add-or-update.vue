@@ -12,9 +12,9 @@
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item prop="parentName" label="上级菜单" class="popover-list">
-				<el-popover ref="menuListPopover" v-model:visible="menuListVisible" placement="bottom-start" trigger="click" :width="400">
+				<el-popover ref="menuListPopover" placement="bottom-start" trigger="click" :width="400">
 					<template #reference>
-						<el-input v-model="dataForm.parentName" :readonly="true" placeholder="上级菜单" @click="menuListVisible = true">
+						<el-input v-model="dataForm.parentName" :readonly="true" placeholder="上级菜单">
 							<template #suffix>
 								<svg-icon v-if="dataForm.pid !== '0'" icon="icon-close-circle" @click.stop="treeSetDefaultHandle()"></svg-icon>
 							</template>
@@ -33,9 +33,6 @@
 						>
 						</el-tree>
 					</div>
-					<el-row justify="end">
-						<el-button type="primary" link style="margin-right: 15px" @click="menuListVisible = false">关闭</el-button>
-					</el-row>
 				</el-popover>
 			</el-form-item>
 			<el-form-item v-if="dataForm.type === 0" prop="url" label="路由">
@@ -54,16 +51,9 @@
 				<el-input v-model="dataForm.authority" placeholder="多个用逗号分隔，如：sys:menu:save,sys:menu:update"></el-input>
 			</el-form-item>
 			<el-form-item v-if="dataForm.type === 0" prop="icon" label="图标" class="popover-list">
-				<el-popover
-					ref="iconListPopover"
-					v-model:visible="iconListVisible"
-					placement="top-start"
-					trigger="click"
-					:width="450"
-					popper-class="mod__menu-icon-popover"
-				>
+				<el-popover ref="iconListPopover" placement="top-start" trigger="click" :width="450" popper-class="mod__menu-icon-popover">
 					<template #reference>
-						<el-input v-model="dataForm.icon" :readonly="true" placeholder="图标" @click="iconListVisible = true"> </el-input>
+						<el-input v-model="dataForm.icon" :readonly="true" placeholder="图标"> </el-input>
 					</template>
 					<div class="mod__menu-icon-inner">
 						<div class="mod__menu-icon-list">
@@ -72,9 +62,6 @@
 							</el-button>
 						</div>
 					</div>
-					<el-row justify="end">
-						<el-button type="primary" link style="margin-right: 15px" @click="iconListVisible = false">关闭</el-button>
-					</el-row>
 				</el-popover>
 			</el-form-item>
 		</el-form>
@@ -94,12 +81,12 @@ import { useMenuApi, useMenuListApi, useMenuSubmitApi } from '@/api/menu'
 const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
-const menuListVisible = ref(false)
-const iconListVisible = ref(false)
 const menuList = ref([])
 const iconList = ref<string[]>([])
 const menuListTree = ref()
 const dataFormRef = ref()
+const menuListPopover = ref()
+const iconListPopover = ref()
 
 const dataForm = reactive({
 	id: '',
@@ -172,13 +159,13 @@ const treeSetDefaultHandle = () => {
 const treeCurrentChange = (data: any) => {
 	dataForm.pid = data.id
 	dataForm.parentName = data.name
-	menuListVisible.value = false
+	menuListPopover.value.hide()
 }
 
 // 图标点击事件
 const iconHandle = (icon: string) => {
 	dataForm.icon = icon
-	iconListVisible.value = false
+	iconListPopover.value.hide()
 }
 
 const dataRules = ref({
