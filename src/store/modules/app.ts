@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ITheme } from '@/store/theme/interface'
 import cache from '@/utils/cache'
-import { useDictTypeAllApi } from '@/api/dict'
+import { useDictTypeAllApi } from '@/api/sys/dict'
 
 export const appStore = defineStore('appStore', {
 	state: () => ({

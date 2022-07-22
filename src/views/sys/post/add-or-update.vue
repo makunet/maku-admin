@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { usePostApi, usePostSubmitApi } from '@/api/post'
+import { usePostApi, usePostSubmitApi } from '@/api/sys/post'
 
 const emit = defineEmits(['refreshDataList'])
 

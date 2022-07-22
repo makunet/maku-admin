@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useOrgApi, useOrgListApi, useOrgSubmitApi } from '@/api/orgs'
+import { useOrgApi, useOrgListApi, useOrgSubmitApi } from '@/api/sys/orgs'
 
 const emit = defineEmits(['refreshDataList'])
 

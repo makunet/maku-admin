@@ -76,7 +76,7 @@
 import { reactive, ref } from 'vue'
 import { getIconList } from '@/utils/tool'
 import { ElMessage } from 'element-plus/es'
-import { useMenuApi, useMenuListApi, useMenuSubmitApi } from '@/api/menu'
+import { useMenuApi, useMenuListApi, useMenuSubmitApi } from '@/api/sys/menu'
 
 const emit = defineEmits(['refreshDataList'])
 

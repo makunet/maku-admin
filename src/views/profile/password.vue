@@ -26,7 +26,7 @@ import { useRouter, useRoute } from 'vue-router'
 import store from '@/store'
 import { useI18n } from 'vue-i18n'
 import { validatePassword } from '@/utils/validate'
-import { updatePasswordApi } from '@/api/user'
+import { updatePasswordApi } from '@/api/sys/user'
 import { ElMessage } from 'element-plus'
 import { closeTab } from '@/utils/tabs'
 

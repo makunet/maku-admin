@@ -32,8 +32,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useRoleApi, useRoleMenuApi, useRoleSubmitApi } from '@/api/role'
-import { useOrgListApi } from '@/api/orgs'
+import { useRoleApi, useRoleMenuApi, useRoleSubmitApi } from '@/api/sys/role'
+import { useOrgListApi } from '@/api/sys/orgs'
 
 const emit = defineEmits(['refreshDataList'])
 

@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useDictDataApi, useDictDataSubmitApi } from '@/api/dict'
+import { useDictDataApi, useDictDataSubmitApi } from '@/api/sys/dict'
 
 const emit = defineEmits(['refreshDataList'])
 
