@@ -7,20 +7,9 @@
 			<el-form-item prop="remark" label="备注">
 				<el-input v-model="dataForm.remark" placeholder="备注"></el-input>
 			</el-form-item>
-			<el-row>
-				<el-col :span="12">
-					<el-form-item label="菜单权限">
-						<el-tree ref="menuListTree" :data="menuList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox>
-						</el-tree>
-					</el-form-item>
-				</el-col>
-				<el-col :span="12">
-					<el-form-item label="数据权限">
-						<el-tree ref="orgListTree" :data="orgList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox>
-						</el-tree>
-					</el-form-item>
-				</el-col>
-			</el-row>
+			<el-form-item label="菜单权限">
+				<el-tree ref="menuListTree" :data="menuList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox></el-tree>
+			</el-form-item>
 		</el-form>
 		<template #footer>
 			<el-button @click="visible = false">取消</el-button>
@@ -33,15 +22,12 @@
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
 import { useRoleApi, useRoleMenuApi, useRoleSubmitApi } from '@/api/sys/role'
-import { useOrgListApi } from '@/api/sys/orgs'
 
 const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
 const menuList = ref([])
-const orgList = ref([])
 const menuListTree = ref()
-const orgListTree = ref()
 const dataFormRef = ref()
 
 const dataForm = reactive({
@@ -63,9 +49,6 @@ const init = (id?: number) => {
 	if (menuListTree.value) {
 		menuListTree.value.setCheckedKeys([])
 	}
-	if (orgListTree.value) {
-		orgListTree.value.setCheckedKeys([])
-	}
 
 	// id 存在则为修改
 	if (id) {
@@ -74,9 +57,6 @@ const init = (id?: number) => {
 
 	// 菜单列表
 	getMenuList()
-
-	// 机构列表
-	getOrgList()
 }
 
 // 获取菜单列表
@@ -86,20 +66,12 @@ const getMenuList = () => {
 	})
 }
 
-// 获取机构列表
-const getOrgList = () => {
-	return useOrgListApi().then(res => {
-		orgList.value = res.data
-	})
-}
-
 // 获取信息
 const getRole = (id: number) => {
 	useRoleApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 
 		dataForm.menuIdList.forEach(item => menuListTree.value.setChecked(item, true))
-		orgListTree.value.setCheckedKeys(dataForm.orgIdList)
 	})
 }
 
@@ -114,7 +86,6 @@ const submitHandle = () => {
 			return false
 		}
 		dataForm.menuIdList = [...menuListTree.value.getHalfCheckedKeys(), ...menuListTree.value.getCheckedKeys()]
-		dataForm.orgIdList = orgListTree.value.getCheckedKeys()
 
 		useRoleSubmitApi(dataForm).then(() => {
 			ElMessage.success({

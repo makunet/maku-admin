@@ -19,3 +19,7 @@ export const useRoleSubmitApi = (dataForm: any) => {
 		return service.post('/sys/role', dataForm)
 	}
 }
+
+export const useRoleDataScopeSubmitApi = (dataForm: any) => {
+	return service.put('/sys/role/data-scope', dataForm)
+}
