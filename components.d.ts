@@ -56,6 +56,7 @@ declare module '@vue/runtime-core' {
     FastRadioGroup: typeof import('./src/components/fast-radio-group/src/fast-radio-group.vue')['default']
     FastSelect: typeof import('./src/components/fast-select/src/fast-select.vue')['default']
     FastTableColumn: typeof import('./src/components/fast-table-column/src/fast-table-column.vue')['default']
+    FastUser: typeof import('./src/components/fast-user/src/fast-user.vue')['default']
     Lang: typeof import('./src/components/lang/index.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
     RouterLink: typeof import('vue-router')['RouterLink']
