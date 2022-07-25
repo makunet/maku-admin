@@ -1,11 +1,5 @@
 <template>
-	<el-select
-		:style="style"
-		:model-value="modelValue + ''"
-		:placeholder="placeholder"
-		:clearable="clearable"
-		@change="$emit('update:modelValue', $event)"
-	>
+	<el-select :model-value="modelValue + ''" :placeholder="placeholder" :clearable="clearable" @change="$emit('update:modelValue', $event)">
 		<el-option v-for="data in dataList" :key="data.dictValue" :label="data.dictLabel" :value="data.dictValue">{{ data.dictLabel }}</el-option>
 	</el-select>
 </template>
@@ -22,11 +16,6 @@ const props = defineProps({
 	dictType: {
 		type: String,
 		required: true
-	},
-	style: {
-		type: String,
-		required: false,
-		default: () => ''
 	},
 	clearable: {
 		type: Boolean,
