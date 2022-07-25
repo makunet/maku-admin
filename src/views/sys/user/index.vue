@@ -8,7 +8,7 @@
 				<el-input v-model="state.queryForm.mobile" placeholder="手机号" clearable></el-input>
 			</el-form-item>
 			<el-form-item>
-				<fast-select v-model="state.queryForm.gender" dict-type="user_gender" placeholder="性别"></fast-select>
+				<fast-select v-model="state.queryForm.gender" dict-type="user_gender" clearable placeholder="性别"></fast-select>
 			</el-form-item>
 			<el-form-item>
 				<el-button @click="getDataList()">查询</el-button>

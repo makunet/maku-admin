@@ -8,7 +8,7 @@
 				<el-input v-model="state.queryForm.postName" placeholder="岗位名称" clearable></el-input>
 			</el-form-item>
 			<el-form-item>
-				<fast-select v-model="state.queryForm.status" dict-type="post_status" placeholder="状态"></fast-select>
+				<fast-select v-model="state.queryForm.status" dict-type="post_status" clearable placeholder="状态"></fast-select>
 			</el-form-item>
 			<el-form-item>
 				<el-button @click="getDataList()">查询</el-button>
