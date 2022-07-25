@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="visible" title="数据权限" :close-on-click-modal="false" width="600px">
+	<el-dialog v-model="visible" title="数据权限" :close-on-click-modal="false" :width="600" draggable>
 		<el-form ref="dataFormRef" :model="dataForm" label-width="120px" @keyup.enter="submitHandle()">
 			<el-form-item prop="name" label="名称">
 				<el-input v-model="dataForm.name" disabled></el-input>
@@ -7,7 +7,7 @@
 			<el-form-item prop="dataScope" label="数据范围">
 				<fast-select v-model="dataForm.dataScope" dict-type="role_data_scope" placeholder="数据范围" style="width: 100%"></fast-select>
 			</el-form-item>
-			<el-form-item v-show="dataForm.dataScope === 4" label="数据权限">
+			<el-form-item v-show="dataForm.dataScope == 4" label="数据权限">
 				<el-tree ref="orgListTree" :data="orgList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox> </el-tree>
 			</el-form-item>
 		</el-form>
