@@ -23,11 +23,12 @@
 				<template #default="scope">
 					<el-button v-auth="'sys:role:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
 					<el-button v-auth="'sys:role:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>
-					<el-dropdown v-auth="'sys:role:update'" @command="(command: string) => handleCommand(command, scope.row.id)">
+					<el-dropdown v-auth="'sys:role:update'" @command="(command: string) => handleCommand(command, scope.row)">
 						<el-button type="primary" class="el-dropdown-link" link>更多</el-button>
 						<template #dropdown>
 							<el-dropdown-menu>
 								<el-dropdown-item command="dataScope">数据权限</el-dropdown-item>
+								<el-dropdown-item command="user">分配用户</el-dropdown-item>
 							</el-dropdown-menu>
 						</template>
 					</el-dropdown>
@@ -47,7 +48,12 @@
 
 		<!-- 弹窗, 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+		<!-- 数据权限 -->
 		<data-scope ref="dataScopeRef"></data-scope>
+		<!-- 分配用户 -->
+		<el-drawer v-if="userVisible" v-model="userVisible" :title="userTitle" :size="1000" :close-on-press-escape="false">
+			<user :role-id="roleId"></user>
+		</el-drawer>
 	</el-card>
 </template>
 
@@ -56,6 +62,7 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import DataScope from './data-scope.vue'
+import User from './user.vue'
 import { IHooksOptions } from '@/hooks/interface'
 
 const state: IHooksOptions = reactive({
@@ -72,9 +79,16 @@ const addOrUpdateHandle = (id?: number) => {
 }
 
 const dataScopeRef = ref()
-const handleCommand = (command: string, id: number) => {
+const userVisible = ref(false)
+const roleId = ref()
+const userTitle = ref()
+const handleCommand = (command: string, row: any) => {
 	if (command === 'dataScope') {
-		dataScopeRef.value.init(id)
+		dataScopeRef.value.init(row.id)
+	} else if (command === 'user') {
+		roleId.value = row.id
+		userTitle.value = '分配用户 - ' + row.name
+		userVisible.value = true
 	}
 }
 
