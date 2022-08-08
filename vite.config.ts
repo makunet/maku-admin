@@ -2,8 +2,6 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
@@ -20,13 +18,6 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		vueSetupExtend(),
-		Components({
-			resolvers: [
-				ElementPlusResolver({
-					importStyle: 'sass'
-				})
-			]
-		}),
 		createSvgIconsPlugin({
 			iconDirs: [resolve(__dirname, 'src/icons/svg')],
 			symbolId: 'icon-[dir]-[name]'

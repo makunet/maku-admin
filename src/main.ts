@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
 import App from './App.vue'
 import { createPinia } from 'pinia'
 import { registerStore } from './store'
@@ -8,14 +9,14 @@ import { i18n } from './i18n'
 import 'virtual:svg-icons-register'
 
 import '@/icons/iconfont/iconfont'
+import 'element-plus/dist/index.css'
 import '@/styles/index.scss'
-import 'element-plus/theme-chalk/src/message.scss'
-import 'element-plus/theme-chalk/src/message-box.scss'
 
 import FastTableColumn from '@/components/fast-table-column'
 import FastRadioGroup from '@/components/fast-radio-group'
 import FastSelect from '@/components/fast-select'
 import FastUser from '@/components/fast-user'
+import SvgIcon from '@/components/svg-icon'
 const app = createApp(App)
 
 app.use(createPinia())
@@ -29,4 +30,6 @@ app.use(FastTableColumn)
 app.use(FastRadioGroup)
 app.use(FastSelect)
 app.use(FastUser)
+app.use(SvgIcon)
+app.use(ElementPlus)
 app.mount('#app')
