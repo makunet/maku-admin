@@ -44,7 +44,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="FastUser">
 import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
 import { useCrud } from '@/hooks'

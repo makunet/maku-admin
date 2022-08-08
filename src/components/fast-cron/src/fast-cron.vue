@@ -292,7 +292,7 @@ import { defineComponent } from 'vue'
 import Language from './language/index'
 
 export default defineComponent({
-	name: 'Cron',
+	name: 'FastCron',
 	props: ['data', 'lang'],
 	data() {
 		return {
