@@ -51,7 +51,7 @@
 				<el-input v-model="dataForm.authority" placeholder="多个用逗号分隔，如：sys:menu:save,sys:menu:update"></el-input>
 			</el-form-item>
 			<el-form-item v-if="dataForm.type === 0" prop="icon" label="图标" class="popover-list">
-				<el-popover ref="iconListPopover" placement="top-start" trigger="click" :width="450" popper-class="mod__menu-icon-popover">
+				<el-popover ref="iconListPopover" placement="top-start" trigger="click" :width="470" popper-class="mod__menu-icon-popover">
 					<template #reference>
 						<el-input v-model="dataForm.icon" :readonly="true" placeholder="图标"> </el-input>
 					</template>
