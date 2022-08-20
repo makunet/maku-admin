@@ -28,7 +28,7 @@
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="160">
 				<template #default="scope">
 					<el-button v-auth="'sms:platform:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
-					<el-button v-auth="'sms:platform:update'" type="primary" link @click="sendHandle(scope.row.id)">测试</el-button>
+					<el-button v-auth="'sms:platform:update'" type="primary" link @click="sendHandle(scope.row)">测试</el-button>
 					<el-button v-auth="'sms:platform:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -73,8 +73,8 @@ const addOrUpdateHandle = (id?: number) => {
 }
 
 const sendRef = ref()
-const sendHandle = (id?: number) => {
-	sendRef.value.init(id)
+const sendHandle = (row: any) => {
+	sendRef.value.init(row)
 }
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
