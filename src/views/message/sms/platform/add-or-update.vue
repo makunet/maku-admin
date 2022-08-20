@@ -7,7 +7,7 @@
 			<el-form-item v-if="dataForm.platform == 1" label="AppId" prop="appId">
 				<el-input v-model="dataForm.appId" placeholder="AppId"></el-input>
 			</el-form-item>
-			<el-form-item label="短信签名" prop="signName">
+			<el-form-item v-if="dataForm.platform != 2" label="短信签名" prop="signName">
 				<el-input v-model="dataForm.signName" placeholder="短信签名"></el-input>
 			</el-form-item>
 			<el-form-item label="短信模板" prop="templateId">
@@ -21,6 +21,9 @@
 			</el-form-item>
 			<el-form-item v-if="dataForm.platform == 1" label="SenderId" prop="senderId">
 				<el-input v-model="dataForm.senderId" placeholder="国际短信必填"></el-input>
+			</el-form-item>
+			<el-form-item v-if="dataForm.platform == 3" label="通道号" prop="senderId">
+				<el-input v-model="dataForm.senderId" placeholder="通道号必填"></el-input>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
 				<fast-radio-group v-model="dataForm.status" dict-type="enable_disable"></fast-radio-group>

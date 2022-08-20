@@ -7,7 +7,7 @@
 			<el-form-item label="手机号" prop="mobile">
 				<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
 			</el-form-item>
-			<el-form-item label="参数Key" prop="paramKey">
+			<el-form-item v-if="dataForm.platform == 0 || dataForm.platform == 2" label="参数Key" prop="paramKey">
 				<el-input v-model="dataForm.paramKey" placeholder="参数Key"></el-input>
 			</el-form-item>
 			<el-form-item label="参数Value" prop="paramValue">
