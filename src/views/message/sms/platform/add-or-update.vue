@@ -4,6 +4,9 @@
 			<el-form-item label="平台类型" prop="platform">
 				<fast-select v-model="dataForm.platform" dict-type="sms_platform" placeholder="平台类型" style="width: 100%"></fast-select>
 			</el-form-item>
+			<el-form-item v-if="dataForm.platform == 3" label="接入地址" prop="url">
+				<el-input v-model="dataForm.url" placeholder="APP接入地址"></el-input>
+			</el-form-item>
 			<el-form-item v-if="dataForm.platform == 1" label="AppId" prop="appId">
 				<el-input v-model="dataForm.appId" placeholder="AppId"></el-input>
 			</el-form-item>
@@ -53,6 +56,7 @@ const dataForm = reactive({
 	templateId: '',
 	appId: '',
 	senderId: '',
+	url: '',
 	accessKey: '',
 	secretKey: '',
 	status: 0,
@@ -85,6 +89,7 @@ const dataRules = ref({
 	appId: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	signName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	templateId: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	url: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	accessKey: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	secretKey: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
