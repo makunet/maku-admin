@@ -5,6 +5,16 @@ export const pathToCamel = (path: string): string => {
 	return path.replace(/\/(\w)/g, (all, letter) => letter.toUpperCase())
 }
 
+// 转换文件大小格式
+export const convertSizeFormat = (size: number): string => {
+	const unit = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
+	let index = Math.floor(Math.log(size) / Math.log(1024))
+	let newSize = size / Math.pow(1024, index)
+
+	// 保留的小数位数
+	return newSize.toFixed(2) + ' ' + unit[index]
+}
+
 // 获取svg图标(id)列表
 export const getIconList = (): string[] => {
 	const rs: string[] = []
