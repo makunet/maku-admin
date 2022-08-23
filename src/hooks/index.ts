@@ -2,6 +2,7 @@ import { IHooksOptions } from '@/hooks/interface'
 import service from '@/utils/request'
 import { onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import axios from 'axios'
 
 export const useCrud = (options: IHooksOptions) => {
 	const defaultOptions: IHooksOptions = {
@@ -151,5 +152,43 @@ export const useCrud = (options: IHooksOptions) => {
 			.catch(() => {})
 	}
 
-	return { getDataList, sizeChangeHandle, currentChangeHandle, selectionChangeHandle, sortChangeHandle, deleteHandle, deleteBatchHandle }
+	const downloadHandle = (url: string, filename?: string, method: string = 'GET'): Promise<any> => {
+		return axios({
+			responseType: 'blob',
+			url: url,
+			method: method
+		}).then((res: any): any => {
+			// 创建a标签
+			const down = document.createElement('a')
+			// 文件名没传，则使用时间戳
+			down.download = filename || new Date().getTime().toString()
+			// 隐藏a标签
+			down.style.display = 'none'
+
+			// 创建下载url
+			let binaryData = []
+			binaryData.push(res.data)
+			down.href = URL.createObjectURL(new Blob(binaryData))
+
+			// 模拟点击下载
+			document.body.appendChild(down)
+			down.click()
+
+			// 释放URL
+			URL.revokeObjectURL(down.href)
+			// 下载完成移除
+			document.body.removeChild(down)
+		})
+	}
+
+	return {
+		getDataList,
+		sizeChangeHandle,
+		currentChangeHandle,
+		selectionChangeHandle,
+		sortChangeHandle,
+		deleteHandle,
+		deleteBatchHandle,
+		downloadHandle
+	}
 }
