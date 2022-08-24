@@ -2,7 +2,9 @@
 
 .el-menu {
   border-right: none !important;
-  width: var(--theme-aside-width);
+  &:not(.el-menu--collapse) {
+    width: var(--theme-aside-width);
+  }
 }
 
 .el-menu-item,
