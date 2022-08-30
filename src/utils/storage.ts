@@ -7,6 +7,9 @@
  */
 export const Storage = {
 	setItem(key: string, value: any) {
+		if (value === undefined) {
+			return
+		}
 		window.localStorage.setItem(key, JSON.stringify(value))
 	},
 	getItem(key: string) {
@@ -30,6 +33,9 @@ export const Storage = {
  */
 export const SessionStorage = {
 	setItem(key: string, value: any) {
+		if (value === undefined) {
+			return
+		}
 		window.sessionStorage.setItem(key, JSON.stringify(value))
 	},
 	getItem(key: string) {

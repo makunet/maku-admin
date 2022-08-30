@@ -16,7 +16,7 @@ service.interceptors.request.use(
 	(config: any) => {
 		const userStore = store.userStore
 		if (userStore?.token) {
-			config.headers.Authorization = 'Bearer ' + userStore.token
+			config.headers.Authorization = userStore.token
 		}
 
 		config.headers['Accept-Language'] = cache.getLanguage()

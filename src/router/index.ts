@@ -20,7 +20,7 @@ const constantRoutes: RouteRecordRaw[] = [
 	},
 	{
 		path: '/login',
-		component: () => import('../views/login/login.vue')
+		component: () => import('../views/login/index.vue')
 	},
 	{
 		path: '/404',
