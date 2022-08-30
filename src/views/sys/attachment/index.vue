@@ -21,8 +21,8 @@
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="name" label="附件名称" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="url" label="附件地址" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="name" label="附件名称" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="url" label="附件地址" show-overflow-tooltip header-align="center" align="center"></el-table-column>
 			<el-table-column prop="size" label="附件大小" header-align="center" align="center">
 				<template #default="scope">
 					{{ convertSizeFormat(scope.row.size) }}
