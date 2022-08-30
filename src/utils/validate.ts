@@ -22,3 +22,7 @@ export const validatePassword = (rule: any, value: any, callback: (e?: Error) =>
 		callback()
 	}
 }
+
+export const validateMobile = (mobile: string): boolean => {
+	return /^1[3456789]\d{9}$/.test(mobile)
+}
