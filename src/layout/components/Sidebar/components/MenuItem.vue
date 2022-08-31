@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue'
-import { RouteRecordRaw } from 'vue-router'
 
 defineProps({
 	menu: {
