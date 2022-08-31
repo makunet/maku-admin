@@ -1,6 +1,6 @@
 {
-  "name": "fast-admin",
-  "version": "1.0.0",
+  "name": "maku-admin",
+  "version": "2.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -51,7 +51,7 @@
     "vuejs",
     "vite",
     "element-plus",
-    "fast-admin"
+    "maku-admin"
   ],
   "license": "MIT"
 }
