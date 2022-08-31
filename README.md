@@ -1,16 +1,16 @@
 ## 介绍
 - 基于Vue3、TypeScript、Element Plus、Vue Router、Pinia、Axios、i18n、Vite等开发的后台管理，使用门槛极低，采用MIT开源协议，完全免费开源且终身免费，可免费用于商业项目等场景。
-- 目前已实现maku-admin后端接口的有：【MakuBoot】 和 【MakuCloud】 2个后端开源项目。
+- 目前已实现maku-admin后端接口的有：【maku-boot】 和 【maku-cloud】 2个后端开源项目。
 - 开发文档：[https://maku.net/docs/maku-admin](https://maku.net/docs/maku-admin)
 
 
-## MakuBoot
+## maku-boot | 单体快速开发平台
 - Github仓库：https://github.com/makunet/maku-boot
 - Gitee仓库：https://gitee.com/makunet/maku-boot
 - 演示环境：https://demo.maku.net/maku-boot
 
 
-## MakuCloud
+## maku-cloud | 微服务快速开发平台
 - Github仓库：https://github.com/makunet/maku-cloud
 - Gitee仓库：https://gitee.com/makunet/maku-cloud
 - 演示环境：https://demo.maku.net/maku-cloud
