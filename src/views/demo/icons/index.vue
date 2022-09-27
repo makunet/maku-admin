@@ -44,7 +44,6 @@ const handleCopy = (icon: string) => {
 	overflow: hidden;
 	display: flex;
 	transition: all 0.3s ease;
-	margin: auto;
 	justify-content: space-around;
 	cursor: pointer;
 	&:hover {
