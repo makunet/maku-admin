@@ -12,6 +12,8 @@
 					v-model="dataForm.orgId"
 					:data="orgList"
 					value-key="id"
+					check-strictly
+					:render-after-expand="false"
 					:props="{ label: 'name', children: 'children' }"
 					style="width: 100%"
 				/>
