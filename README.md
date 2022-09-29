@@ -5,14 +5,14 @@
 
 
 ## maku-boot | 单体快速开发平台
-- Github仓库：https://github.com/makunet/maku-boot
 - Gitee仓库：https://gitee.com/makunet/maku-boot
+- Github仓库：https://github.com/makunet/maku-boot
 - 演示环境：https://demo.maku.net/maku-boot
 
 
 ## maku-cloud | 微服务快速开发平台
-- Github仓库：https://github.com/makunet/maku-cloud
 - Gitee仓库：https://gitee.com/makunet/maku-cloud
+- Github仓库：https://github.com/makunet/maku-cloud
 - 演示环境：https://demo.maku.net/maku-cloud
 
 
@@ -38,10 +38,9 @@ npm run build
 
 
 ## 交流和反馈
-- 官方社区：https://maku.net
-- Github仓库：https://github.com/makunet/maku-admin
+- 官网地址：https://maku.net
 - Gitee仓库：https://gitee.com/makunet/maku-admin
-- 技术解答、交流、反馈、建议等，请移步到官方社区，我们会及时回复，也方便今后的小伙伴寻找答案，感谢理解！
+- Github仓库：https://github.com/makunet/maku-admin
 
 
 ## 微信交流群
