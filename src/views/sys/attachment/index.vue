@@ -78,7 +78,7 @@ const dataForm = reactive({
 
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
 	if (res.code !== 0) {
-		ElMessage.error('上传失败：' + res.message)
+		ElMessage.error('上传失败：' + res.msg)
 		return false
 	}
 
