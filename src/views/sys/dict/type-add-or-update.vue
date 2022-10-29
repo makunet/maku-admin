@@ -1,6 +1,6 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" draggable>
-		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="80px" @keyup.enter="submitHandle()">
+		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="80px">
 			<el-form-item prop="dictType" label="字典类型">
 				<el-input v-model="dataForm.dictType" placeholder="字典类型"></el-input>
 			</el-form-item>
@@ -12,6 +12,19 @@
 			</el-form-item>
 			<el-form-item prop="remark" label="备注">
 				<el-input v-model="dataForm.remark" placeholder="备注"></el-input>
+			</el-form-item>
+			<el-form-item label="数据来源" prop="dictSource">
+				<el-radio-group v-model="dataForm.dictSource">
+					<el-radio-button :label="0">字典数据</el-radio-button>
+					<el-radio-button :label="1">动态SQL</el-radio-button>
+				</el-radio-group>
+			</el-form-item>
+			<el-form-item v-if="dataForm.dictSource === 1" prop="dictSql" label="动态SQL">
+				<el-input
+					v-model="dataForm.dictSql"
+					type="textarea"
+					placeholder="如：select id as dictValue, name as dictLabel from sys_role where deleted = 0"
+				></el-input>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -35,12 +48,16 @@ const dataForm = reactive({
 	dictType: '',
 	dictName: '',
 	sort: 0,
+	dictSource: 0,
+	dictSql: '',
 	remark: ''
 })
 
 const dataRules = ref({
 	dictType: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-	dictName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+	dictName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	dictSource: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	dictSql: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 const init = (id?: number) => {

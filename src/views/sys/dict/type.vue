@@ -28,12 +28,19 @@
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="dictType" label="字典类型" header-align="center" align="center"> </el-table-column>
 			<el-table-column prop="dictName" label="字典名称" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="remark" label="备注" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="remark" label="备注" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="dictSource" label="数据来源" header-align="center" align="center">
+				<template #default="scope">
+					<span v-if="scope.row.dictSource === 0">字典数据</span>
+					<span v-else>动态SQL</span>
+				</template>
+			</el-table-column>
 			<el-table-column prop="sort" label="排序" sortable="custom" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="200">
 				<template #default="scope">
-					<el-button type="primary" link @click="showDictDataHandle(scope.row)">字典配置</el-button>
+					<el-button v-if="scope.row.dictSource === 0" type="primary" link @click="showDictDataHandle(scope.row)">字典配置</el-button>
+					<el-button v-if="scope.row.dictSource === 1" type="primary" link @click="showDataSqlHandle(scope.row)">动态数据</el-button>
 					<el-button type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
 					<el-button type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>
 				</template>
@@ -51,6 +58,12 @@
 		</el-pagination>
 		<!-- 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+
+		<!-- 动态数据 -->
+		<el-drawer v-if="dataSqlVisible" v-model="dataSqlVisible" :title="dataSqlTitle" :size="800" :close-on-press-escape="false">
+			<data-sql :dict-type-id="dictTypeId"></data-sql>
+		</el-drawer>
+
 		<!-- 字典配置 -->
 		<el-drawer v-if="dictDataVisible" v-model="dictDataVisible" :title="dictDataTitle" :size="800" :close-on-press-escape="false">
 			<dict-data :dict-type-id="dictTypeId"></dict-data>
@@ -62,6 +75,7 @@
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './type-add-or-update.vue'
+import DataSql from './data-sql.vue'
 import DictData from './data.vue'
 import { IHooksOptions } from '@/hooks/interface'
 
@@ -81,6 +95,14 @@ const showDictDataHandle = (row: any) => {
 	dictDataVisible.value = true
 	dictTypeId.value = row.id
 	dictDataTitle.value = '字典配置 - ' + row.dictType
+}
+
+const dataSqlVisible = ref(false)
+const dataSqlTitle = ref()
+const showDataSqlHandle = (row: any) => {
+	dataSqlVisible.value = true
+	dictTypeId.value = row.id
+	dataSqlTitle.value = '动态数据 - ' + row.dictType
 }
 
 const addOrUpdateRef = ref()
