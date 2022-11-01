@@ -48,6 +48,32 @@
 					</el-space>
 				</el-space>
 
+				<el-divider content-position="left">{{ $t('settings.layout') }}</el-divider>
+
+				<!-- 布局切换 -->
+				<el-space>
+					<el-tooltip key="dark" effect="dark" placement="top" :content="$t('settings.vertical')">
+						<div
+							class="settings-box-item item-vertical"
+							:class="theme.layout === 'vertical' ? 'active' : ''"
+							@click="handleLayoutTheme('vertical')"
+						></div>
+					</el-tooltip>
+					<el-tooltip key="light" effect="dark" placement="top" :content="$t('settings.columns')">
+						<div class="settings-box-item item-columns" :class="theme.layout === 'columns' ? 'active' : ''" @click="handleLayoutTheme('columns')">
+							<div class="columns-tips-box"></div>
+							<div class="columns-sub-menu"></div>
+						</div>
+					</el-tooltip>
+					<el-tooltip key="light" effect="dark" placement="top" :content="$t('settings.transverse')">
+						<div
+							class="settings-box-item item-transverse"
+							:class="theme.layout === 'transverse' ? 'active' : ''"
+							@click="handleLayoutTheme('transverse')"
+						></div>
+					</el-tooltip>
+				</el-space>
+
 				<el-divider content-position="left">{{ $t('settings.interface') }}</el-divider>
 
 				<SwitchItem v-model="isDark" :title="$t('settings.dark')" />
@@ -115,6 +141,12 @@ const tabsStyle = [
 // 默认主题
 const theme = computed(() => store.appStore.theme)
 
+// 处理布局切换
+const handleLayoutTheme = (layout: string) => {
+	theme.value.layout = layout
+	cache.setTheme(theme.value)
+}
+
 // 处理侧边栏主题
 const handleSidebarTheme = (style: string) => {
 	theme.value.sidebarStyle = style
@@ -176,7 +208,7 @@ const handleResetConfig = async () => {
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 		cursor: pointer;
 		&.active {
-			&::after {
+			&:after {
 				content: '';
 				width: 6px;
 				height: 6px;
@@ -190,7 +222,7 @@ const handleResetConfig = async () => {
 	}
 
 	.item-left-light {
-		&::before {
+		&:before {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -204,7 +236,7 @@ const handleResetConfig = async () => {
 	}
 
 	.item-left-dark {
-		&::before {
+		&:before {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -218,7 +250,7 @@ const handleResetConfig = async () => {
 	}
 
 	.item-top-light {
-		&::before {
+		&:before {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -232,7 +264,7 @@ const handleResetConfig = async () => {
 	}
 
 	.item-top-theme {
-		&::before {
+		&:before {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -255,7 +287,7 @@ const handleResetConfig = async () => {
 		position: relative;
 		cursor: pointer;
 		&.active {
-			&::after {
+			&:after {
 				content: url('data:image/svg+xml;charset=utf-8,<svg width="14" height="14" color="rgb(255 255 255)" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-042ca774=""><path fill="currentColor" d="M406.656 706.944L195.84 496.256a32 32 0 10-45.248 45.248l256 256 512-512a32 32 0 00-45.248-45.248L406.592 706.944z"></path></svg>');
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
@@ -268,6 +300,70 @@ const handleResetConfig = async () => {
 			}
 		}
 	}
+
+	.item-vertical {
+		&:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 33%;
+			height: 100%;
+			background-color: #000;
+			content: '';
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+		}
+	}
+
+	.item-columns {
+		&:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20%;
+			height: 100%;
+			background-color: #000;
+			content: '';
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+		}
+		.columns-tips-box {
+			transition: inherit;
+			position: relative;
+			top: 0;
+			left: 20%;
+			background-color: #333;
+			content: '';
+			height: 30%;
+			width: 83%;
+			border-top-right-radius: 3px;
+		}
+		.columns-sub-menu {
+			transition: inherit;
+			position: relative;
+			width: 18%;
+			top: 0;
+			left: 20%;
+			background-color: #999;
+			content: '';
+			height: 70%;
+		}
+	}
+
+	.item-transverse {
+		&:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 33%;
+			background-color: #333;
+			content: '';
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
+		}
+	}
+
 	.config-btn {
 		button {
 			width: 100%;
