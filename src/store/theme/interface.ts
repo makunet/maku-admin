@@ -5,6 +5,8 @@ export interface ITheme {
 	headerStyle: string
 	// 主题颜色
 	primaryColor: string
+	// 布局风格 [vertical、columns、transverse]
+	layout: string
 	// 侧栏排他展开(只保持一个子菜单展开)
 	uniqueOpened: boolean
 	// 开启LOGO
