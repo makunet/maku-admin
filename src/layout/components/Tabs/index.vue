@@ -128,6 +128,7 @@ const onClose = (type: string) => {
 	position: relative;
 	z-index: 6;
 	height: 40px;
+	background-color: #fff;
 	.tabs-item {
 		transition: left 0.3s;
 		flex-grow: 1;

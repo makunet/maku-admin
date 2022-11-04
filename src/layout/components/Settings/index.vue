@@ -113,10 +113,15 @@ import SelectItem from './components/SelectItem.vue'
 import { ElMessage } from 'element-plus'
 import { handleThemeStyle } from '@/utils/theme'
 import cache from '@/utils/cache'
+import emits from '@/utils/emits'
 
 const { t } = useI18n()
 const { copy } = useClipboard()
+
+// 是否显示
 const visible = ref(false)
+emits.on('openThemeSettings', () => (visible.value = true))
+
 const colors = [
 	'#409eff',
 	'#0BB2D4',

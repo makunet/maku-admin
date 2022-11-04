@@ -14,7 +14,7 @@ import store from '@/store'
 
 <style lang="scss" scoped>
 .sidebar-logo {
-	width: var(--theme-aside-width) !important;
+	width: 230px !important;
 	height: var(--theme-header-height);
 	line-height: var(--theme-header-height);
 	display: flex;
