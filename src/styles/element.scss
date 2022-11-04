@@ -2,15 +2,12 @@
 
 .el-menu {
   border-right: none !important;
-  &:not(.el-menu--collapse) {
-    width: var(--theme-aside-width);
-  }
 }
 
 .el-menu-item,
 .el-sub-menu__title {
   color: var(--theme-menu-text-color) !important;
-  height: 48px !important;
+  height: 50px !important;
   overflow: hidden;
 }
 

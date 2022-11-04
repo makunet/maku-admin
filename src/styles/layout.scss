@@ -50,7 +50,7 @@ a:hover {
       overflow: hidden;
     }
     &.aside-expend {
-      width: var(--theme-aside-width) !important;
+      width: 230px !important;
       transition: width 0.3s ease;
     }
     &.aside-compress {
