@@ -13,6 +13,9 @@
 			<el-form-item>
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="downloadExcel()">导出</el-button>
+      </el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -41,6 +44,8 @@
 <script setup lang="ts" name="SysLogLogin">
 import { useCrud } from '@/hooks'
 import { reactive } from 'vue'
+import { ElMessage } from 'element-plus'
+import { useLogLoginExportApi } from '@/api/sys/log'
 import { IHooksOptions } from '@/hooks/interface'
 
 const state: IHooksOptions = reactive({
@@ -52,5 +57,17 @@ const state: IHooksOptions = reactive({
 	}
 })
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle } = useCrud(state)
+const downloadExcel = () => {
+  useLogLoginExportApi().then(res => {
+    ElMessage.success({
+      message: '开始下载',
+      duration: 500,
+      onClose: () => {
+        downloadHandle(res.data.path, res.data.filename)
+      }
+    })
+  })
+}
+
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, downloadHandle } = useCrud(state)
 </script>
