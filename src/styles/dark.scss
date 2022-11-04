@@ -32,6 +32,12 @@ html.dark {
   .el-popover.el-popper{
     background: var(--el-bg-color-overlay);
   }
+  .tabs-container{
+    background: none;
+  }
+  .columns-sub-menu {
+    background: none;
+  }
 
   // 编辑器
   --w-e-textarea-bg-color: #333;
