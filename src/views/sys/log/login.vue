@@ -14,7 +14,7 @@
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="downloadExcel()">导出</el-button>
+        <el-button v-auth="'sys:log:login:export'" type="primary" @click="downloadExcel()">导出</el-button>
       </el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">

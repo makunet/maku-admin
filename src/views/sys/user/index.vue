@@ -19,13 +19,13 @@
 			<el-form-item>
 				<el-button v-auth="'sys:user:delete'" type="danger" @click="deleteBatchHandle()">删除</el-button>
 			</el-form-item>
-      <el-form-item>
+      <el-form-item v-auth="'sys:user:import'">
         <el-upload :action="constant.uploadUserExcelUrl" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
           <el-button type="info">导入</el-button>
         </el-upload>
       </el-form-item>
       <el-form-item>
-        <el-button  type="success" @click="downloadExcel()">导出</el-button>
+        <el-button v-auth="'sys:user:export'" type="success" @click="downloadExcel()">导出</el-button>
       </el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
