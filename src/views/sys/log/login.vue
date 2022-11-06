@@ -13,9 +13,9 @@
 			<el-form-item>
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
-      <el-form-item>
-        <el-button v-auth="'sys:log:login:export'" type="primary" @click="downloadExcel()">导出</el-button>
-      </el-form-item>
+			<el-form-item>
+				<el-button type="primary" @click="downloadExcel()">导出</el-button>
+			</el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -58,15 +58,15 @@ const state: IHooksOptions = reactive({
 })
 
 const downloadExcel = () => {
-  useLogLoginExportApi().then(res => {
-    ElMessage.success({
-      message: '开始下载',
-      duration: 500,
-      onClose: () => {
-        downloadHandle(res.data.path, res.data.filename)
-      }
-    })
-  })
+	useLogLoginExportApi().then(res => {
+		ElMessage.success({
+			message: '开始下载',
+			duration: 500,
+			onClose: () => {
+				downloadHandle(res.data.path, res.data.filename)
+			}
+		})
+	})
 }
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, downloadHandle } = useCrud(state)
