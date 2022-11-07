@@ -5,6 +5,11 @@ export const pathToCamel = (path: string): string => {
 	return path.replace(/\/(\w)/g, (all, letter) => letter.toUpperCase())
 }
 
+// 是否外链
+export const isExternalLink = (path: string): boolean => {
+	return /^(https?:|\/\/|http?:|\/\/|^{{\s?ApiUrl\s?}})/.test(path)
+}
+
 // 转换文件大小格式
 export const convertSizeFormat = (size: number): string => {
 	const unit = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB']

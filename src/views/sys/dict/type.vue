@@ -57,7 +57,7 @@
 		>
 		</el-pagination>
 		<!-- 新增 / 修改 -->
-		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+		<add-or-update ref="addOrUpdateRef" @refresh-data-list="getDataList"></add-or-update>
 
 		<!-- 动态数据 -->
 		<el-drawer v-if="dataSqlVisible" v-model="dataSqlVisible" :title="dataSqlTitle" :size="800" :close-on-press-escape="false">

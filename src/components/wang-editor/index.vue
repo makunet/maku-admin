@@ -9,8 +9,8 @@
 			:disabled="disabled"
 			:default-config="editorConfig"
 			:mode="mode"
-			@onCreated="handleCreated"
-			@onChange="handleChange"
+			@on-created="handleCreated"
+			@on-change="handleChange"
 		/>
 	</div>
 </template>

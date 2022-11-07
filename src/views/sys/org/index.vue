@@ -16,7 +16,7 @@
 				</template>
 			</el-table-column>
 		</el-table>
-		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+		<add-or-update ref="addOrUpdateRef" @refresh-data-list="getDataList"></add-or-update>
 	</el-card>
 </template>
 

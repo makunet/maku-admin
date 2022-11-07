@@ -55,7 +55,7 @@
 		</el-pagination>
 
 		<!-- 弹窗, 新增 / 修改 -->
-		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+		<add-or-update ref="addOrUpdateRef" @refresh-data-list="getDataList"></add-or-update>
 
 		<!-- 日志 -->
 		<el-drawer v-if="logVisible" v-model="logVisible" title="任务日志" :size="1200" :close-on-press-escape="false">

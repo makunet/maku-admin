@@ -23,7 +23,5 @@ module.exports = {
 	// 使用默认的折行标准，可选值"[always|never|preserve]"
 	proseWrap: 'preserve',
 	// 指定HTML文件的全局空格敏感度，可选值"[css|strict|ignore]"
-	htmlWhitespaceSensitivity: 'css',
-	// 结尾时换行符使用lf，可选值"[auto|lf|crlf|cr]"
-	endOfLine: 'lf'
+	htmlWhitespaceSensitivity: 'css'
 }
