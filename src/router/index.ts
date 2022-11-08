@@ -130,9 +130,17 @@ router.beforeEach(async (to, from, next) => {
 		} else {
 			// 用户信息不存在，则重新拉取用户等信息
 			if (!store.userStore.user.id) {
-				await store.userStore.getUserInfoAction()
-				await store.userStore.getAuthorityListAction()
-				await store.appStore.getDictListAction()
+				try {
+					await store.userStore.getUserInfoAction()
+					await store.userStore.getAuthorityListAction()
+					await store.appStore.getDictListAction()
+				} catch (error) {
+					// 请求异常，则跳转到登录页
+					store.userStore?.setToken('')
+					next('/login')
+					return Promise.reject(error)
+				}
+
 				const menuRoutes = await store.routerStore.getMenuRoutes()
 
 				// 根据后端菜单路由，生成KeepAlive路由
