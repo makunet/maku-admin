@@ -1,4 +1,5 @@
 import type { App, Plugin } from 'vue'
+import constant from '@/utils/constant'
 
 // 把路径转换成驼峰命名
 export const pathToCamel = (path: string): string => {
@@ -6,8 +7,13 @@ export const pathToCamel = (path: string): string => {
 }
 
 // 是否外链
-export const isExternalLink = (path: string): boolean => {
-	return /^(https?:|\/\/|http?:|\/\/|^{{\s?ApiUrl\s?}})/.test(path)
+export const isExternalLink = (url: string): boolean => {
+	return /^(https?:|\/\/|http?:|\/\/|^{{\s?apiUrl\s?}})/.test(url)
+}
+
+// 替换外链参数
+export const replaceLinkParam = (url: string): string => {
+	return url.replace('{{apiUrl}}', constant.apiUrl)
 }
 
 // 转换文件大小格式
