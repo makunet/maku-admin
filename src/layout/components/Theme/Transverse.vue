@@ -2,7 +2,7 @@
 	<el-container class="layout-container layout-transverse">
 		<el-header class="navbar-container" :class="headerClass">
 			<Logo v-if="theme.isLogo" />
-			<el-menu :default-active="defaultActive" background-color="transparent" :collapse-transition="false" mode="horizontal" router>
+			<el-menu :default-active="defaultActive" background-color="transparent" :collapse-transition="false" mode="horizontal">
 				<menu-item v-for="menu in store.routerStore.menuRoutes" :key="menu.path" :menu="menu"></menu-item>
 			</el-menu>
 			<NavbarRight />

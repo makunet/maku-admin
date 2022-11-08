@@ -10,7 +10,6 @@
 					background-color="transparent"
 					:collapse-transition="false"
 					mode="vertical"
-					router
 				>
 					<menu-item v-for="menu in store.routerStore.menuRoutes" :key="menu.path" :menu="menu"></menu-item>
 				</el-menu>
