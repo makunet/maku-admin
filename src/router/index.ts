@@ -3,7 +3,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import store from '@/store'
 import { i18n } from '@/i18n'
-import { pathToCamel } from '@/utils/tool'
+import { isExternalLink, pathToCamel } from '@/utils/tool'
 
 NProgress.configure({ showSpinner: false })
 
@@ -17,6 +17,10 @@ const constantRoutes: RouteRecordRaw[] = [
 				component: () => import('../layout/components/Router/Redirect.vue')
 			}
 		]
+	},
+	{
+		path: '/iframe/:query?',
+		component: () => import('../layout/components/Router/Iframe.vue')
 	},
 	{
 		path: '/login',
@@ -190,11 +194,7 @@ const layoutModules = import.meta.glob('/src/views/**/*.vue')
 
 // 根据路径，动态获取vue组件
 const getDynamicComponent = (path: string): any => {
-	const component = layoutModules[`/src/views/${path}.vue`]
-	if (!component) {
-		console.error('组件不存在，路径为：', path)
-	}
-	return component
+	return layoutModules[`/src/views/${path}.vue`]
 }
 
 // 根据菜单列表，生成路由数据
@@ -208,8 +208,14 @@ export const generateRoutes = (menuList: any): RouteRecordRaw[] => {
 			component = () => import('@/layout/index.vue')
 			path = '/p/' + menu.id
 		} else {
-			component = getDynamicComponent(menu.url)
-			path = '/' + menu.url
+			// 判断是否iframe
+			if (isIframeUrl(menu)) {
+				component = () => import('@/layout/components/Router/Iframe.vue')
+				path = '/iframe/' + menu.id
+			} else {
+				component = getDynamicComponent(menu.url)
+				path = '/' + menu.url
+			}
 		}
 		const route: RouteRecordRaw = {
 			path: path,
@@ -220,8 +226,9 @@ export const generateRoutes = (menuList: any): RouteRecordRaw[] => {
 				title: menu.name,
 				icon: menu.icon,
 				id: '' + menu.id,
+				url: menu.url,
 				cache: true,
-				_blank: menu.openStyle === 1,
+				newOpen: menu.openStyle === 1,
 				breadcrumb: []
 			}
 		}
@@ -235,4 +242,15 @@ export const generateRoutes = (menuList: any): RouteRecordRaw[] => {
 	})
 
 	return routerList
+}
+
+// 判断是否iframe
+const isIframeUrl = (menu: any): boolean => {
+	// 如果是新页面打开，则不用iframe
+	if (menu.openStyle === 1) {
+		return false
+	}
+
+	// 是否外部链接
+	return isExternalLink(menu.url)
 }
