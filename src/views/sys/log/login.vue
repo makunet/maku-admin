@@ -44,7 +44,6 @@
 <script setup lang="ts" name="SysLogLogin">
 import { useCrud } from '@/hooks'
 import { reactive } from 'vue'
-import { ElMessage } from 'element-plus'
 import { useLogLoginExportApi } from '@/api/sys/log'
 import { IHooksOptions } from '@/hooks/interface'
 
@@ -58,16 +57,9 @@ const state: IHooksOptions = reactive({
 })
 
 const downloadExcel = () => {
-	useLogLoginExportApi().then(res => {
-		ElMessage.success({
-			message: '开始下载',
-			duration: 500,
-			onClose: () => {
-				downloadHandle(res.data.path, res.data.filename)
-			}
-		})
-	})
+	useLogLoginExportApi()
+  return
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, downloadHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle} = useCrud(state)
 </script>

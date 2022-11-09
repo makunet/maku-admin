@@ -1,5 +1,7 @@
-import service from '@/utils/request'
+import cache from "@/utils/cache";
 
+
+// 文件导出
 export const useLogLoginExportApi = () => {
-	return service.get('/sys/log/login/export')
+	location.href = import.meta.env.VITE_API_URL + '/sys/log/login/export?access_token=' + cache.getToken()
 }

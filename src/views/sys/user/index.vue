@@ -86,15 +86,8 @@ const addOrUpdateHandle = (id?: number) => {
 }
 
 const downloadExcel = () => {
-	useUserExportApi().then(res => {
-		ElMessage.success({
-			message: '开始下载',
-			duration: 500,
-			onClose: () => {
-				downloadHandle(res.data.path, res.data.filename)
-			}
-		})
-	})
+	useUserExportApi()
+  return
 }
 
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
