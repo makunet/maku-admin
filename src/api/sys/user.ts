@@ -1,5 +1,6 @@
 import service from '@/utils/request'
-import cache from "@/utils/cache";
+import cache from '@/utils/cache'
+import constant from '@/utils/constant'
 
 export const useUserInfoApi = () => {
 	return service.get('/sys/user/info')
@@ -14,7 +15,7 @@ export const useUserApi = (id: number) => {
 }
 
 export const useUserExportApi = () => {
-	location.href = import.meta.env.VITE_API_URL + '/sys/user/export?access_token=' + cache.getToken()
+	location.href = constant.apiUrl + '/sys/user/export?access_token=' + cache.getToken()
 }
 
 export const useUserSubmitApi = (dataForm: any) => {
