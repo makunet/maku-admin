@@ -24,6 +24,7 @@ import store from '@/store'
 import { useCaptchaApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import constant from '@/utils/constant'
 
 const router = useRouter()
 const { t } = useI18n()
@@ -31,8 +32,8 @@ const loginFormRef = ref()
 const captchaBase64 = ref()
 
 const loginForm = reactive({
-	username: 'admin',
-	password: 'admin',
+	username: constant.env.PROD ? '' : 'admin',
+	password: constant.env.PROD ? '' : 'admin',
 	key: '',
 	captcha: ''
 })
