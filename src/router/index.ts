@@ -4,6 +4,7 @@ import 'nprogress/nprogress.css'
 import store from '@/store'
 import { i18n } from '@/i18n'
 import { isExternalLink, pathToCamel } from '@/utils/tool'
+import constant from '@/utils/constant'
 
 NProgress.configure({ showSpinner: false })
 
@@ -59,7 +60,7 @@ const asyncRoutes: RouteRecordRaw = {
 }
 
 // 配置常量菜单
-export const constantMenu = [
+export const constantMenu = constant.env.PROD ? [] : [
 	{
 		id: 1000,
 		name: 'Demo',
