@@ -22,6 +22,6 @@ export default {
 		MODE: import.meta.env.MODE,
 		PROD: import.meta.env.PROD,
 		DEV: import.meta.env.DEV,
-		SSR: import.meta.env.SSR,
+		SSR: import.meta.env.SSR
 	}
 }
