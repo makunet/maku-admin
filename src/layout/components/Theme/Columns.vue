@@ -7,7 +7,7 @@
 			<el-scrollbar>
 				<div class="columns-menu">
 					<router-link to="/home">
-						<div class="columns-menu-item" :class="{ active: menuPath === '' }">
+						<div class="columns-menu-item" :class="{ active: menuPath === '/home' }">
 							<svg-icon icon="icon-home"></svg-icon>
 							<span class="title">首页</span>
 						</div>
@@ -82,7 +82,7 @@ onMounted(() => {
 
 const menuPath = ref<string>('')
 const initSubMenu = () => {
-	menuPath.value = ''
+	menuPath.value = defaultActive.value
 	for (const menu of store.routerStore.menuRoutes) {
 		// 是否包含当前路由
 		const exist = findRoute(menu.children)
@@ -99,7 +99,9 @@ const findRoute = (menus: RouteRecordRaw[]): boolean => {
 	for (const menu of menus) {
 		// 有子菜单的情况
 		if (menu.children && menu.children.length > 0) {
-			return findRoute(menu.children)
+			if (findRoute(menu.children)) {
+				return true
+			}
 		} else if (menu.path === defaultActive.value) {
 			return true
 		}
@@ -108,8 +110,12 @@ const findRoute = (menus: RouteRecordRaw[]): boolean => {
 }
 
 const handleMenu = (menu: any) => {
-	const leafRoute = findLeafRoute(menu.children)
-	router.push(leafRoute.path)
+	if (menu.children && menu.children.length > 0) {
+		const leafRoute = findLeafRoute(menu.children)
+		router.push(leafRoute.path)
+	} else {
+		router.push(menu.path)
+	}
 }
 
 const findLeafRoute = (menus: RouteRecordRaw[]): any => {
