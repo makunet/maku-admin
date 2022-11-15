@@ -173,11 +173,11 @@ const onClose = (type: string) => {
 			color: var(--el-color-primary);
 			background-color: var(--el-color-primary-light-9);
 			border-bottom: var(--el-border-color-light) 2px solid;
-			&::before {
+			&:before {
 				background-color: var(--el-color-primary);
 			}
 		}
-		&::before {
+		&:before {
 			content: '';
 			width: 9px;
 			height: 9px;
@@ -206,7 +206,7 @@ const onClose = (type: string) => {
 			color: var(--el-color-primary) !important;
 			background-color: var(--el-color-primary-light-9) !important;
 			border-bottom: var(--el-color-primary) 2px solid;
-			&::before {
+			&:before {
 				background-color: var(--el-color-primary);
 			}
 		}
