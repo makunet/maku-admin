@@ -1,10 +1,9 @@
-import { createRouter, createWebHistory, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import store from '@/store'
 import { i18n } from '@/i18n'
 import { isExternalLink, pathToCamel } from '@/utils/tool'
-import constant from '@/utils/constant'
 
 NProgress.configure({ showSpinner: false })
 
@@ -60,7 +59,7 @@ const asyncRoutes: RouteRecordRaw = {
 }
 
 // 配置常量菜单
-export const constantMenu = constant.env.PROD ? [] : [
+export const constantMenu = [
 	{
 		id: 1000,
 		name: 'Demo',
@@ -120,7 +119,7 @@ export const router = createRouter({
 // 白名单列表
 const whiteList = ['/login']
 
-// 路由加载前
+// 路由跳转前
 router.beforeEach(async (to, from, next) => {
 	NProgress.start()
 
@@ -129,7 +128,7 @@ router.beforeEach(async (to, from, next) => {
 		if (to.path === '/login') {
 			next('/home')
 		} else {
-			// 用户信息不存在，则重新拉取用户等信息
+			// 用户信息不存在，则重新拉取
 			if (!store.userStore.user.id) {
 				try {
 					await store.userStore.getUserInfoAction()
@@ -142,9 +141,10 @@ router.beforeEach(async (to, from, next) => {
 					return Promise.reject(error)
 				}
 
+				// 动态菜单+常量菜单
 				const menuRoutes = await store.routerStore.getMenuRoutes()
 
-				// 根据后端菜单路由，生成KeepAlive路由
+				// 获取扁平化路由，将多级路由转换成一级路由
 				const keepAliveRoutes = getKeepAliveRoutes(menuRoutes, [])
 
 				// 添加菜单路由
