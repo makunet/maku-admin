@@ -61,6 +61,7 @@ const loginSwitch = (type: string) => {
 	border-radius: 6px;
 	box-shadow: 1px 1px 8px #aaa6a6;
 	box-sizing: border-box;
+	width: 440px;
 
 	:deep(.el-input) {
 		height: 45px;
