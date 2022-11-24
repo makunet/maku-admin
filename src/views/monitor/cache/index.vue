@@ -50,7 +50,7 @@ const data = ref({
 		connected_clients: 1,
 		uptime_in_days: 0,
 		used_memory_human: 0,
-		used_cpu_user_children: '0',
+		used_cpu_user_children: 0,
 		maxmemory_human: 0,
 		aof_enabled: 0,
 		rdb_last_bgsave_status: '0',
