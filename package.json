@@ -8,7 +8,7 @@
     "lint": "eslint --fix --ext .vue,.jsx,.ts,.tsx ."
   },
   "dependencies": {
-    "@element-plus/icons-vue": "2.0.6",
+    "@element-plus/icons-vue": "2.0.10",
     "@vueuse/core": "9.1.1",
     "axios": "0.27.2",
     "element-plus": "2.2.18",
