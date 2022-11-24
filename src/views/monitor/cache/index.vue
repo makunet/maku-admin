@@ -14,7 +14,7 @@
 				<el-descriptions-item label="运行时间（天）">{{ data.info.uptime_in_days }}</el-descriptions-item>
 				<el-descriptions-item label="Key数量">{{ data.keyCount }}</el-descriptions-item>
 				<el-descriptions-item label="最大内存配置">{{ data.info.maxmemory_human }}</el-descriptions-item>
-				<el-descriptions-item label="使用CPU">{{ data.info.used_cpu_user_children * 100 }}%</el-descriptions-item>
+				<el-descriptions-item label="使用CPU">{{ data.info.used_cpu_user_children }}%</el-descriptions-item>
 				<el-descriptions-item label="已用内存">{{ data.info.used_memory_human }}</el-descriptions-item>
 				<el-descriptions-item label="AOF是否开启">{{ data.info.aof_enabled === 0 ? '否' : '是' }}</el-descriptions-item>
 				<el-descriptions-item label="RDB是否成功">{{ data.info.rdb_last_bgsave_status }}</el-descriptions-item>
