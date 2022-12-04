@@ -2,6 +2,6 @@ export default {
 	SidebarOpenedKey: 'sidebarOpened',
 	LangKey: 'lang',
 	ComponentSizeKey: 'componentSize',
-	TokenKey: 'token',
+	TokenKey: 'maToken',
 	ThemeKey: 'theme'
 }
