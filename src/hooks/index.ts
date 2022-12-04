@@ -63,8 +63,9 @@ export const useCrud = (options: IHooksOptions) => {
 				state.dataList = state.isPage ? res.data.list : res.data
 				state.total = state.isPage ? res.data.total : 0
 			})
-
-		state.dataListLoading = false
+			.finally(() => {
+				state.dataListLoading = false
+			})
 	}
 
 	const getDataList = () => {
