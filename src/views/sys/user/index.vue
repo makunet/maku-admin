@@ -61,7 +61,7 @@
 	</el-card>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="SysUserIndex">
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
@@ -87,7 +87,7 @@ const addOrUpdateHandle = (id?: number) => {
 
 const downloadExcel = () => {
 	useUserExportApi()
-  return
+	return
 }
 
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {

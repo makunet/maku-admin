@@ -64,7 +64,7 @@
 	</el-card>
 </template>
 
-<script setup lang="ts" name="QuartzIndex">
+<script setup lang="ts" name="QuartzScheduleIndex">
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
