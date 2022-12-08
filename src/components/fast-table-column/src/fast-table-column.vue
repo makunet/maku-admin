@@ -9,14 +9,20 @@
 		:class-name="className"
 	>
 		<template #default="scope">
-			{{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
+      <el-tag v-if="scope.row[props.prop] !== null && getDictTag(store.appStore.dictList, props.dictType, scope.row[props.prop]) !== 'none'"
+              :type="getDictTag(store.appStore.dictList, props.dictType, scope.row[props.prop])">
+        {{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
+      </el-tag>
+      <span v-else>
+        {{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
+      </span>
 		</template>
 	</el-table-column>
 </template>
 
 <script setup lang="ts" name="FastTableColumn">
 import store from '@/store'
-import { getDictLabel } from '@/utils/tool'
+import { getDictLabel,getDictTag } from '@/utils/tool'
 
 const props = defineProps({
 	prop: {

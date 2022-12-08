@@ -16,6 +16,7 @@
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="dictValue" label="字典值" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="dictLabel" label="字典标签" show-overflow-tooltip header-align="center" align="center"> </el-table-column>
+      <fast-table-column prop="tagType" label="tag类型" width="100" header-align="center" align="center" dict-type="dict_tag"></fast-table-column>
 			<el-table-column prop="sort" label="排序" sortable="custom" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
