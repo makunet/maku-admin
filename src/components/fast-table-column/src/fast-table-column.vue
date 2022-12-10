@@ -9,20 +9,26 @@
 		:class-name="className"
 	>
 		<template #default="scope">
-      <el-tag v-if="scope.row[props.prop] !== null && getDictTag(store.appStore.dictList, props.dictType, scope.row[props.prop]) !== 'none'"
-              :type="getDictTag(store.appStore.dictList, props.dictType, scope.row[props.prop])">
-        {{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
-      </el-tag>
-      <span v-else>
-        {{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
-      </span>
+			<el-tag
+				v-if="getDictLabelClass(store.appStore.dictList, props.dictType, scope.row[props.prop])"
+				:type="
+					getDictLabelClass(store.appStore.dictList, props.dictType, scope.row[props.prop]) === 'primary'
+						? ''
+						: getDictLabelClass(store.appStore.dictList, props.dictType, scope.row[props.prop])
+				"
+			>
+				{{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
+			</el-tag>
+			<span v-else>
+				{{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
+			</span>
 		</template>
 	</el-table-column>
 </template>
 
 <script setup lang="ts" name="FastTableColumn">
 import store from '@/store'
-import { getDictLabel,getDictTag } from '@/utils/tool'
+import { getDictLabel, getDictLabelClass } from '@/utils/tool'
 
 const props = defineProps({
 	prop: {
