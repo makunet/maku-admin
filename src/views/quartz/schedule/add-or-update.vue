@@ -33,12 +33,7 @@
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="cron表达式" prop="cronExpression">
-						<el-popover ref="cronPopover" :width="550" trigger="click">
-							<Cron @submit="changeCron" @close="cronPopover.hide()"></Cron>
-							<template #reference>
-								<el-input v-model="dataForm.cronExpression" placeholder="cron表达式"></el-input>
-							</template>
-						</el-popover>
+						<el-input v-model="dataForm.cronExpression" placeholder="cron表达式"></el-input>
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -69,14 +64,8 @@
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
 import { useScheduleApi, useScheduleSubmitApi } from '@/api/quartz/schedule'
-import Cron from '@/components/fast-cron/index'
 
 const emit = defineEmits(['refreshDataList'])
-
-const cronPopover = ref()
-const changeCron = (val: any) => {
-	dataForm.cronExpression = val
-}
 
 const visible = ref(false)
 const dataFormRef = ref()
