@@ -51,14 +51,14 @@
 				<el-input v-model="dataForm.authority" placeholder="多个用逗号分隔，如：sys:menu:save,sys:menu:update"></el-input>
 			</el-form-item>
 			<el-form-item v-if="dataForm.type === 0" prop="icon" label="图标" class="popover-list">
-				<el-popover ref="iconListPopover" placement="top-start" trigger="click" :width="470" popper-class="mod__menu-icon-popover">
+				<el-popover ref="iconListPopover" placement="top-start" trigger="click" width="40%" popper-class="mod__menu-icon-popover">
 					<template #reference>
 						<el-input v-model="dataForm.icon" :readonly="true" placeholder="图标"> </el-input>
 					</template>
 					<div class="mod__menu-icon-inner">
 						<div class="mod__menu-icon-list">
 							<el-button v-for="(item, index) in iconList" :key="index" :class="{ 'is-active': dataForm.icon === item }" @click="iconHandle(item)">
-								<svg-icon :icon="item"></svg-icon>
+								<svg-icon size="50px" :icon="item"></svg-icon>
 							</el-button>
 						</div>
 					</div>
@@ -236,12 +236,14 @@ defineExpose({
 		}
 	}
 	&-icon-list {
-		width: 458px !important;
+		width: 100% !important;
 		padding: 0;
 		margin: -8px 0 0 -8px;
 		> .el-button {
 			padding: 8px;
 			margin: 18px 0 0 8px;
+			height: 55px;
+			width: 55px;
 			> span {
 				display: inline-block;
 				vertical-align: middle;

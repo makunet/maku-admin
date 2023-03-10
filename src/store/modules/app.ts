@@ -21,6 +21,10 @@ export const appStore = defineStore('appStore', {
 			this.sidebarOpened = !this.sidebarOpened
 			cache.setSidebarOpened(this.sidebarOpened)
 		},
+		setSidebarStatus(status: boolean) {
+			this.sidebarOpened = status
+			cache.setSidebarOpened(this.sidebarOpened)
+		},
 		setLanguage(locale: string) {
 			this.language = locale
 			cache.setLanguage(locale)
