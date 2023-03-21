@@ -11,3 +11,6 @@ declare module '*.vue' {
 	const component: DefineComponent<{}, {}, any>
 	export default component
 }
+
+declare module 'maku-form-design'
+declare module 'maku-online'
