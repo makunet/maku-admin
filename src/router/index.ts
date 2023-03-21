@@ -54,6 +54,15 @@ const asyncRoutes: RouteRecordRaw = {
 				title: i18n.global.t('router.profilePassword'),
 				cache: true
 			}
+		},
+		{
+			path: '/online/form/:id',
+			name: 'OnlineForm',
+			component: () => import('../views/online/form/index.vue'),
+			meta: {
+				title: '在线表单',
+				cache: false
+			}
 		}
 	]
 }
@@ -76,27 +85,41 @@ export const constantMenu = [
 			},
 			{
 				id: 1002,
+				name: '表单设计器',
+				url: 'demo/formDesign/form',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1003,
+				name: '表单生成器',
+				url: 'demo/formDesign/generate',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1004,
 				name: '二维码生成',
 				url: 'demo/qrcode/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1003,
+				id: 1005,
 				name: '页面打印',
 				url: 'demo/printJs/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1004,
+				id: 1006,
 				name: '图片裁剪',
 				url: 'demo/cropper/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1005,
+				id: 1007,
 				name: '富文本编辑器',
 				url: 'demo/wangeditor/index',
 				openStyle: 0,
@@ -221,6 +244,9 @@ export const generateRoutes = (menuList: any): RouteRecordRaw[] => {
 			if (isIframeUrl(menu)) {
 				component = () => import('@/layout/components/Router/Iframe.vue')
 				path = '/iframe/' + menu.id
+			} else if (menu.url.indexOf('online/form/') != -1) {
+				component = () => import('@/views/online/form/index.vue')
+				path = '/' + menu.url
 			} else {
 				component = getDynamicComponent(menu.url)
 				path = '/' + menu.url
