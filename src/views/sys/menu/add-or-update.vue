@@ -58,7 +58,7 @@
 					<div class="mod__menu-icon-inner">
 						<div class="mod__menu-icon-list">
 							<el-button v-for="(item, index) in iconList" :key="index" :class="{ 'is-active': dataForm.icon === item }" @click="iconHandle(item)">
-								<svg-icon size="50px" :icon="item"></svg-icon>
+								<svg-icon size="45px" :icon="item"></svg-icon>
 							</el-button>
 						</div>
 					</div>
@@ -242,8 +242,8 @@ defineExpose({
 		> .el-button {
 			padding: 8px;
 			margin: 18px 0 0 8px;
-			height: 55px;
-			width: 55px;
+			height: 50px;
+			width: 50px;
 			> span {
 				display: inline-block;
 				vertical-align: middle;
