@@ -29,7 +29,7 @@ export const convertSizeFormat = (size: number): string => {
 // 获取svg图标(id)列表
 export const getIconList = (): string[] => {
 	const rs: string[] = []
-	const list = document.querySelectorAll('svg symbol')
+	const list = document.querySelectorAll('svg symbol[id^="icon-"]')
 	for (let i = 0; i < list.length; i++) {
 		rs.push(list[i].id)
 	}
