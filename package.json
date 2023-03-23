@@ -15,7 +15,7 @@
     "axios": "0.27.2",
     "cropperjs": "1.5.12",
     "maku-form-design": "1.0.2",
-    "maku-online": "1.0.0",
+    "maku-online": "1.0.1",
     "element-plus": "2.2.32",
     "mitt": "3.0.0",
     "nprogress": "0.2.0",
