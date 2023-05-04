@@ -3,6 +3,7 @@ import service from '@/utils/request'
 import { onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import axios from 'axios'
+import qs from "qs"
 
 export const useCrud = (options: IHooksOptions) => {
 	const defaultOptions: IHooksOptions = {
@@ -57,6 +58,9 @@ export const useCrud = (options: IHooksOptions) => {
 					page: state.isPage ? state.page : null,
 					limit: state.isPage ? state.limit : null,
 					...state.queryForm
+				},
+				paramsSerializer: params => {
+					return qs.stringify(params)
 				}
 			})
 			.then((res: any) => {
