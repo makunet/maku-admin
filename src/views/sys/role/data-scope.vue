@@ -8,7 +8,16 @@
 				<fast-select v-model="dataForm.dataScope" dict-type="role_data_scope" placeholder="数据范围" style="width: 100%"></fast-select>
 			</el-form-item>
 			<el-form-item v-show="dataForm.dataScope == 4" label="数据权限">
-				<el-tree ref="orgListTree" :data="orgList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox> </el-tree>
+				<el-tree
+					ref="orgListTree"
+					:data="orgList"
+					:default-checked-keys="dataForm.orgIdList"
+					:props="{ label: 'name', children: 'children' }"
+					node-key="id"
+					accordion
+					show-checkbox
+				>
+				</el-tree>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -69,8 +78,6 @@ const getOrgList = () => {
 const getRole = (id: number) => {
 	useRoleApi(id).then(res => {
 		Object.assign(dataForm, res.data)
-
-		orgListTree.value.setCheckedKeys(dataForm.orgIdList)
 	})
 }
 
