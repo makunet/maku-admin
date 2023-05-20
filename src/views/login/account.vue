@@ -7,7 +7,7 @@
 		<el-form-item prop="password">
 			<el-input v-model="loginForm.password" :prefix-icon="Lock" show-password :placeholder="$t('app.password')"></el-input>
 		</el-form-item>
-		<el-form-item prop="captcha" class="login-captcha">
+		<el-form-item v-if="captchaVisible" prop="captcha" class="login-captcha">
 			<el-input v-model="loginForm.captcha" :placeholder="$t('app.captcha')" :prefix-icon="Key"></el-input>
 			<img :src="captchaBase64" @click="onCaptcha" />
 		</el-form-item>
@@ -44,12 +44,18 @@ const loginRules = ref({
 	captcha: [{ required: true, message: t('required'), trigger: 'blur' }]
 })
 
+// 是否显示验证码
+const captchaVisible = ref(false)
+
 onMounted(() => {
 	onCaptcha()
 })
 
 const onCaptcha = async () => {
 	const { data } = await useCaptchaApi()
+	if (data.enabled) {
+		captchaVisible.value = true
+	}
 	loginForm.key = data.key
 	captchaBase64.value = data.image
 }
