@@ -1,0 +1,84 @@
+<template>
+	<el-card>
+		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			<el-form-item>
+				<el-input v-model="state.queryForm.realName" placeholder="用户"></el-input>
+			</el-form-item>
+			<el-form-item>
+				<el-input v-model="state.queryForm.module" placeholder="模块名"></el-input>
+			</el-form-item>
+			<el-form-item>
+				<el-input v-model="state.queryForm.reqUri" placeholder="请求URI"></el-input>
+			</el-form-item>
+			<el-form-item>
+				<fast-select v-model="state.queryForm.status" placeholder="操作状态" dict-type="success_fail" clearable> </fast-select>
+			</el-form-item>
+			<el-form-item>
+				<el-button @click="getDataList()">查询</el-button>
+			</el-form-item>
+		</el-form>
+		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
+			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
+			<el-table-column prop="realName" label="用户" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="module" label="模块名" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="reqUri" label="请求URI" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="reqMethod" label="请求方法" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="address" label="登录地点" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<fast-table-column
+				prop="operateType"
+				label="操作类型"
+				show-overflow-tooltip
+				dict-type="log_operate_type"
+				header-align="center"
+				align="center"
+			></fast-table-column>
+			<el-table-column prop="duration" label="执行时长" show-overflow-tooltip header-align="center" align="center">
+				<template #default="scope"> {{ scope.row.duration }}ms </template>
+			</el-table-column>
+			<fast-table-column prop="status" label="操作状态" show-overflow-tooltip dict-type="success_fail"></fast-table-column>
+			<el-table-column prop="createTime" label="创建时间" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="80">
+				<template #default="scope">
+					<el-button type="primary" link @click="detailHandle(scope.row)">详情</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+		<el-pagination
+			:current-page="state.page"
+			:page-sizes="state.pageSizes"
+			:page-size="state.limit"
+			:total="state.total"
+			layout="total, sizes, prev, pager, next, jumper"
+			@size-change="sizeChangeHandle"
+			@current-change="currentChangeHandle"
+		>
+		</el-pagination>
+
+		<!-- 详情 -->
+		<operate-detail ref="detailRef"></operate-detail>
+	</el-card>
+</template>
+
+<script setup lang="ts" name="SysLogOperate">
+import { useCrud } from '@/hooks'
+import { reactive, ref } from 'vue'
+import { IHooksOptions } from '@/hooks/interface'
+import OperateDetail from './operate_detail.vue'
+
+const state: IHooksOptions = reactive({
+	dataListUrl: '/sys/log/operate/page',
+	queryForm: {
+		realName: '',
+		module: '',
+		reqUri: '',
+		status: ''
+	}
+})
+
+const detailRef = ref()
+const detailHandle = (row: any) => {
+	detailRef.value.init(row)
+}
+
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+</script>
