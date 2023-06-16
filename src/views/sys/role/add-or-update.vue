@@ -8,15 +8,7 @@
 				<el-input v-model="dataForm.remark" placeholder="备注"></el-input>
 			</el-form-item>
 			<el-form-item label="菜单权限">
-				<el-tree
-					ref="menuListTree"
-					:data="menuList"
-					:default-checked-keys="dataForm.menuIdList"
-					:props="{ label: 'name', children: 'children' }"
-					node-key="id"
-					accordion
-					show-checkbox
-				></el-tree>
+				<el-tree ref="menuListTree" :data="menuList" :props="{ label: 'name', children: 'children' }" node-key="id" accordion show-checkbox></el-tree>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -78,6 +70,8 @@ const getMenuList = () => {
 const getRole = (id: number) => {
 	useRoleApi(id).then(res => {
 		Object.assign(dataForm, res.data)
+
+		dataForm.menuIdList.forEach(item => menuListTree.value.setChecked(item, true))
 	})
 }
 
