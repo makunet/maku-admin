@@ -3,7 +3,7 @@ import service from '@/utils/request'
 import { onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import axios from 'axios'
-import qs from "qs"
+import qs from 'qs'
 
 export const useCrud = (options: IHooksOptions) => {
 	const defaultOptions: IHooksOptions = {
@@ -20,7 +20,7 @@ export const useCrud = (options: IHooksOptions) => {
 		page: 1,
 		limit: 10,
 		total: 0,
-		pageSizes: [1, 10, 20, 50, 100, 200],
+		pageSizes: [10, 20, 50, 100, 200],
 		dataListLoading: false,
 		dataListSelections: []
 	}
