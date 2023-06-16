@@ -23,6 +23,12 @@ export const validatePassword = (rule: any, value: any, callback: (e?: Error) =>
 	}
 }
 
-export const validateMobile = (mobile: string): boolean => {
-	return /^1[3456789]\d{9}$/.test(mobile)
+export const mobileRegExp = /^1[3456789]\d{9}$/
+
+export const validateMobile = (rule: any, value: any, callback: (e?: Error) => any) => {
+	if (mobileRegExp.test(value)) {
+		callback()
+	} else {
+		callback(new Error('手机号格式不正确'))
+	}
 }

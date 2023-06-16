@@ -22,12 +22,12 @@ import store from '@/store'
 import { useSendCodeApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { validateMobile } from '@/utils/validate'
+import { mobileRegExp } from '@/utils/validate'
 import { ElMessage } from 'element-plus'
 
 // 发送短信验证码
 const sendCode = () => {
-	if (!validateMobile(loginForm.mobile)) {
+	if (!mobileRegExp.test(loginForm.mobile)) {
 		ElMessage.error('请输入正确的手机号')
 		return
 	}
