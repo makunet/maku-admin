@@ -21,7 +21,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { User, Lock, Key } from '@element-plus/icons-vue'
 import store from '@/store'
-import { useCaptchaApi } from '@/api/auth'
+import { useCaptchaApi, useCaptchaEnabledApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import constant from '@/utils/constant'
@@ -48,8 +48,17 @@ const loginRules = ref({
 const captchaVisible = ref(false)
 
 onMounted(() => {
-	onCaptcha()
+	onCaptchaEnabled()
 })
+
+const onCaptchaEnabled = async () => {
+	const { data } = await useCaptchaEnabledApi()
+	captchaVisible.value = data
+
+	if (data) {
+		await onCaptcha()
+	}
+}
 
 const onCaptcha = async () => {
 	const { data } = await useCaptchaApi()
@@ -73,7 +82,9 @@ const onLogin = () => {
 				router.push({ path: '/home' })
 			})
 			.catch(() => {
-				onCaptcha()
+				if (captchaVisible.value) {
+					onCaptcha()
+				}
 			})
 	})
 }
