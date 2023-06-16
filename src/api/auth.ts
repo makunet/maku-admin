@@ -1,5 +1,9 @@
 import service from '@/utils/request'
 
+export const useCaptchaEnabledApi = () => {
+	return service.get('/sys/auth/captcha/enabled')
+}
+
 export const useCaptchaApi = () => {
 	return service.get('/sys/auth/captcha')
 }
