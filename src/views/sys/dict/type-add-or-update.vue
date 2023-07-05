@@ -23,7 +23,7 @@
 				<el-input
 					v-model="dataForm.dictSql"
 					type="textarea"
-					placeholder="如：select id as dictValue, name as dictLabel from sys_role where deleted = 0"
+					placeholder="如：select id as dictValue, name as dictLabel, 'info' as labelClass from sys_role where deleted = 0"
 				></el-input>
 			</el-form-item>
 		</el-form>
