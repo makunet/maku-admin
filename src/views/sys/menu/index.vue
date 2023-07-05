@@ -4,8 +4,21 @@
 			<el-form-item>
 				<el-button v-auth="'sys:menu:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
 			</el-form-item>
+			<el-form-item>
+				<el-button type="danger" @click="toggleExpandAll()">
+					<el-icon style="width: 100%"><Sort />展开/折叠</el-icon>
+				</el-button>
+			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" row-key="id" border style="width: 100%">
+		<el-table
+			v-if="refreshTable"
+			v-loading="state.dataListLoading"
+			:default-expand-all="isExpandAll"
+			:data="state.dataList"
+			row-key="id"
+			border
+			style="width: 100%"
+		>
 			<el-table-column prop="name" label="名称" header-align="center" min-width="150"></el-table-column>
 			<el-table-column prop="icon" label="图标" header-align="center" align="center">
 				<template #default="scope">
@@ -49,9 +62,10 @@
 
 <script setup lang="ts">
 import { useCrud } from '@/hooks'
-import { reactive, ref } from 'vue'
+import { reactive, ref, nextTick } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
+import { Sort } from '@element-plus/icons-vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/menu/list',
@@ -65,4 +79,20 @@ const addOrUpdateHandle = (id?: number) => {
 }
 
 const { getDataList, deleteHandle } = useCrud(state)
+
+// 是否展开，默认全部折叠
+const isExpandAll = ref(false)
+// 是否重新渲染表格状态
+const refreshTable = ref(true)
+
+/**
+ * 切换 展开/折叠
+ */
+const toggleExpandAll = () => {
+	refreshTable.value = false
+	isExpandAll.value = !isExpandAll.value
+	nextTick(() => {
+		refreshTable.value = true
+	})
+}
 </script>
