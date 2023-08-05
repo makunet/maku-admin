@@ -2,8 +2,8 @@ import { createI18n } from 'vue-i18n'
 import cache from '@/utils/cache'
 
 // element-plus 国际化文件
-import element_zh_cn from 'element-plus/lib/locale/lang/zh-cn'
-import element_en from 'element-plus/lib/locale/lang/en'
+import element_zh_cn from 'element-plus/es/locale/lang/zh-cn'
+import element_en from 'element-plus/es/locale/lang/en'
 
 // 框架 国际化文件
 const zh_cn = import.meta.globEager('./lang/**/zh-CN.ts')
