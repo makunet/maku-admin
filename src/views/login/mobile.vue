@@ -6,8 +6,8 @@
 		</el-form-item>
 		<el-form-item prop="code" class="login-code">
 			<el-input v-model="loginForm.code" :placeholder="$t('app.captcha')" :prefix-icon="Key"></el-input>
-			<el-button v-if="!sms.disabled" type="default" @click="sendCode">发送验证码</el-button>
-			<el-button v-else type="default" disabled>{{ sms.count }} 秒后重新发送</el-button>
+			<el-button v-if="!sms.disabled" @click="sendCode">发送验证码</el-button>
+			<el-button v-else disabled>{{ sms.count }} 秒后重新发送</el-button>
 		</el-form-item>
 		<el-form-item class="login-button">
 			<el-button type="primary" @click="onLogin()">{{ $t('app.signIn') }}</el-button>
