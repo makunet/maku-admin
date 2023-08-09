@@ -1,8 +1,9 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import qs from 'qs'
 import { ElMessage } from 'element-plus'
 import store from '@/store'
 import cache from '@/utils/cache'
+import { ElMessageBox } from 'element-plus/es'
 
 // axios实例
 const service = axios.create({
@@ -37,9 +38,19 @@ service.interceptors.request.use(
 	}
 )
 
+// 是否刷新
+let isRefreshToken = false
+// 重试请求
+let requests: any[] = []
+
+// 刷新token
+const getRefreshToken = (refreshToken: string) => {
+	return service.post('/sys/auth/token?refreshToken=' + refreshToken)
+}
+
 // 响应拦截器
 service.interceptors.response.use(
-	response => {
+	async (response: AxiosResponse<any>) => {
 		if (response.status !== 200) {
 			return Promise.reject(new Error(response.statusText || 'Error'))
 		}
@@ -50,14 +61,57 @@ service.interceptors.response.use(
 			return res
 		}
 
+		// refreshToken失效，跳转到登录页
+		if (res.code === 400) {
+			return handleAuthorized()
+		}
+
+		// 没有权限，如：未登录、token过期
+		if (res.code === 401) {
+			const config = response.config
+			if (!isRefreshToken) {
+				isRefreshToken = true
+
+				// 不存在 refreshToken，重新登录
+				const refreshToken = cache.getRefreshToken()
+				if (!refreshToken) {
+					return handleAuthorized()
+				}
+
+				try {
+					const { data } = await getRefreshToken(refreshToken)
+					// 设置新 token
+					store.userStore.setToken(data.access_token)
+					config.headers!.Authorization = data.access_token
+					requests.forEach((cb: any) => {
+						cb()
+					})
+					requests = []
+					return service(config)
+				} catch (e) {
+					// 2.2 刷新失败，只回放队列的请求
+					requests.forEach((cb: any) => {
+						cb()
+					})
+					// 提示是否要登出。即不回放当前请求！不然会形成递归
+					return handleAuthorized()
+				} finally {
+					requests = []
+					isRefreshToken = false
+				}
+			} else {
+				// 多个请求的情况
+				return new Promise(resolve => {
+					requests.push(() => {
+						config.headers!.Authorization = store.userStore.getToken()
+						resolve(service(config))
+					})
+				})
+			}
+		}
+
 		// 错误提示
 		ElMessage.error(res.msg)
-
-		// 没有权限，如：未登录、登录过期等，需要跳转到登录页
-		if (res.code === 401) {
-			store.userStore?.setToken('')
-			location.reload()
-		}
 
 		return Promise.reject(new Error(res.msg || 'Error'))
 	},
@@ -66,6 +120,22 @@ service.interceptors.response.use(
 		return Promise.reject(error)
 	}
 )
+
+const handleAuthorized = () => {
+	ElMessageBox.confirm('登录超时，请重新登录', '提示', {
+		showCancelButton: false,
+		closeOnClickModal: false,
+		showClose: false,
+		confirmButtonText: '重新登录',
+		type: 'warning'
+	}).then(() => {
+		store.userStore?.setToken('')
+		store.userStore?.setRefreshToken('')
+		location.reload()
+
+		return Promise.reject('登录超时，请重新登录')
+	})
+}
 
 // 导出 axios 实例
 export default service
