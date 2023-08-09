@@ -13,6 +13,14 @@ class Cache {
 		Storage.setItem(CacheKey.TokenKey, value)
 	}
 
+	getRefreshToken = (): string => {
+		return Storage.getItem(CacheKey.RefreshTokenKey) || ''
+	}
+
+	setRefreshToken = (value: string) => {
+		Storage.setItem(CacheKey.RefreshTokenKey, value)
+	}
+
 	getSidebarOpened = (): boolean => {
 		return Storage.getItem(CacheKey.SidebarOpenedKey) || false
 	}

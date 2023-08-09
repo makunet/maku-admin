@@ -14,8 +14,10 @@ export const userStore = defineStore('userStore', {
 		},
 		// 权限列表
 		authorityList: [],
-		// 登录token
-		token: cache.getToken()
+		// 访问token
+		token: cache.getToken(),
+		// 刷新token
+		refreshToken: cache.getRefreshToken()
 	}),
 	actions: {
 		setUser(val: any) {
@@ -25,15 +27,21 @@ export const userStore = defineStore('userStore', {
 			this.token = val
 			cache.setToken(val)
 		},
+		setRefreshToken(val: any) {
+			this.refreshToken = val
+			cache.setRefreshToken(val)
+		},
 		// 账号登录
 		async accountLoginAction(loginForm: any) {
 			const { data } = await useAccountLoginApi(loginForm)
 			this.setToken(data.access_token)
+			this.setRefreshToken(data.refresh_token)
 		},
 		// 手机号登录
 		async mobileLoginAction(loginForm: any) {
 			const { data } = await useMobileLoginApi(loginForm)
 			this.setToken(data.access_token)
+			this.setRefreshToken(data.refresh_token)
 		},
 		// 获取用户信息
 		async getUserInfoAction() {
@@ -51,6 +59,7 @@ export const userStore = defineStore('userStore', {
 
 			// 移除 token
 			this.setToken(null)
+			this.setRefreshToken(null)
 		}
 	}
 })
