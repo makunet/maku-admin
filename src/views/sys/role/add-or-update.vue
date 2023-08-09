@@ -4,6 +4,9 @@
 			<el-form-item prop="name" label="名称">
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
+			<el-form-item prop="roleCode" label="编码">
+				<el-input v-model="dataForm.roleCode" placeholder="编码"></el-input>
+			</el-form-item>
 			<el-form-item prop="remark" label="备注">
 				<el-input v-model="dataForm.remark" placeholder="备注"></el-input>
 			</el-form-item>
@@ -33,6 +36,7 @@ const dataFormRef = ref()
 const dataForm = reactive({
 	id: '',
 	name: '',
+	roleCode: '',
 	menuIdList: [] as any[],
 	orgIdList: [],
 	remark: ''
@@ -76,7 +80,8 @@ const getRole = (id: number) => {
 }
 
 const dataRules = ref({
-	name: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+	name: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	roleCode: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 // 表单提交
