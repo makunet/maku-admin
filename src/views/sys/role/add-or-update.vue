@@ -42,7 +42,7 @@ const dataForm = reactive({
 	remark: ''
 })
 
-const init = (id?: number) => {
+const init = async (id?: number) => {
 	visible.value = true
 	dataForm.id = ''
 
@@ -54,20 +54,19 @@ const init = (id?: number) => {
 		menuListTree.value.setCheckedKeys([])
 	}
 
+	// 菜单列表
+	await getMenuList()
+
 	// id 存在则为修改
 	if (id) {
 		getRole(id)
 	}
-
-	// 菜单列表
-	getMenuList()
 }
 
 // 获取菜单列表
-const getMenuList = () => {
-	return useRoleMenuApi().then(res => {
-		menuList.value = res.data
-	})
+const getMenuList = async () => {
+	const res = await useRoleMenuApi()
+	menuList.value = res.data
 }
 
 // 获取信息
