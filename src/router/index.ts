@@ -124,6 +124,20 @@ export const constantMenu = [
 				url: 'demo/wangeditor/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1008,
+				name: 'Markdown编辑器',
+				url: 'demo/mdeditor/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1009,
+				name: 'ECharts图表',
+				url: 'demo/echarts/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
 			}
 		]
 	}
@@ -179,6 +193,9 @@ router.beforeEach(async (to, from, next) => {
 
 				// 保存路由数据
 				store.routerStore.setRoutes(constantRoutes.concat(asyncRoutes))
+
+				// 搜索菜单需要使用
+				store.routerStore.setSearchMenu(keepAliveRoutes)
 
 				next({ ...to, replace: true })
 			} else {
