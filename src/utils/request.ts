@@ -89,11 +89,10 @@ service.interceptors.response.use(
 					requests = []
 					return service(config)
 				} catch (e) {
-					// 2.2 刷新失败，只回放队列的请求
+					// 刷新失败
 					requests.forEach((cb: any) => {
 						cb()
 					})
-					// 提示是否要登出。即不回放当前请求！不然会形成递归
 					return handleAuthorized()
 				} finally {
 					requests = []

@@ -32,13 +32,16 @@ const props = defineProps({
 const iconName = computed(() => `#icon-${props.icon.replace('icon-', '')}`)
 </script>
 
-<style scoped>
-.svg-icon svg {
-	width: 1em;
-	height: 1em;
-	vertical-align: -0.15em;
-	fill: currentColor;
-	overflow: hidden;
-	flex-shrink: 0;
+<style lang="scss" scoped>
+.svg-icon {
+	display: inline-block;
+	svg {
+		width: 1em;
+		height: 1em;
+		vertical-align: -0.15em;
+		fill: currentColor;
+		overflow: hidden;
+		flex-shrink: 0;
+	}
 }
 </style>
