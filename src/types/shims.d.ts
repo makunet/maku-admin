@@ -12,5 +12,8 @@ declare module '*.vue' {
 	export default component
 }
 
+declare module '@kangc/v-md-editor'
+declare module '@kangc/v-md-editor/lib/theme/github.js'
+
 declare module 'maku-form-design'
 declare module 'maku-online'
