@@ -127,8 +127,8 @@ export const constantMenu = [
 			},
 			{
 				id: 1008,
-				name: 'Markdown编辑器',
-				url: 'demo/mdeditor/index',
+				name: 'Markdown',
+				url: 'demo/markdown/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
