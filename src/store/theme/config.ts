@@ -4,7 +4,7 @@ export const themeConfig: ITheme = {
 	sidebarStyle: 'dark',
 	headerStyle: 'light',
 	primaryColor: '#409eff',
-	layout: 'vertical',
+	layout: 'columns',
 	uniqueOpened: true,
 	isLogo: true,
 	isBreadcrumb: true,
