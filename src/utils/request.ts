@@ -59,6 +59,10 @@ service.interceptors.response.use(
 		}
 
 		const res = response.data
+		if (Object.prototype.toString.call(res) === '[object Blob]') {
+			return response
+		}
+
 		// 响应成功
 		if (res.code === 0) {
 			return res
