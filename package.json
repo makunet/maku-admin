@@ -1,6 +1,6 @@
 {
   "name": "maku-admin",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -17,7 +17,6 @@
     "axios": "0.27.2",
     "cropperjs": "1.5.12",
     "maku-form-design": "1.0.2",
-    "maku-online": "1.0.1",
     "element-plus": "2.3.14",
     "mitt": "3.0.0",
     "nprogress": "0.2.0",
