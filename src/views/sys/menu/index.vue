@@ -5,8 +5,13 @@
 				<el-button v-auth="'sys:menu:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="danger" @click="toggleExpandAll()">
-					<el-icon style="width: 100%"><Sort />展开/折叠</el-icon>
+				<el-button plain @click="toggleExpandAll()">
+					<template v-if="!isExpandAll">
+						全部展开&nbsp;<el-icon><ArrowDown /></el-icon>
+					</template>
+					<template v-else>
+						全部收起&nbsp;<el-icon><ArrowUp /></el-icon>
+					</template>
 				</el-button>
 			</el-form-item>
 		</el-form>
@@ -15,6 +20,7 @@
 			v-loading="state.dataListLoading"
 			:default-expand-all="isExpandAll"
 			:data="state.dataList"
+			show-overflow-tooltip
 			row-key="id"
 			border
 			style="width: 100%"
@@ -40,15 +46,8 @@
 				</template>
 			</el-table-column>
 			<el-table-column prop="sort" label="排序" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="url" label="路由" header-align="center" align="center" width="150" :show-overflow-tooltip="true"></el-table-column>
-			<el-table-column
-				prop="authority"
-				label="授权标识"
-				header-align="center"
-				align="center"
-				width="150"
-				:show-overflow-tooltip="true"
-			></el-table-column>
+			<el-table-column prop="url" label="路由" header-align="center" align="center" width="150"></el-table-column>
+			<el-table-column prop="authority" label="授权标识" header-align="center" align="center" width="150"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'sys:menu:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
@@ -65,7 +64,7 @@ import { useCrud } from '@/hooks'
 import { reactive, ref, nextTick } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
-import { Sort } from '@element-plus/icons-vue'
+import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/menu/list',
@@ -85,9 +84,7 @@ const isExpandAll = ref(false)
 // 是否重新渲染表格状态
 const refreshTable = ref(true)
 
-/**
- * 切换 展开/折叠
- */
+// 切换 展开和折叠
 const toggleExpandAll = () => {
 	refreshTable.value = false
 	isExpandAll.value = !isExpandAll.value
