@@ -11,29 +11,17 @@
 			<el-form-item prop="name" label="名称">
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
-			<el-form-item prop="parentName" label="上级菜单" class="popover-list">
-				<el-popover ref="menuListPopover" placement="bottom-start" trigger="click" :width="400">
-					<template #reference>
-						<el-input v-model="dataForm.parentName" :readonly="true" placeholder="上级菜单">
-							<template #suffix>
-								<svg-icon v-if="dataForm.pid !== '0'" icon="icon-close-circle" @click.stop="treeSetDefaultHandle()"></svg-icon>
-							</template>
-						</el-input>
-					</template>
-					<div>
-						<el-tree
-							ref="menuListTree"
-							:data="menuList"
-							:props="{ label: 'name', children: 'children' }"
-							node-key="id"
-							:highlight-current="true"
-							:expand-on-click-node="false"
-							accordion
-							@current-change="treeCurrentChange"
-						>
-						</el-tree>
-					</div>
-				</el-popover>
+			<el-form-item prop="pid" label="上级菜单">
+				<el-tree-select
+					v-model="dataForm.pid"
+					:data="menuList"
+					value-key="id"
+					check-strictly
+					:render-after-expand="false"
+					:props="{ label: 'name', children: 'children' }"
+					style="width: 100%"
+					clearable
+				/>
 			</el-form-item>
 			<el-form-item v-if="dataForm.type === 0" prop="url" label="路由">
 				<el-input v-model="dataForm.url" placeholder="路由"></el-input>
@@ -58,7 +46,7 @@
 					<div class="mod__menu-icon-inner">
 						<div class="mod__menu-icon-list">
 							<el-button v-for="(item, index) in iconList" :key="index" :class="{ 'is-active': dataForm.icon === item }" @click="iconHandle(item)">
-								<svg-icon size="45px" :icon="item"></svg-icon>
+								<svg-icon size="30px" :icon="item"></svg-icon>
 							</el-button>
 						</div>
 					</div>
@@ -83,16 +71,14 @@ const emit = defineEmits(['refreshDataList'])
 const visible = ref(false)
 const menuList = ref([])
 const iconList = ref<string[]>([])
-const menuListTree = ref()
 const dataFormRef = ref()
-const menuListPopover = ref()
 const iconListPopover = ref()
 
 const dataForm = reactive({
 	id: '',
 	type: 0,
 	name: '',
-	pid: '0',
+	pid: '',
 	parentName: '',
 	url: '',
 	authority: '',
@@ -113,8 +99,6 @@ const init = (id?: number) => {
 	// id 存在则为修改
 	if (id) {
 		getMenu(id)
-	} else {
-		treeSetDefaultHandle()
 	}
 
 	// 菜单列表
@@ -127,39 +111,20 @@ const init = (id?: number) => {
 // 菜单类型改变
 const menuTypeChange = () => {
 	getMenuList()
-	treeSetDefaultHandle()
+	dataForm.pid = ''
 }
 
 // 获取菜单列表
-const getMenuList = () => {
-	return useMenuListApi(dataForm.type).then(res => {
-		menuList.value = res.data
-	})
+const getMenuList = async () => {
+	const res = await useMenuListApi(dataForm.type)
+	menuList.value = res.data
 }
 
 // 获取信息
 const getMenu = (id: number) => {
 	useMenuApi(id).then(res => {
 		Object.assign(dataForm, res.data)
-
-		if (dataForm.pid == '0') {
-			return treeSetDefaultHandle()
-		}
-
-		menuListTree.value.setCurrentKey(dataForm.pid)
 	})
-}
-
-// 上级菜单树, 设置默认值
-const treeSetDefaultHandle = () => {
-	dataForm.pid = '0'
-	dataForm.parentName = '一级菜单'
-}
-
-const treeCurrentChange = (data: any) => {
-	dataForm.pid = data.id
-	dataForm.parentName = data.name
-	menuListPopover.value.hide()
 }
 
 // 图标点击事件
@@ -215,7 +180,7 @@ defineExpose({
 
 	&-icon-inner {
 		width: 100%;
-		max-height: 260px;
+		max-height: 350px;
 		overflow-x: hidden;
 		overflow-y: auto;
 		// 滚动条的宽度
@@ -242,8 +207,8 @@ defineExpose({
 		> .el-button {
 			padding: 8px;
 			margin: 18px 0 0 8px;
-			height: 50px;
-			width: 50px;
+			height: 45px;
+			width: 45px;
 			> span {
 				display: inline-block;
 				vertical-align: middle;
