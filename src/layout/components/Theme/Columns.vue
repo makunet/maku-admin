@@ -19,8 +19,8 @@
 						:class="{ active: menuPath === menu.path }"
 						@click="handleMenu(menu)"
 					>
-						<svg-icon :icon="menu.meta.icon"></svg-icon>
-						<span class="title">{{ menu.meta.title }}</span>
+						<svg-icon :icon="menu.meta?.icon"></svg-icon>
+						<span class="title">{{ menu.meta?.title }}</span>
 					</div>
 				</div>
 			</el-scrollbar>
