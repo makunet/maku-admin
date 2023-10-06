@@ -1,48 +1,55 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" draggable>
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="120px" @keyup.enter="submitHandle()">
-			<el-form-item prop="username" label="用户名">
-				<el-input v-model="dataForm.username" placeholder="用户名"></el-input>
-			</el-form-item>
-			<el-form-item prop="realName" label="姓名">
-				<el-input v-model="dataForm.realName" placeholder="姓名"></el-input>
-			</el-form-item>
-			<el-form-item prop="orgId" label="所属机构">
-				<el-tree-select
-					v-model="dataForm.orgId"
-					:data="orgList"
-					value-key="id"
-					check-strictly
-					:render-after-expand="false"
-					:props="{ label: 'name', children: 'children' }"
-					style="width: 100%"
-				/>
-			</el-form-item>
-			<el-form-item prop="gender" label="性别">
-				<fast-radio-group v-model="dataForm.gender" dict-type="user_gender"></fast-radio-group>
-			</el-form-item>
-			<el-form-item prop="mobile" label="手机号">
-				<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
-			</el-form-item>
-			<el-form-item prop="email" label="邮箱">
-				<el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
-			</el-form-item>
-			<el-form-item prop="password" label="密码">
-				<el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
-			</el-form-item>
-			<el-form-item prop="roleIdList" label="所属角色">
-				<el-select v-model="dataForm.roleIdList" multiple placeholder="所属角色" style="width: 100%">
-					<el-option v-for="role in roleList" :key="role.id" :label="role.name" :value="role.id"></el-option>
-				</el-select>
-			</el-form-item>
-			<el-form-item prop="postIdList" label="所属岗位">
-				<el-select v-model="dataForm.postIdList" multiple placeholder="所属岗位" style="width: 100%">
-					<el-option v-for="post in postList" :key="post.id" :label="post.postName" :value="post.id"></el-option>
-				</el-select>
-			</el-form-item>
-			<el-form-item prop="status" label="状态">
-				<fast-radio-group v-model="dataForm.status" dict-type="user_status"></fast-radio-group>
-			</el-form-item>
+			<el-row>
+				<el-col :span="12">
+					<el-form-item prop="username" label="用户名">
+						<el-input v-model="dataForm.username" placeholder="用户名"></el-input>
+					</el-form-item>
+					<el-form-item prop="orgId" label="所属机构">
+						<el-tree-select
+							v-model="dataForm.orgId"
+							:data="orgList"
+							value-key="id"
+							check-strictly
+							:render-after-expand="false"
+							:props="{ label: 'name', children: 'children' }"
+							style="width: 100%"
+						/>
+					</el-form-item>
+					<el-form-item prop="mobile" label="手机号">
+						<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
+					</el-form-item>
+					<el-form-item prop="password" label="密码">
+						<el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
+					</el-form-item>
+					<el-form-item prop="postIdList" label="所属岗位">
+						<el-select v-model="dataForm.postIdList" multiple placeholder="所属岗位" style="width: 100%">
+							<el-option v-for="post in postList" :key="post.id" :label="post.postName" :value="post.id"></el-option>
+						</el-select>
+					</el-form-item>
+				</el-col>
+
+				<el-col :span="12">
+					<el-form-item prop="realName" label="姓名">
+						<el-input v-model="dataForm.realName" placeholder="姓名"></el-input>
+					</el-form-item>
+					<el-form-item prop="gender" label="性别">
+						<fast-radio-group v-model="dataForm.gender" dict-type="user_gender"></fast-radio-group>
+					</el-form-item>
+					<el-form-item prop="email" label="邮箱">
+						<el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
+					</el-form-item>
+					<el-form-item prop="roleIdList" label="所属角色">
+						<el-select v-model="dataForm.roleIdList" multiple placeholder="所属角色" style="width: 100%">
+							<el-option v-for="role in roleList" :key="role.id" :label="role.name" :value="role.id"></el-option>
+						</el-select>
+					</el-form-item>
+					<el-form-item prop="status" label="状态">
+						<fast-radio-group v-model="dataForm.status" dict-type="user_status"></fast-radio-group>
+					</el-form-item>
+				</el-col>
+			</el-row>
 		</el-form>
 		<template #footer>
 			<el-button @click="visible = false">取消</el-button>
