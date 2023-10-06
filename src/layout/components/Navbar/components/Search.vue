@@ -22,11 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
 import { Search } from '@element-plus/icons-vue'
 import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useRouterStore } from '@/store/modules/router'
 
+const routerStore = useRouterStore()
 const router = useRouter()
 const menuAutocompleteRef = ref()
 const visible = ref(false)
@@ -50,7 +51,7 @@ interface Restaurant {
 }
 
 // 获取菜单列表
-const menuList = store.routerStore.searchMenu
+const menuList = routerStore.searchMenu
 
 // 菜单搜索
 const menuSearch = (queryString: string, cb: any) => {

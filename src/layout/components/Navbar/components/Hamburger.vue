@@ -6,12 +6,14 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import store from '@/store'
+import { useAppStore } from '@/store/modules/app'
+
+const appStore = useAppStore()
 
 const screenWidth = ref(0)
 
 const handleClick = () => {
-	store.appStore.setSidebarOpened()
+	appStore.setSidebarOpened()
 }
 
 onMounted(() => {
@@ -22,10 +24,10 @@ onMounted(() => {
 
 watch(screenWidth, (value, oldValue) => {
 	if (oldValue > value && value < 1000) {
-		store.appStore.setSidebarStatus(false)
+		appStore.setSidebarStatus(false)
 	} else if (oldValue < value && value > 1000) {
-		store.appStore.setSidebarStatus(true)
+		appStore.setSidebarStatus(true)
 	}
 })
-const icon = computed(() => (store.appStore.sidebarOpened ? 'icon-outdent' : 'icon-indent'))
+const icon = computed(() => (appStore.sidebarOpened ? 'icon-outdent' : 'icon-indent'))
 </script>

@@ -12,15 +12,16 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
 import { useI18n } from 'vue-i18n'
 import { messages } from '@/i18n'
+import { useAppStore } from '@/store/modules/app'
 
+const appStore = useAppStore()
 const languages = Object.keys(messages)
 
 const { locale } = useI18n()
-const languageChange = async (language: string) => {
-	await store.appStore.setLanguage(language)
+const languageChange = (language: string) => {
+	appStore.setLanguage(language)
 	locale.value = language
 
 	// 刷新页面

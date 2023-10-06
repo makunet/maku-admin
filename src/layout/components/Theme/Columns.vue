@@ -13,7 +13,7 @@
 						</div>
 					</router-link>
 					<div
-						v-for="menu in store.routerStore.menuRoutes"
+						v-for="menu in routerStore.menuRoutes"
 						:key="menu.path"
 						class="columns-menu-item"
 						:class="{ active: menuPath === menu.path }"
@@ -33,11 +33,11 @@
 				</div>
 			</el-header>
 			<div class="layout-main">
-				<div v-if="subMenus.length > 0 && store.appStore.sidebarOpened" class="columns-sub-menu">
+				<div v-if="subMenus.length > 0 && appStore.sidebarOpened" class="columns-sub-menu">
 					<el-menu
 						:default-active="defaultActive"
-						:collapse="!store.appStore.sidebarOpened"
-						:unique-opened="store.appStore.theme.uniqueOpened"
+						:collapse="!appStore.sidebarOpened"
+						:unique-opened="appStore.theme.uniqueOpened"
 						background-color="transparent"
 						:collapse-transition="false"
 						mode="vertical"
@@ -53,7 +53,8 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
+import { useRouterStore } from '@/store/modules/router'
+import { useAppStore } from '@/store/modules/app'
 import NavbarLeft from '@/layout/components/Navbar/NavbarLeft.vue'
 import NavbarRight from '@/layout/components/Navbar/NavbarRight.vue'
 import Main from '@/layout/components/Main/index.vue'
@@ -62,6 +63,8 @@ import MenuItem from '@/layout/components/Menu/MenuItem.vue'
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 
+const routerStore = useRouterStore()
+const appStore = useAppStore()
 const route = useRoute()
 const router = useRouter()
 
@@ -83,11 +86,11 @@ onMounted(() => {
 const menuPath = ref<string>('')
 const initSubMenu = () => {
 	menuPath.value = defaultActive.value
-	for (const menu of store.routerStore.menuRoutes) {
+	for (const menu of routerStore.menuRoutes) {
 		// 是否包含当前路由
-		const exist = findRoute(menu.children)
+		const exist = findRoute(menu.children as RouteRecordRaw[])
 		if (exist) {
-			subMenus.value = menu.children
+			subMenus.value = menu.children as RouteRecordRaw[]
 
 			menuPath.value = menu.path
 			break
@@ -130,13 +133,13 @@ const findLeafRoute = (menus: RouteRecordRaw[]): any => {
 	return null
 }
 
-const headerClass = computed(() => (store.appStore.theme.headerStyle === 'theme' ? 'header-theme' : ''))
+const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'header-theme' : ''))
 
 const sidebarClass = computed(() => {
-	return store.appStore.theme.sidebarStyle === 'dark' ? 'sidebar-dark' : ''
+	return appStore.theme.sidebarStyle === 'dark' ? 'sidebar-dark' : ''
 })
 
-const theme = computed(() => store.appStore.theme)
+const theme = computed(() => appStore.theme)
 const layoutHeaderHeight = computed(() => {
 	if (!theme.value.isTabsView) {
 		return 'height:var(--theme-header-height) !important'

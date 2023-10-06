@@ -1,5 +1,5 @@
 <template>
-	<div v-if="store.appStore.sidebarOpened" class="sidebar-logo">
+	<div v-if="appStore.sidebarOpened" class="sidebar-logo">
 		<el-avatar src="./favicon.ico"></el-avatar>
 		<span class="logo-title"> {{ $t('app.logoText') }}</span>
 	</div>
@@ -9,7 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
+import { useAppStore } from '@/store/modules/app'
+const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>

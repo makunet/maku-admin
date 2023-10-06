@@ -2,13 +2,7 @@
 	<div class="tabs-container">
 		<div class="tabs-item">
 			<el-tabs v-model="activeTabName" :class="tabsStyleClass" @tab-click="tabClick" @tab-remove="tabRemove">
-				<el-tab-pane
-					v-for="tab in store.tabsStore.visitedViews"
-					:key="tab"
-					:label="tab.title"
-					:name="tab.path"
-					:closable="!isAffix(tab)"
-				></el-tab-pane>
+				<el-tab-pane v-for="tab in tabsStore.visitedViews" :key="tab" :label="tab.title" :name="tab.path" :closable="!isAffix(tab)"></el-tab-pane>
 			</el-tabs>
 		</div>
 		<el-dropdown class="tabs-action" trigger="click" placement="bottom-end" @command="onClose">
@@ -27,15 +21,20 @@
 <script setup lang="ts">
 import { watch, onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import store from '@/store'
 import { closeAllTabs, closeOthersTabs, closeTab } from '@/utils/tabs'
 import { ArrowDown, Close, CircleClose, CircleCloseFilled } from '@element-plus/icons-vue'
+import { useAppStore } from '@/store/modules/app'
+import { useRouterStore } from '@/store/modules/router'
+import { useTabsStore } from '@/store/modules/tabs'
 
+const appStore = useAppStore()
+const routerStore = useRouterStore()
+const tabsStore = useTabsStore()
 const route = useRoute()
 const router = useRouter()
 
 const activeTabName = ref(route.path)
-const tabsStyleClass = computed(() => 'tabs-item-' + store.appStore.theme.tabsStyle)
+const tabsStyleClass = computed(() => 'tabs-item-' + appStore.theme.tabsStyle)
 
 // 是否固定
 const isAffix = (tab: any) => {
@@ -57,11 +56,11 @@ onMounted(() => {
 
 // 初始化固定tab
 const initTabs = () => {
-	const affixTabs = getAffixTabs(store.routerStore.routes)
+	const affixTabs = getAffixTabs(routerStore.routes)
 	for (const tab of affixTabs) {
 		// 需要有tab名称
 		if (tab.name) {
-			store.tabsStore.addView(tab)
+			tabsStore.addView(tab)
 		}
 	}
 }
@@ -90,8 +89,8 @@ const getAffixTabs = (routes: any) => {
 
 // 添加tab
 const addTab = () => {
-	store.tabsStore.addView(route)
-	store.tabsStore.addCachedView(route)
+	tabsStore.addView(route)
+	tabsStore.addCachedView(route)
 	activeTabName.value = route.path
 }
 
@@ -102,7 +101,7 @@ const tabClick = (tab: any) => {
 
 // 点击关闭tab
 const tabRemove = (path: string) => {
-	const tab = store.tabsStore.visitedViews.filter((tab: any) => tab.path === path)
+	const tab = tabsStore.visitedViews.filter((tab: any) => tab.path === path)
 	closeTab(router, tab[0])
 }
 
@@ -194,7 +193,7 @@ const onClose = (type: string) => {
 		border-right: none;
 		user-select: none;
 		color: #8c8c8c;
-		display: inline-block;
+		//display: inline-block;
 
 		&:hover {
 			color: #444;

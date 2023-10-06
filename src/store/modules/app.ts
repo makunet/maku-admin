@@ -3,7 +3,7 @@ import { ITheme } from '@/store/theme/interface'
 import cache from '@/utils/cache'
 import { useDictTypeAllApi } from '@/api/sys/dict'
 
-export const appStore = defineStore('appStore', {
+export const useAppStore = defineStore('appStore', {
 	state: () => ({
 		// sidebar 是否展开
 		sidebarOpened: cache.getSidebarOpened(),

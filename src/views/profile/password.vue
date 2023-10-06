@@ -2,7 +2,7 @@
 	<el-card>
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="200px" @keyup.enter="handleDataForm()">
 			<el-form-item :label="$t('profile.username')">
-				<span>{{ store.userStore.user.username }}</span>
+				<span>{{ userStore.user.username }}</span>
 			</el-form-item>
 			<el-form-item prop="password" :label="$t('profile.oldPassword')">
 				<el-input v-model="dataForm.password" type="password"></el-input>
@@ -23,13 +23,14 @@
 <script setup lang="ts" name="ProfilePassword">
 import { reactive, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import store from '@/store'
+import { useUserStore } from '@/store/modules/user'
 import { useI18n } from 'vue-i18n'
 import { validatePassword } from '@/utils/validate'
 import { updatePasswordApi } from '@/api/sys/user'
 import { ElMessage } from 'element-plus'
 import { closeTab } from '@/utils/tabs'
 
+const userStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()

@@ -2,15 +2,17 @@
 	<div class="navbar-left">
 		<Hamburger />
 		<Refresh />
-		<Breadcrumb v-if="store.appStore.theme.isBreadcrumb" />
+		<Breadcrumb v-if="appStore.theme.isBreadcrumb" />
 	</div>
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
 import Hamburger from './components/Hamburger.vue'
 import Refresh from './components/Refresh.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
+import { useAppStore } from '@/store/modules/app'
+
+const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>

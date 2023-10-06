@@ -1,8 +1,8 @@
 <template>
 	<el-dropdown class="avatar-container" trigger="hover">
 		<div class="avatar-wrapper">
-			<el-avatar shape="circle" :size="30" :src="store.userStore.user.avatar"></el-avatar>
-			<span>{{ store.userStore.user.username }}</span>
+			<el-avatar shape="circle" :size="30" :src="userStore.user.avatar"></el-avatar>
+			<span>{{ userStore.user.username }}</span>
 			<el-icon class="el-icon--right"><ArrowDown /></el-icon>
 		</div>
 		<template #dropdown>
@@ -17,14 +17,15 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
+import { useUserStore } from '@/store/modules/user'
 import { useRouter } from 'vue-router'
 import { ArrowDown } from '@element-plus/icons-vue'
 
+const userStore = useUserStore()
 const router = useRouter()
 
 const logout = () => {
-	store.userStore.logoutAction().then(() => {
+	userStore.logoutAction().then(() => {
 		// router.push({ path: '/login' })
 
 		// 刷新页面

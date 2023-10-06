@@ -17,12 +17,14 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue'
 import { useRouter } from 'vue-router'
-import store from '@/store'
 import { isExternalLink, replaceLinkParam } from '@/utils/tool'
+import { useAppStore } from '@/store/modules/app'
+
+const appStore = useAppStore()
 
 // 显示icon图标
 const showIcon = computed(() => {
-	return store.appStore.theme.layout !== 'columns'
+	return appStore.theme.layout !== 'columns'
 })
 
 defineProps({

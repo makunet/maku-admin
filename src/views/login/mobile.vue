@@ -18,12 +18,14 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { User, Key } from '@element-plus/icons-vue'
-import store from '@/store'
+import { useUserStore } from '@/store/modules/user'
 import { useSendCodeApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { mobileRegExp } from '@/utils/validate'
 import { ElMessage } from 'element-plus'
+
+const userStore = useUserStore()
 
 // 发送短信验证码
 const sendCode = () => {
@@ -80,7 +82,7 @@ const onLogin = () => {
 		}
 
 		// 用户登录
-		store.userStore.mobileLoginAction(loginForm).then(() => {
+		userStore.mobileLoginAction(loginForm).then(() => {
 			router.push({ path: '/home' })
 		})
 	})

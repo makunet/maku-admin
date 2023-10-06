@@ -3,7 +3,7 @@ import { useMenuNavApi } from '@/api/sys/menu'
 import { generateRoutes, constantMenu } from '@/router'
 import { RouteRecordRaw } from 'vue-router'
 
-export const routerStore = defineStore('routerStore', {
+export const useRouterStore = defineStore('routerStore', {
 	state: () => ({
 		menuRoutes: [] as RouteRecordRaw[],
 		searchMenu: [] as RouteRecordRaw[],

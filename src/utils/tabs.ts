@@ -1,25 +1,30 @@
-import store from '@/store'
+import { useTabsStore } from '@/store/modules/tabs'
 
 // 关闭tab
 export const closeTab = (router: any, tab: any) => {
+	const tabsStore = useTabsStore()
 	if (tab.meta && tab.meta.affix) {
 		return
 	}
 
-	store.tabsStore.delView(tab)
-	toLastView(router, store.tabsStore.visitedViews, tab)
+	tabsStore.delView(tab)
+	toLastView(router, tabsStore.visitedViews, tab)
 }
 
 // 关闭其他tabs
 export const closeOthersTabs = (router: any, tab: any) => {
+	const tabsStore = useTabsStore()
+
 	router.push(tab)
-	store.tabsStore.delOthersViews(tab)
+	tabsStore.delOthersViews(tab)
 }
 
 // 关闭全部tabs
 export const closeAllTabs = (router: any, tab: any) => {
-	store.tabsStore.delAllViews()
-	toLastView(router, store.tabsStore.visitedViews, tab)
+	const tabsStore = useTabsStore()
+
+	tabsStore.delAllViews()
+	toLastView(router, tabsStore.visitedViews, tab)
 }
 
 // 跳转到最后一个tab

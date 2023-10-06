@@ -103,7 +103,6 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { CopyDocument, RefreshRight } from '@element-plus/icons-vue'
@@ -114,6 +113,9 @@ import { ElMessage } from 'element-plus'
 import { handleThemeStyle } from '@/utils/theme'
 import cache from '@/utils/cache'
 import emits from '@/utils/emits'
+import { useAppStore } from '@/store/modules/app'
+
+const appStore = useAppStore()
 
 const { t } = useI18n()
 const { copy } = useClipboard()
@@ -144,7 +146,7 @@ const tabsStyle = [
 ]
 
 // 默认主题
-const theme = computed(() => store.appStore.theme)
+const theme = computed(() => appStore.theme)
 
 // 处理布局切换
 const handleLayoutTheme = (layout: string) => {
@@ -189,7 +191,7 @@ const handleCopyConfig = () => {
 
 // 恢复默认
 const handleResetConfig = async () => {
-	await cache.removeTheme()
+	cache.removeTheme()
 	window.location.reload()
 }
 </script>

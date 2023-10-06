@@ -4,7 +4,7 @@ import { useUserInfoApi } from '@/api/sys/user'
 import cache from '@/utils/cache'
 import { useAuthorityListApi } from '@/api/sys/menu'
 
-export const userStore = defineStore('userStore', {
+export const useUserStore = defineStore('userStore', {
 	state: () => ({
 		// 用户信息
 		user: {

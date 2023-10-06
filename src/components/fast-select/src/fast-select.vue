@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts" name="FastSelect">
-import store from '@/store'
 import { getDictDataList } from '@/utils/tool'
+import { useAppStore } from '@/store/modules/app'
 
+const appStore = useAppStore()
 const props = defineProps({
 	modelValue: {
 		type: [Number, String],
@@ -29,5 +30,5 @@ const props = defineProps({
 	}
 })
 
-const dataList = getDictDataList(store.appStore.dictList, props.dictType)
+const dataList = getDictDataList(appStore.dictList, props.dictType)
 </script>

@@ -1,17 +1,17 @@
 <template>
 	<el-container class="layout-container layout-vertical">
 		<el-aside class="layout-sidebar" :class="sidebarClass">
-			<Logo v-if="store.appStore.theme.isLogo" />
+			<Logo v-if="appStore.theme.isLogo" />
 			<el-scrollbar>
 				<el-menu
 					:default-active="defaultActive"
-					:collapse="!store.appStore.sidebarOpened"
-					:unique-opened="store.appStore.theme.uniqueOpened"
+					:collapse="!appStore.sidebarOpened"
+					:unique-opened="appStore.theme.uniqueOpened"
 					background-color="transparent"
 					:collapse-transition="false"
 					mode="vertical"
 				>
-					<menu-item v-for="menu in store.routerStore.menuRoutes" :key="menu.path" :menu="menu"></menu-item>
+					<menu-item v-for="menu in routerStore.menuRoutes" :key="menu.path" :menu="menu"></menu-item>
 				</el-menu>
 			</el-scrollbar>
 		</el-aside>
@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
 import NavbarLeft from '@/layout/components/Navbar/NavbarLeft.vue'
 import NavbarRight from '@/layout/components/Navbar/NavbarRight.vue'
 import Main from '@/layout/components/Main/index.vue'
@@ -38,7 +37,11 @@ import Logo from '@/layout/components/Logo/index.vue'
 import MenuItem from '@/layout/components/Menu/MenuItem.vue'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAppStore } from '@/store/modules/app'
+import { useRouterStore } from '@/store/modules/router'
 
+const appStore = useAppStore()
+const routerStore = useRouterStore()
 const route = useRoute()
 
 const defaultActive = computed(() => {
@@ -46,15 +49,15 @@ const defaultActive = computed(() => {
 	return path
 })
 
-const headerClass = computed(() => (store.appStore.theme.headerStyle === 'theme' ? 'header-theme' : ''))
+const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'header-theme' : ''))
 
 const sidebarClass = computed(() => {
-	const sidebarOpened = store.appStore.sidebarOpened ? 'aside-expend' : 'aside-compress'
-	const isDark = store.appStore.theme.sidebarStyle === 'dark' ? 'sidebar-dark' : ''
+	const sidebarOpened = appStore.sidebarOpened ? 'aside-expend' : 'aside-compress'
+	const isDark = appStore.theme.sidebarStyle === 'dark' ? 'sidebar-dark' : ''
 	return sidebarOpened + ' ' + isDark
 })
 
-const theme = computed(() => store.appStore.theme)
+const theme = computed(() => appStore.theme)
 const layoutHeaderHeight = computed(() => {
 	if (!theme.value.isTabsView) {
 		return 'height:var(--theme-header-height) !important'

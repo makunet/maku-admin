@@ -10,26 +10,27 @@
 	>
 		<template #default="scope">
 			<el-tag
-				v-if="getDictLabelClass(store.appStore.dictList, props.dictType, scope.row[props.prop])"
+				v-if="getDictLabelClass(appStore.dictList, props.dictType, scope.row[props.prop])"
 				:type="
-					getDictLabelClass(store.appStore.dictList, props.dictType, scope.row[props.prop]) === 'primary'
+					getDictLabelClass(appStore.dictList, props.dictType, scope.row[props.prop]) === 'primary'
 						? ''
-						: getDictLabelClass(store.appStore.dictList, props.dictType, scope.row[props.prop])
+						: getDictLabelClass(appStore.dictList, props.dictType, scope.row[props.prop])
 				"
 			>
-				{{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
+				{{ getDictLabel(appStore.dictList, props.dictType, scope.row[props.prop]) }}
 			</el-tag>
 			<span v-else>
-				{{ getDictLabel(store.appStore.dictList, props.dictType, scope.row[props.prop]) }}
+				{{ getDictLabel(appStore.dictList, props.dictType, scope.row[props.prop]) }}
 			</span>
 		</template>
 	</el-table-column>
 </template>
 
 <script setup lang="ts" name="FastTableColumn">
-import store from '@/store'
 import { getDictLabel, getDictLabelClass } from '@/utils/tool'
+import { useAppStore } from '@/store/modules/app'
 
+const appStore = useAppStore()
 const props = defineProps({
 	prop: {
 		type: String,

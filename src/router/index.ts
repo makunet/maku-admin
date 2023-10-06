@@ -1,7 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import store from '@/store'
+import { useAppStore } from '@/store/modules/app'
+import { useUserStore } from '@/store/modules/user'
+import { useRouterStore } from '@/store/modules/router'
 import { i18n } from '@/i18n'
 import { isExternalLink, pathToCamel } from '@/utils/tool'
 
@@ -53,15 +55,6 @@ const asyncRoutes: RouteRecordRaw = {
 			meta: {
 				title: i18n.global.t('router.profilePassword'),
 				cache: true
-			}
-		},
-		{
-			path: '/online/form/:id',
-			name: 'OnlineForm',
-			component: () => import('../views/online/form/index.vue'),
-			meta: {
-				title: '在线表单',
-				cache: false
 			}
 		}
 	]
@@ -160,26 +153,30 @@ const whiteList = ['/login']
 router.beforeEach(async (to, from, next) => {
 	NProgress.start()
 
+	const appStore = useAppStore()
+	const userStore = useUserStore()
+	const routerStore = useRouterStore()
+
 	// token存在的情况
-	if (store.userStore.token) {
+	if (userStore.token) {
 		if (to.path === '/login') {
 			next('/home')
 		} else {
 			// 用户信息不存在，则重新拉取
-			if (!store.userStore.user.id) {
+			if (!userStore.user.id) {
 				try {
-					await store.userStore.getUserInfoAction()
-					await store.userStore.getAuthorityListAction()
-					await store.appStore.getDictListAction()
+					await userStore.getUserInfoAction()
+					await userStore.getAuthorityListAction()
+					await appStore.getDictListAction()
 				} catch (error) {
 					// 请求异常，则跳转到登录页
-					store.userStore?.setToken('')
+					userStore?.setToken('')
 					next('/login')
 					return Promise.reject(error)
 				}
 
 				// 动态菜单+常量菜单
-				const menuRoutes = await store.routerStore.getMenuRoutes()
+				const menuRoutes = await routerStore.getMenuRoutes()
 
 				// 获取扁平化路由，将多级路由转换成一级路由
 				const keepAliveRoutes = getKeepAliveRoutes(menuRoutes, [])
@@ -192,10 +189,10 @@ router.beforeEach(async (to, from, next) => {
 				router.addRoute(errorRoute)
 
 				// 保存路由数据
-				store.routerStore.setRoutes(constantRoutes.concat(asyncRoutes))
+				routerStore.setRoutes(constantRoutes.concat(asyncRoutes))
 
 				// 搜索菜单需要使用
-				store.routerStore.setSearchMenu(keepAliveRoutes)
+				routerStore.setSearchMenu(keepAliveRoutes)
 
 				next({ ...to, replace: true })
 			} else {
@@ -261,9 +258,6 @@ export const generateRoutes = (menuList: any): RouteRecordRaw[] => {
 			if (isIframeUrl(menu)) {
 				component = () => import('@/layout/components/Router/Iframe.vue')
 				path = '/iframe/' + menu.id
-			} else if (menu.url.indexOf('online/form/') != -1) {
-				component = () => import('@/views/online/form/index.vue')
-				path = '/' + menu.url
 			} else {
 				component = getDynamicComponent(menu.url)
 				path = '/' + menu.url

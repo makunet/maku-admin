@@ -12,11 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import store from '@/store'
+import { useAppStore } from '@/store/modules/app'
 import { computed } from 'vue'
 
-const componentSize = computed(() => store.appStore.componentSize)
+const appStore = useAppStore()
+const componentSize = computed(() => appStore.componentSize)
 const componentSizeChange = (size: string) => {
-	store.appStore.setComponentSize(size)
+	appStore.setComponentSize(size)
 }
 </script>

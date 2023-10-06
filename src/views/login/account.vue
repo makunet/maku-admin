@@ -20,12 +20,13 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { User, Lock, Key } from '@element-plus/icons-vue'
-import store from '@/store'
+import { useUserStore } from '@/store/modules/user'
 import { useCaptchaApi, useCaptchaEnabledApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import constant from '@/utils/constant'
 
+const userStore = useUserStore()
 const router = useRouter()
 const { t } = useI18n()
 const loginFormRef = ref()
@@ -76,7 +77,7 @@ const onLogin = () => {
 		}
 
 		// 用户登录
-		store.userStore
+		userStore
 			.accountLoginAction(loginForm)
 			.then(() => {
 				router.push({ path: '/home' })

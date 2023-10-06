@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts" name="FastRadioGroup">
-import store from '@/store'
+import { useAppStore } from '@/store/modules/app'
 import { getDictDataList } from '@/utils/tool'
 
+const appStore = useAppStore()
 const props = defineProps({
 	modelValue: {
 		type: [Number, String],
@@ -19,5 +20,5 @@ const props = defineProps({
 	}
 })
 
-const dataList = getDictDataList(store.appStore.dictList, props.dictType)
+const dataList = getDictDataList(appStore.dictList, props.dictType)
 </script>
