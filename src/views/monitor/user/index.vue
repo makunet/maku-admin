@@ -1,8 +1,15 @@
 <template>
 	<el-card>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
+		<el-table
+			v-loading="state.dataListLoading"
+			show-overflow-tooltip
+			:data="state.dataList"
+			border
+			style="width: 100%"
+			@selection-change="selectionChangeHandle"
+		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="accessToken" label="会话编号" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="accessToken" label="会话编号" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
 			<fast-table-column prop="gender" label="性别" dict-type="user_gender"></fast-table-column>

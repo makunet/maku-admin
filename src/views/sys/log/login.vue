@@ -17,13 +17,20 @@
 				<el-button type="primary" @click="downloadExcel()">导出</el-button>
 			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
+		<el-table
+			v-loading="state.dataListLoading"
+			show-overflow-tooltip
+			:data="state.dataList"
+			border
+			style="width: 100%"
+			@selection-change="selectionChangeHandle"
+		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="id" label="序号" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="ip" label="登录IP" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="address" label="登录地点" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="userAgent" label="User Agent" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="userAgent" label="User Agent" header-align="center" align="center"></el-table-column>
 			<fast-table-column prop="status" label="登录状态" dict-type="success_fail"></fast-table-column>
 			<fast-table-column prop="operation" label="操作信息" dict-type="login_operation"></fast-table-column>
 			<el-table-column prop="createTime" label="登录时间" header-align="center" align="center" width="165"></el-table-column>
@@ -58,8 +65,8 @@ const state: IHooksOptions = reactive({
 
 const downloadExcel = () => {
 	useLogLoginExportApi()
-  return
+	return
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle} = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle } = useCrud(state)
 </script>

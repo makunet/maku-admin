@@ -20,13 +20,20 @@
 				<el-button type="danger" @click="deleteBatchHandle()"> 删除 </el-button>
 			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
+		<el-table
+			v-loading="state.dataListLoading"
+			show-overflow-tooltip
+			:data="state.dataList"
+			border
+			style="width: 100%"
+			@selection-change="selectionChangeHandle"
+		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="paramName" label="参数名称" show-overflow-tooltip header-align="center" align="center"></el-table-column>
-			<el-table-column prop="paramKey" label="参数键" show-overflow-tooltip header-align="center" align="center"></el-table-column>
-			<el-table-column prop="paramValue" label="参数值" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="paramName" label="参数名称" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="paramKey" label="参数键" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="paramValue" label="参数值" header-align="center" align="center"></el-table-column>
 			<fast-table-column prop="paramType" label="系统参数" dict-type="params_type"></fast-table-column>
-			<el-table-column prop="remark" label="备注" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+			<el-table-column prop="remark" label="备注" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">

@@ -9,13 +9,14 @@
 			v-loading="state.dataListLoading"
 			:data="state.dataList"
 			border
+			show-overflow-tooltip
 			style="width: 100%"
 			@selection-change="selectionChangeHandle"
 			@sort-change="sortChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="dictValue" label="字典值" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="dictLabel" label="字典标签" show-overflow-tooltip header-align="center" align="center">
+			<el-table-column prop="dictLabel" label="字典标签" header-align="center" align="center">
 				<template #default="scope">
 					<el-tag v-if="scope.row.labelClass" :type="scope.row.labelClass === 'primary' ? '' : scope.row.labelClass">
 						{{ scope.row.dictLabel }}
