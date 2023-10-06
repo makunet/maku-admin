@@ -9,6 +9,7 @@ export const useUserStore = defineStore('userStore', {
 		// 用户信息
 		user: {
 			id: '',
+			superAdmin: 0,
 			username: '',
 			avatar: ''
 		},
