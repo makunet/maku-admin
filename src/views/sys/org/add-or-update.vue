@@ -4,29 +4,17 @@
 			<el-form-item prop="name" label="名称">
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
-			<el-form-item prop="parentName" label="上级机构" class="org-list">
-				<el-popover ref="orgListPopover" placement="bottom-start" trigger="click" :width="400" popper-class="popover-pop">
-					<template #reference>
-						<el-input v-model="dataForm.parentName" :readonly="true" placeholder="上级机构">
-							<template #suffix>
-								<svg-icon v-if="dataForm.pid !== '0'" icon="icon-close-circle" @click.stop="treeSetDefaultHandle()"></svg-icon>
-							</template>
-						</el-input>
-					</template>
-					<div class="popover-pop-body">
-						<el-tree
-							ref="orgListTree"
-							:data="orgList"
-							:props="{ label: 'name', children: 'children' }"
-							node-key="id"
-							:highlight-current="true"
-							:expand-on-click-node="false"
-							accordion
-							@current-change="treeCurrentChange"
-						>
-						</el-tree>
-					</div>
-				</el-popover>
+			<el-form-item prop="pid" label="上级机构">
+				<el-tree-select
+					v-model="dataForm.pid"
+					:data="orgList"
+					value-key="id"
+					check-strictly
+					:render-after-expand="false"
+					:props="{ label: 'name', children: 'children' }"
+					style="width: 100%"
+					clearable
+				/>
 			</el-form-item>
 			<el-form-item prop="sort" label="排序">
 				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" label="排序"></el-input-number>
@@ -48,9 +36,7 @@ const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
 const orgList = ref([])
-const orgListTree = ref()
 const dataFormRef = ref()
-const orgListPopover = ref()
 
 const dataForm = reactive({
 	id: '',
@@ -72,8 +58,6 @@ const init = (id?: number) => {
 	// id 存在则为修改
 	if (id) {
 		getOrg(id)
-	} else {
-		treeSetDefaultHandle()
 	}
 
 	// 机构列表
@@ -81,37 +65,17 @@ const init = (id?: number) => {
 }
 
 // 获取机构列表
-const getOrgList = () => {
-	return useOrgListApi().then(res => {
-		orgList.value = res.data
-	})
+const getOrgList = async () => {
+	const res = await useOrgListApi()
+	orgList.value = res.data
 }
 
 // 获取信息
 const getOrg = (id: number) => {
 	useOrgApi(id).then(res => {
 		Object.assign(dataForm, res.data)
-
-		if (dataForm.pid == '0') {
-			return treeSetDefaultHandle()
-		}
-
-		orgListTree.value.setCurrentKey(dataForm.pid)
 	})
 }
-
-// 上级机构树, 设置默认值
-const treeSetDefaultHandle = () => {
-	dataForm.pid = '0'
-	dataForm.parentName = '一级机构'
-}
-
-const treeCurrentChange = (data: any) => {
-	dataForm.pid = data.id
-	dataForm.parentName = data.name
-	orgListPopover.value.hide()
-}
-
 const dataRules = ref({
 	name: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	parentName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
