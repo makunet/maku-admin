@@ -1,5 +1,6 @@
 import type { App, Plugin } from 'vue'
 import constant from '@/utils/constant'
+import { useAppStore } from '@/store/modules/app'
 
 // 把路径转换成驼峰命名
 export const pathToCamel = (path: string): string => {
@@ -64,6 +65,32 @@ export const getDictLabelClass = (dictList: any[], dictType: string, dictValue: 
 	} else {
 		return ''
 	}
+}
+
+export const getDictLabelList = (dictType: string, dictValue: string): string => {
+	if (Number.isInteger(dictValue)) {
+		dictValue = dictValue + ''
+	}
+
+	if (!dictValue) {
+		return ''
+	}
+
+	const appStore = useAppStore()
+
+	let result = ''
+	dictValue.split(',').forEach(value => {
+		const classStyle = getDictLabelClass(appStore.dictList, dictType, value)
+		const label = getDictLabel(appStore.dictList, dictType, value)
+
+		if (classStyle) {
+			result += `<span class="el-tag el-tag--${classStyle} el-tag--${appStore.componentSize}">${label}</span>&nbsp;`
+		} else {
+			result += label + '&nbsp;'
+		}
+	})
+
+	return result
 }
 
 // 获取字典数据列表
