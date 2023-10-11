@@ -20,7 +20,7 @@
 				<el-button v-auth="'sys:user:delete'" type="danger" @click="deleteBatchHandle()">删除</el-button>
 			</el-form-item>
 			<el-form-item v-auth="'sys:user:import'">
-				<el-upload :action="constant.uploadUserExcelUrl" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
+				<el-upload :action="uploadUserExcelUrl" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
 					<el-button type="info">导入</el-button>
 				</el-upload>
 			</el-form-item>
@@ -73,9 +73,9 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
-import constant from '@/utils/constant'
-import { useUserExportApi } from '@/api/sys/user'
 import { ElMessage, UploadProps } from 'element-plus'
+import cache from '@/utils/cache'
+import constant from '@/utils/constant'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/user/page',
@@ -92,9 +92,11 @@ const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
 }
 
+// 导入用户excel文件
+const uploadUserExcelUrl = constant.apiUrl + '/sys/user/import?access_token=' + cache.getToken()
+
 const downloadExcel = () => {
-	useUserExportApi()
-	return
+	downloadHandle('/sys/user/export')
 }
 
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
@@ -120,5 +122,5 @@ const beforeUpload: UploadProps['beforeUpload'] = file => {
 	return true
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, downloadHandle } = useCrud(state)
 </script>
