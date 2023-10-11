@@ -21,6 +21,7 @@ import { onBeforeUnmount, shallowRef } from 'vue'
 import constant from '@/utils/constant'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor'
+import cache from '@/utils/cache'
 
 const props = defineProps({
 	modelValue: {
@@ -56,7 +57,7 @@ const editorConfig: Partial<IEditorConfig> = {
 	readOnly: props.disabled,
 	MENU_CONF: {
 		uploadImage: {
-			server: constant.uploadUrl,
+			server: constant.uploadUrl + '?access_token=' + cache.getToken(),
 			fieldName: 'file',
 			// 自定义插入图片
 			customInsert(res: any, insertFn: InsertFnType) {
