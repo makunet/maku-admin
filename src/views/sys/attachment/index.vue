@@ -11,7 +11,13 @@
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item v-auth="'sys:attachment:save'">
-				<el-upload :action="constant.uploadUrl" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
+				<el-upload
+					:action="constant.uploadUrl"
+					:headers="{ Authorization: cache.getToken() }"
+					:before-upload="beforeUpload"
+					:on-success="handleSuccess"
+					:show-file-list="false"
+				>
 					<el-button type="primary">上传</el-button>
 				</el-upload>
 			</el-form-item>
@@ -61,6 +67,7 @@
 import { useCrud } from '@/hooks'
 import { reactive } from 'vue'
 import constant from '@/utils/constant'
+import cache from '@/utils/cache'
 import { convertSizeFormat } from '@/utils/tool'
 import { IHooksOptions } from '@/hooks/interface'
 import { ElMessage } from 'element-plus'
