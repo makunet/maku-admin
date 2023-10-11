@@ -1,5 +1,4 @@
 import appPackage from '../../package.json'
-import cache from '@/utils/cache'
 
 /**
  * 常量
@@ -12,10 +11,7 @@ export default {
 	apiUrl: import.meta.env.VITE_API_URL,
 
 	// 文件上传地址
-	uploadUrl: import.meta.env.VITE_API_URL + '/sys/file/upload?access_token=' + cache.getToken(),
-
-	// 导入用户excel文件
-	uploadUserExcelUrl: import.meta.env.VITE_API_URL + '/sys/user/import?access_token=' + cache.getToken(),
+	uploadUrl: import.meta.env.VITE_API_URL + '/sys/file/upload',
 
 	// 环境变量
 	env: {
