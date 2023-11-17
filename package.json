@@ -16,7 +16,7 @@
     "echarts": "5.4.3",
     "axios": "0.27.2",
     "cropperjs": "1.5.12",
-    "maku-form-design": "1.0.2",
+    "maku-form-design": "1.1.0",
     "element-plus": "2.3.14",
     "mitt": "3.0.0",
     "nprogress": "0.2.0",
