@@ -2,7 +2,7 @@
 	<el-card class="mod__menu">
 		<el-form :inline="true">
 			<el-form-item>
-				<el-button v-auth="'sys:menu:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+				<el-button v-auth="'sys:menu:save'" type="primary" @click="addOrUpdateHandle(false, null)">新增</el-button>
 			</el-form-item>
 			<el-form-item>
 				<el-button plain @click="toggleExpandAll()">
@@ -50,7 +50,10 @@
 			<el-table-column prop="authority" label="授权标识" header-align="center" align="center" width="150"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'sys:menu:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button v-if="scope.row.type === 0" v-auth="'sys:menu:save'" type="primary" link @click="addOrUpdateHandle(false, scope.row)"
+						>新增</el-button
+					>
+					<el-button v-auth="'sys:menu:update'" type="primary" link @click="addOrUpdateHandle(true, scope.row)">修改</el-button>
 					<el-button v-auth="'sys:menu:delete'" type="primary" link @click="deleteHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -73,8 +76,8 @@ const state: IHooksOptions = reactive({
 })
 
 const addOrUpdateRef = ref()
-const addOrUpdateHandle = (id?: number) => {
-	addOrUpdateRef.value.init(id)
+const addOrUpdateHandle = (isUpdate: Boolean, row: any) => {
+	addOrUpdateRef.value.init(isUpdate, row)
 }
 
 const { getDataList, deleteHandle } = useCrud(state)
