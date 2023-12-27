@@ -2,16 +2,35 @@
 	<el-card>
 		<el-form :inline="true">
 			<el-form-item>
-				<el-button v-auth="'sys:org:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+				<el-button v-auth="'sys:org:save'" type="primary" @click="addOrUpdateHandle(false, null)">新增</el-button>
+			</el-form-item>
+			<el-form-item>
+				<el-button plain @click="toggleExpandAll()">
+					<template v-if="!isExpandAll">
+						全部展开&nbsp;<el-icon><ArrowDown /></el-icon>
+					</template>
+					<template v-else>
+						全部收起&nbsp;<el-icon><ArrowUp /></el-icon>
+					</template>
+				</el-button>
 			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" row-key="id" border style="width: 100%">
+		<el-table
+			v-if="refreshTable"
+			v-loading="state.dataListLoading"
+			:default-expand-all="isExpandAll"
+			:data="state.dataList"
+			row-key="id"
+			border
+			style="width: 100%"
+		>
 			<el-table-column prop="name" label="名称" header-align="center"></el-table-column>
 			<el-table-column prop="parentName" label="上级" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="sort" label="排序" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'sys:org:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button v-auth="'sys:org:save'" type="primary" link @click="addOrUpdateHandle(false, scope.row)">新增</el-button>
+					<el-button v-auth="'sys:org:update'" type="primary" link @click="addOrUpdateHandle(true, scope.row)">修改</el-button>
 					<el-button v-auth="'sys:org:delete'" type="primary" link @click="deleteHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -22,9 +41,10 @@
 
 <script setup lang="ts">
 import { useCrud } from '@/hooks'
-import { reactive, ref } from 'vue'
+import { nextTick, reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
+import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/org/list',
@@ -33,9 +53,23 @@ const state: IHooksOptions = reactive({
 })
 
 const addOrUpdateRef = ref()
-const addOrUpdateHandle = (id?: Number) => {
-	addOrUpdateRef.value.init(id)
+const addOrUpdateHandle = (isUpdate: Boolean, row: any) => {
+	addOrUpdateRef.value.init(isUpdate, row)
 }
 
 const { getDataList, deleteHandle } = useCrud(state)
+
+// 是否展开，默认全部折叠
+const isExpandAll = ref(false)
+// 是否重新渲染表格状态
+const refreshTable = ref(true)
+
+// 切换 展开和折叠
+const toggleExpandAll = () => {
+	refreshTable.value = false
+	isExpandAll.value = !isExpandAll.value
+	nextTick(() => {
+		refreshTable.value = true
+	})
+}
 </script>

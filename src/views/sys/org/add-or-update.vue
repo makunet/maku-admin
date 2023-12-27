@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useOrgApi, useOrgListApi, useOrgSubmitApi } from '@/api/sys/orgs'
+import { useOrgListApi, useOrgSubmitApi } from '@/api/sys/orgs'
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -46,18 +46,17 @@ const dataForm = reactive({
 	sort: 0
 })
 
-const init = (id?: number) => {
+const init = (isUpdate: boolean, row: any) => {
 	visible.value = true
-	dataForm.id = ''
 
 	// 重置表单数据
 	if (dataFormRef.value) {
 		dataFormRef.value.resetFields()
 	}
 
-	// id 存在则为修改
-	if (id) {
-		getOrg(id)
+	// 更新表单数据
+	if (row) {
+		getOrg(isUpdate, row)
 	}
 
 	// 机构列表
@@ -71,11 +70,18 @@ const getOrgList = async () => {
 }
 
 // 获取信息
-const getOrg = (id: number) => {
-	useOrgApi(id).then(res => {
-		Object.assign(dataForm, res.data)
-	})
+const getOrg = (isUpdate: boolean, row: any) => {
+	Object.assign(dataForm, row)
+	if (!isUpdate) {
+		// 是新增，重置表单数据
+		dataForm.pid = dataForm.id
+		dataForm.parentName = dataForm.name
+		dataForm.id = ''
+		dataForm.name = ''
+		dataForm.sort = 0
+	}
 }
+
 const dataRules = ref({
 	name: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	parentName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
