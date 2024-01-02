@@ -5,9 +5,8 @@
 				<el-tab-pane v-for="tab in tabsStore.visitedViews" :key="tab" :label="tab.title" :name="tab.path" :closable="!isAffix(tab)">
 					<template #label>
 						<el-dropdown
-							:id="tab"
+							:id="tab.path"
 							ref="dropdownRef"
-							class="tabs-action"
 							trigger="contextmenu"
 							placement="bottom-end"
 							@visible-change="handleChange($event, tab)"
@@ -148,7 +147,7 @@ const handleChange = (visible: boolean, tab: any) => {
 		return
 	}
 	dropdownRef.value.forEach((item: { id: string; handleClose: () => void }) => {
-		if (item.id === tab) {
+		if (item.id === tab.path) {
 			return
 		}
 		item.handleClose()
@@ -204,6 +203,9 @@ const handleChange = (visible: boolean, tab: any) => {
 			background: rgba(0, 0, 0, 0.02);
 		}
 		&.is-active {
+			.el-dropdown {
+				color: var(--el-color-primary) !important;
+			}
 			color: var(--el-color-primary);
 			background-color: var(--el-color-primary-light-9);
 			border-bottom: var(--el-border-color-light) 2px solid;
@@ -237,6 +239,9 @@ const handleChange = (visible: boolean, tab: any) => {
 		}
 
 		&.is-active {
+			.el-dropdown {
+				color: var(--el-color-primary) !important;
+			}
 			color: var(--el-color-primary) !important;
 			background-color: var(--el-color-primary-light-9) !important;
 			border-bottom: var(--el-color-primary) 2px solid;
