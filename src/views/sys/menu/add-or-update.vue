@@ -1,8 +1,8 @@
 <template>
-	<el-dialog v-model="visible" :title="!disabled ? '新增' : '修改'" :close-on-click-modal="false" draggable>
+	<el-dialog v-model="visible" :title="!update ? '新增' : '修改'" :close-on-click-modal="false" draggable>
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="120px" @keyup.enter="submitHandle()">
 			<el-form-item prop="type" label="类型">
-				<el-radio-group v-model="dataForm.type" :disabled="disabled" @change="menuTypeChange(dataForm.pid)">
+				<el-radio-group v-model="dataForm.type" :disabled="update" @change="menuTypeChange(dataForm.pid)">
 					<el-radio :label="0">菜单</el-radio>
 					<el-radio :label="1">按钮</el-radio>
 					<el-radio :label="2">接口</el-radio>
@@ -87,20 +87,23 @@ const dataForm = reactive({
 	openStyle: 0
 })
 
-const disabled = ref(false)
+const update = ref(false)
 
 const init = (isUpdate: boolean, row: any) => {
 	visible.value = true
-	disabled.value = isUpdate
+	update.value = isUpdate
 
 	// 重置表单数据
 	if (dataFormRef.value) {
 		dataFormRef.value.resetFields()
 	}
 
-	// id 存在则为修改
+	// 存在则为修改
 	if (row) {
 		getMenu(isUpdate, row)
+	} else {
+		dataForm.pid = ''
+		dataForm.parentName = ''
 	}
 
 	// 菜单列表

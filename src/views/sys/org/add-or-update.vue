@@ -57,6 +57,9 @@ const init = (isUpdate: boolean, row: any) => {
 	// 更新表单数据
 	if (row) {
 		getOrg(isUpdate, row)
+	} else {
+		dataForm.pid = ''
+		dataForm.parentName = ''
 	}
 
 	// 机构列表
