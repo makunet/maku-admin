@@ -27,7 +27,7 @@
 			<el-table-column prop="name" label="名称" header-align="center"></el-table-column>
 			<el-table-column prop="parentName" label="上级" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="sort" label="排序" header-align="center" align="center"></el-table-column>
-			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
+			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="160">
 				<template #default="scope">
 					<el-button v-auth="'sys:org:save'" type="primary" link @click="addOrUpdateHandle(false, scope.row)">新增</el-button>
 					<el-button v-auth="'sys:org:update'" type="primary" link @click="addOrUpdateHandle(true, scope.row)">修改</el-button>

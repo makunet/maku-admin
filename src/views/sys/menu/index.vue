@@ -48,7 +48,7 @@
 			<el-table-column prop="sort" label="排序" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="url" label="路由" header-align="center" align="center" width="150"></el-table-column>
 			<el-table-column prop="authority" label="授权标识" header-align="center" align="center" width="150"></el-table-column>
-			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
+			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="160">
 				<template #default="scope">
 					<el-button v-if="scope.row.type === 0" v-auth="'sys:menu:save'" type="primary" link @click="addOrUpdateHandle(false, scope.row)"
 						>新增</el-button
