@@ -31,7 +31,7 @@ export default {
 		large: '大型',
 		default: '默认',
 		small: '小型',
-		close: '关闭',
+		close: '关闭当前',
 		closeOthers: '关闭其它',
 		closeAll: '关闭全部'
 	},
