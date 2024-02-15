@@ -2,7 +2,6 @@
 	<el-card class="layout-home">
 		<h2>介绍</h2>
 		<p>基于Vue3、TypeScript、Element Plus、Vue Router、Pinia、Axios、i18n、Vite等开发的后台管理</p>
-		<p>使用门槛极低，采用MIT开源协议，完全免费开源且终身免费，可免费用于商业项目等场景</p>
 		<p>目前已实现maku-admin后端接口的有：【MakuBoot】和【MakuCloud】2个后端开源项目。</p>
 		<p>
 			演示环境：<el-link href="https://demo.maku.net/maku-admin" :underline="false" type="primary" target="_blank">
