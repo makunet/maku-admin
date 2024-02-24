@@ -59,10 +59,9 @@ const init = (id?: number) => {
 }
 
 // 获取机构列表
-const getOrgList = () => {
-	return useOrgListApi().then(res => {
-		orgList.value = res.data
-	})
+const getOrgList = async () => {
+	const res = await useOrgListApi()
+	orgList.value = res.data
 }
 
 // 获取信息

@@ -63,7 +63,7 @@
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
-import OperateDetail from './operate_detail.vue'
+import OperateDetail from './operate-detail.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/log/operate/page',
