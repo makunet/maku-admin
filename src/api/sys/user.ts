@@ -4,6 +4,10 @@ export const useUserInfoApi = () => {
 	return service.get('/sys/user/info')
 }
 
+export const useUserInfoSubmitApi = (dataForm: any) => {
+	return service.put('/sys/user/info', dataForm)
+}
+
 export const updatePasswordApi = (data: any) => {
 	return service.put('/sys/user/password', data)
 }
