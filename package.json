@@ -1,6 +1,6 @@
 {
   "name": "maku-admin",
-  "version": "2.6.0",
+  "version": "4.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
