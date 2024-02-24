@@ -2,13 +2,13 @@
 	<el-dropdown class="avatar-container" trigger="hover">
 		<div class="avatar-wrapper">
 			<el-avatar shape="circle" :size="30" :src="userStore.user.avatar"></el-avatar>
-			<span>{{ userStore.user.username }}</span>
+			<span>{{ userStore.user.realName }}</span>
 			<el-icon class="el-icon--right"><ArrowDown /></el-icon>
 		</div>
 		<template #dropdown>
 			<el-dropdown-menu class="user-dropdown">
-				<router-link to="/profile/password">
-					<el-dropdown-item> {{ $t('router.profilePassword') }} </el-dropdown-item>
+				<router-link to="/profile">
+					<el-dropdown-item> {{ $t('router.profile') }} </el-dropdown-item>
 				</router-link>
 				<el-dropdown-item divided @click="logout"> {{ $t('app.signOut') }} </el-dropdown-item>
 			</el-dropdown-menu>
