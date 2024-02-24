@@ -72,11 +72,6 @@
 		</p>
 		<br />
 
-		<h2>知识星球</h2>
-		<p>如果希望与作者，进行技术交流、解答、探讨等，可以加入我们的知识星球，作者在知识星球等你啊！</p>
-		<el-image src="https://cdn.maku.net/images/zsxq.jpg" style="width: 300px" />
-		<br />
-
 		<h2>微信交流群</h2>
 		<p>为了更好的交流，我们新提供了微信交流群，需扫描下面的二维码，关注公众号，回复【加群】，根据提示信息，作者会拉你进群的，感谢配合！</p>
 		<el-image src="https://maku.net/app/img/qrcode.jpg" />
