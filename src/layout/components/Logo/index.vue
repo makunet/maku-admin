@@ -24,6 +24,11 @@ const appStore = useAppStore()
 	box-shadow: rgb(0 21 41 / 2%) 0 1px 4px;
 	color: var(--theme-logo-text-color);
 	font-size: 18px;
+
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
 	.el-avatar {
 		width: 25px;
 		height: 25px;
