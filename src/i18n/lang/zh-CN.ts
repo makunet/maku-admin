@@ -24,8 +24,7 @@ export default {
 		password: '密码',
 		captcha: '验证码',
 		signIn: '登录',
-		accountSignIn: '账号密码登录',
-		mobileSignIn: '手机短信登录',
+		mobileSignIn: '手机登录',
 		mobile: '手机号',
 		signOut: '退出',
 		large: '大型',
@@ -66,6 +65,7 @@ export default {
 	},
 	router: {
 		home: '首页',
+		profile: '个人中心',
 		profilePassword: '修改密码'
 	}
 }

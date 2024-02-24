@@ -23,8 +23,7 @@ export default {
 		username: 'Username',
 		password: 'Password',
 		captcha: 'Captcha',
-		accountSignIn: 'Account Sign in',
-		mobileSignIn: 'Mobile Sign in',
+		mobileSignIn: 'Mobile SignIn',
 		mobile: 'Mobile',
 		signIn: 'Sign in',
 		signOut: 'Sign Out',
@@ -66,6 +65,7 @@ export default {
 	},
 	router: {
 		home: 'Home',
+		profile: 'Profile Center',
 		profilePassword: 'Change Password'
 	}
 }
