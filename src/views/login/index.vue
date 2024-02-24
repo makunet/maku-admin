@@ -92,14 +92,6 @@ const loginSwitch = (type: string) => {
 	}
 }
 
-.login-more {
-	display: flex;
-	justify-content: space-evenly;
-	padding-top: 25px;
-	width: 200px;
-	margin: 0 auto;
-}
-
 @media only screen and (max-width: 992px) {
 	.login-intro {
 		display: none;
