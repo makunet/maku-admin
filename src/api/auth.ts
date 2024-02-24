@@ -20,6 +20,10 @@ export const useMobileLoginApi = (data: any) => {
 	return service.post('/sys/auth/mobile', data)
 }
 
+export const useThirdLoginApi = (data: any) => {
+	return service.post('/sys/auth/third', data)
+}
+
 export const useLogoutApi = () => {
 	return service.post('/sys/auth/logout')
 }
