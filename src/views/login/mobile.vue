@@ -1,6 +1,5 @@
 <template>
 	<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" @keyup.enter="onLogin">
-		<div class="login-title">{{ $t('app.signIn') }}</div>
 		<el-form-item prop="mobile">
 			<el-input v-model="loginForm.mobile" :prefix-icon="User" :placeholder="$t('app.mobile')"></el-input>
 		</el-form-item>
@@ -90,14 +89,6 @@ const onLogin = () => {
 </script>
 
 <style lang="scss" scoped>
-.login-title {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 35px;
-	font-size: 24px;
-	color: #444;
-	letter-spacing: 4px;
-}
 .login-code {
 	:deep(.el-input) {
 		width: 200px;

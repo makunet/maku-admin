@@ -5,15 +5,16 @@
 			<div class="desc">
 				{{ $t('app.description') }}
 			</div>
-			<div class="login-bg"><img src="@/assets/login.png" /></div>
+			<div class="login-bg"><img src="@/assets/login.png" alt="" /></div>
 		</div>
 		<div class="login-form">
-			<account v-if="loginType === 'account'"></account>
-			<mobile v-if="loginType === 'mobile'"></mobile>
-			<div class="login-more">
-				<el-button type="info" link @click="loginSwitch('account')">{{ $t('app.accountSignIn') }}</el-button>
-				<el-button type="info" link @click="loginSwitch('mobile')">{{ $t('app.mobileSignIn') }}</el-button>
+			<div class="login-title">
+				<el-button link :class="loginType === 'account' ? 'account' : ''" @click="loginSwitch('account')">{{ $t('app.signIn') }}</el-button>
+				<el-button link :class="loginType === 'mobile' ? 'account' : ''" @click="loginSwitch('mobile')">{{ $t('app.mobileSignIn') }}</el-button>
 			</div>
+			<account v-if="loginType === 'account'" />
+			<mobile v-if="loginType === 'mobile'" />
+			<third />
 		</div>
 	</div>
 </template>
@@ -22,6 +23,7 @@
 import { ref } from 'vue'
 import Account from './account.vue'
 import Mobile from './mobile.vue'
+import Third from './third.vue'
 
 // 登录类型
 const loginType = ref('account')
@@ -54,6 +56,20 @@ const loginSwitch = (type: string) => {
 .login-bg img {
 	width: 520px;
 }
+.login-title {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 20px;
+	:deep(.el-button) {
+		font-size: 20px;
+		color: #333;
+		padding-bottom: 8px;
+	}
+	.account {
+		color: var(--el-color-primary);
+		border-bottom: 4px solid var(--el-color-primary) !important;
+	}
+}
 .login-form {
 	background-color: #fff;
 	flex: 0 1 auto;
@@ -83,6 +99,7 @@ const loginSwitch = (type: string) => {
 	width: 200px;
 	margin: 0 auto;
 }
+
 @media only screen and (max-width: 992px) {
 	.login-intro {
 		display: none;

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useAccountLoginApi, useMobileLoginApi, useLogoutApi } from '@/api/auth'
+import { useAccountLoginApi, useMobileLoginApi, useLogoutApi, useThirdLoginApi } from '@/api/auth'
 import { useUserInfoApi } from '@/api/sys/user'
 import cache from '@/utils/cache'
 import { useAuthorityListApi } from '@/api/sys/menu'
@@ -11,7 +11,14 @@ export const useUserStore = defineStore('userStore', {
 			id: '',
 			superAdmin: 0,
 			username: '',
-			avatar: ''
+			realName: '',
+			gender: 0,
+			mobile: '',
+			email: '',
+			avatar: '',
+			orgName: '',
+			postNameList: [],
+			createTime: ''
 		},
 		// 权限列表
 		authorityList: [],
@@ -41,6 +48,12 @@ export const useUserStore = defineStore('userStore', {
 		// 手机号登录
 		async mobileLoginAction(loginForm: any) {
 			const { data } = await useMobileLoginApi(loginForm)
+			this.setToken(data.access_token)
+			this.setRefreshToken(data.refresh_token)
+		},
+		// 第三方登录
+		async thirdLoginAction(loginForm: any) {
+			const { data } = await useThirdLoginApi(loginForm)
 			this.setToken(data.access_token)
 			this.setRefreshToken(data.refresh_token)
 		},

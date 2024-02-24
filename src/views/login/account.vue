@@ -1,6 +1,5 @@
 <template>
 	<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" @keyup.enter="onLogin">
-		<div class="login-title">{{ $t('app.signIn') }}</div>
 		<el-form-item prop="username">
 			<el-input v-model="loginForm.username" :prefix-icon="User" :placeholder="$t('app.username')"></el-input>
 		</el-form-item>
@@ -25,6 +24,7 @@ import { useCaptchaApi, useCaptchaEnabledApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import constant from '@/utils/constant'
+import { sm2Encrypt } from '@/utils/smCrypto'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -76,9 +76,17 @@ const onLogin = () => {
 			return false
 		}
 
+		// 重新封装登录数据
+		const loginData = {
+			username: loginForm.username,
+			password: sm2Encrypt(loginForm.password),
+			key: loginForm.key,
+			captcha: loginForm.captcha
+		}
+
 		// 用户登录
 		userStore
-			.accountLoginAction(loginForm)
+			.accountLoginAction(loginData)
 			.then(() => {
 				router.push({ path: '/home' })
 			})
@@ -92,14 +100,6 @@ const onLogin = () => {
 </script>
 
 <style lang="scss" scoped>
-.login-title {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 35px;
-	font-size: 24px;
-	color: #444;
-	letter-spacing: 4px;
-}
 .login-captcha {
 	:deep(.el-input) {
 		width: 200px;

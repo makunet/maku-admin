@@ -10,6 +10,9 @@ export default {
 	// API地址
 	apiUrl: import.meta.env.VITE_API_URL,
 
+	// 第三方登录地址
+	thirdLoginUrl: import.meta.env.VITE_API_URL + '/sys/third/render/',
+
 	// 文件上传地址
 	uploadUrl: import.meta.env.VITE_API_URL + '/sys/file/upload',
 
