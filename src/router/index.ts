@@ -49,11 +49,11 @@ const asyncRoutes: RouteRecordRaw = {
 			}
 		},
 		{
-			path: '/profile/password',
-			name: 'ProfilePassword',
-			component: () => import('../views/profile/password.vue'),
+			path: '/profile',
+			name: 'ProfileIndex',
+			component: () => import('../views/profile/index.vue'),
 			meta: {
-				title: i18n.global.t('router.profilePassword'),
+				title: i18n.global.t('router.profile'),
 				cache: true
 			}
 		}
