@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import App from './App.vue'
 import { createPinia } from 'pinia'
 import { directive } from './utils/directive'
@@ -32,6 +33,11 @@ VXETable.config({
 
 const app = createApp(App)
 app.use(createPinia())
+
+// element plus图标 全局注册
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+	app.component(key, component)
+}
 
 // 表单设计器
 app.use(MakuFormDesign)
