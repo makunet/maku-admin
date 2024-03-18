@@ -92,3 +92,10 @@
   box-shadow: none !important;
 }
 
+.el-form--inline {
+  .el-form-item {
+    & > .el-input, .el-cascader, .el-select, .el-date-editor, .el-autocomplete {
+      width: 220px;
+    }
+  }
+}
