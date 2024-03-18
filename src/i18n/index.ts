@@ -6,8 +6,8 @@ import element_zh_cn from 'element-plus/es/locale/lang/zh-cn'
 import element_en from 'element-plus/es/locale/lang/en'
 
 // 框架 国际化文件
-const zh_cn = import.meta.globEager('./lang/**/zh-CN.ts')
-const en_us = import.meta.globEager('./lang/**/en-US.ts')
+const zh_cn = import.meta.glob('./lang/**/zh-CN.ts', { eager: true })
+const en_us = import.meta.glob('./lang/**/en-US.ts', { eager: true })
 
 // 加载 lang 文件夹下的国际化
 export const loadLang = (modules: Record<string, any>) => {
@@ -42,6 +42,9 @@ function getLanguage() {
 }
 
 export const i18n = createI18n({
+	allowComposition: true,
+	globalInjection: true,
+	legacy: false,
 	locale: getLanguage(),
 	messages
 })

@@ -1,7 +1,7 @@
 <template>
 	<el-breadcrumb separator="/" :separator-icon="ArrowRight" class="navbar-breadcrumb">
 		<el-breadcrumb-item key="home">
-			<span>{{ $t('router.home') }}</span>
+			<span>{{ $t('home') }}</span>
 		</el-breadcrumb-item>
 		<el-breadcrumb-item v-for="(item, index) in breadcrumb" :key="index">
 			<span>{{ item }}</span>

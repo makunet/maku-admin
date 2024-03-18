@@ -7,6 +7,7 @@ export default {
 	export: 'Export',
 	handle: 'Action',
 	back: 'Back',
+	home: 'Home',
 	confirm: 'Confirm',
 	cancel: 'Cancel',
 	clear: 'Clear',
@@ -27,6 +28,7 @@ export default {
 		mobile: 'Mobile',
 		signIn: 'Sign in',
 		signOut: 'Sign Out',
+		profile: 'Profile',
 		large: 'Large',
 		default: 'Default',
 		small: 'Small',
@@ -58,14 +60,5 @@ export default {
 		copySuc: 'Copy Succeeded',
 		style1: 'Style-1',
 		style2: 'Style2'
-	},
-	error: {
-		email: 'The email format is incorrect',
-		password: 'The password cannot be less than {len} digits'
-	},
-	router: {
-		home: 'Home',
-		profile: 'Profile Center',
-		profilePassword: 'Change Password'
 	}
 }

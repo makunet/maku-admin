@@ -7,6 +7,7 @@ export default {
 	export: '导出',
 	handle: '操作',
 	back: '返回',
+	home: '首页',
 	confirm: '确定',
 	cancel: '取消',
 	clear: '清除',
@@ -27,6 +28,7 @@ export default {
 		mobileSignIn: '手机登录',
 		mobile: '手机号',
 		signOut: '退出',
+		profile: '个人中心',
 		large: '大型',
 		default: '默认',
 		small: '小型',
@@ -58,14 +60,5 @@ export default {
 		copySuc: '复制成功',
 		style1: '风格1',
 		style2: '风格2'
-	},
-	error: {
-		email: '邮箱格式不正确',
-		password: '密码不能小于{len}位数'
-	},
-	router: {
-		home: '首页',
-		profile: '个人中心',
-		profilePassword: '修改密码'
 	}
 }

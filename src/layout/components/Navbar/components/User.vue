@@ -8,7 +8,7 @@
 		<template #dropdown>
 			<el-dropdown-menu class="user-dropdown">
 				<router-link to="/profile">
-					<el-dropdown-item> {{ $t('router.profile') }} </el-dropdown-item>
+					<el-dropdown-item> {{ $t('app.profile') }} </el-dropdown-item>
 				</router-link>
 				<el-dropdown-item divided @click="logout"> {{ $t('app.signOut') }} </el-dropdown-item>
 			</el-dropdown-menu>

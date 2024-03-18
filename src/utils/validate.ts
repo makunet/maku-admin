@@ -1,5 +1,3 @@
-import { i18n } from '@/i18n'
-
 export const isExternalLink = (path: string): boolean => {
 	return /^(https?:|mailto:|tel:)/.test(path)
 }
@@ -11,13 +9,13 @@ export const validateEmail = (rule: any, value: any, callback: (e?: Error) => an
 	if (reg.test(value)) {
 		callback()
 	} else {
-		callback(new Error(i18n.global.t('error.email')))
+		callback(new Error('邮箱格式不正确'))
 	}
 }
 
 export const validatePassword = (rule: any, value: any, callback: (e?: Error) => any) => {
 	if (value.length < 4) {
-		callback(new Error(i18n.global.t('error.password', { len: 4 })))
+		callback(new Error('密码不能小于4位数'))
 	} else {
 		callback()
 	}

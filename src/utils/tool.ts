@@ -104,7 +104,7 @@ export function getDictDataList(dictList: any[], dictType: string) {
 }
 
 // 全局组件安装
-export const withInstall = <T>(component: T, alias?: string) => {
+export const withInstall = <T>(component: any, alias?: string) => {
 	const comp = component as any
 	comp.install = (app: App) => {
 		app.component(comp.name || comp.displayName, component)

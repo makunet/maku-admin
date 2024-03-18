@@ -23,7 +23,7 @@ import FastSelect from '@/components/fast-select'
 import FastUser from '@/components/fast-user'
 import SvgIcon from '@/components/svg-icon'
 
-VXETable.setup({
+VXETable.config({
 	zIndex: 3000,
 	select: {
 		transfer: true
@@ -38,8 +38,8 @@ app.use(MakuFormDesign)
 
 // 注册 自定义指令
 directive(app)
-app.use(router)
 app.use(i18n)
+app.use(router)
 app.use(FastTableColumn)
 app.use(FastRadioGroup)
 app.use(FastSelect)

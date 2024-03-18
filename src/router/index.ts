@@ -4,7 +4,6 @@ import 'nprogress/nprogress.css'
 import { useAppStore } from '@/store/modules/app'
 import { useUserStore } from '@/store/modules/user'
 import { useRouterStore } from '@/store/modules/router'
-import { i18n } from '@/i18n'
 import { isExternalLink, pathToCamel } from '@/utils/tool'
 
 NProgress.configure({ showSpinner: false })
@@ -44,7 +43,7 @@ const asyncRoutes: RouteRecordRaw = {
 			name: 'Home',
 			component: () => import('../views/home.vue'),
 			meta: {
-				title: i18n.global.t('router.home'),
+				title: '首页',
 				affix: true
 			}
 		},
@@ -53,7 +52,7 @@ const asyncRoutes: RouteRecordRaw = {
 			name: 'ProfileIndex',
 			component: () => import('../views/profile/index.vue'),
 			meta: {
-				title: i18n.global.t('router.profile'),
+				title: '个人中心',
 				cache: true
 			}
 		}
