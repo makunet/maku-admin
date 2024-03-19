@@ -23,6 +23,7 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { mobileRegExp } from '@/utils/validate'
 import { ElMessage } from 'element-plus'
+import constant from '@/utils/constant'
 
 const userStore = useUserStore()
 
@@ -82,7 +83,7 @@ const onLogin = () => {
 
 		// 用户登录
 		userStore.mobileLoginAction(loginForm).then(() => {
-			router.push({ path: '/home' })
+			router.push({ path: constant.loginPage })
 		})
 	})
 }

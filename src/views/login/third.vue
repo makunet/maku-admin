@@ -31,7 +31,7 @@ const thirdLogin = (openType: string) => {
 
 		// 第三方登录
 		userStore.thirdLoginAction(e.data).then(() => {
-			router.push({ path: '/home' })
+			router.push({ path: constant.loginPage })
 		})
 	}
 }

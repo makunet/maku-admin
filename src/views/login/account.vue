@@ -88,7 +88,7 @@ const onLogin = () => {
 		userStore
 			.accountLoginAction(loginData)
 			.then(() => {
-				router.push({ path: '/home' })
+				router.push({ path: constant.loginPage })
 			})
 			.catch(() => {
 				if (captchaVisible.value) {
