@@ -6,12 +6,6 @@
 			</div>
 			<el-scrollbar>
 				<div class="columns-menu">
-					<router-link to="/home">
-						<div class="columns-menu-item" :class="{ active: menuPath === '/home' }">
-							<svg-icon icon="icon-home"></svg-icon>
-							<span class="title">首页</span>
-						</div>
-					</router-link>
 					<div
 						v-for="menu in routerStore.menuRoutes"
 						:key="menu.path"
