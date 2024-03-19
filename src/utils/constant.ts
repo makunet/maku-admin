@@ -7,6 +7,9 @@ export default {
 	// 版本号
 	version: appPackage.version,
 
+	// 登录成功后，跳转页面
+	loginPage: '/dashboard/workbench',
+
 	// API地址
 	apiUrl: import.meta.env.VITE_API_URL,
 
