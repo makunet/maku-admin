@@ -5,6 +5,7 @@ import { useAppStore } from '@/store/modules/app'
 import { useUserStore } from '@/store/modules/user'
 import { useRouterStore } from '@/store/modules/router'
 import { isExternalLink, pathToCamel } from '@/utils/tool'
+import constant from '@/utils/constant'
 
 NProgress.configure({ showSpinner: false })
 
@@ -36,17 +37,8 @@ const constantRoutes: RouteRecordRaw[] = [
 const asyncRoutes: RouteRecordRaw = {
 	path: '/',
 	component: () => import('../layout/index.vue'),
-	redirect: '/home',
+	redirect: '/dashboard/index',
 	children: [
-		{
-			path: '/home',
-			name: 'Home',
-			component: () => import('../views/home.vue'),
-			meta: {
-				title: '首页',
-				affix: true
-			}
-		},
 		{
 			path: '/profile',
 			name: 'ProfileIndex',
@@ -58,6 +50,34 @@ const asyncRoutes: RouteRecordRaw = {
 		}
 	]
 }
+
+// 配置控制台菜单
+export const dashboardMenu = [
+	{
+		id: 100,
+		name: 'Dashboard',
+		url: null,
+		openStyle: 0,
+		icon: 'icon-appstore',
+		children: [
+			{
+				id: 101,
+				name: '首页',
+				url: 'dashboard/index',
+				openStyle: 0,
+				icon: 'icon-home',
+				affix: true
+			},
+			{
+				id: 102,
+				name: '工作台',
+				url: 'dashboard/workbench',
+				openStyle: 0,
+				icon: 'icon-appstore'
+			}
+		]
+	}
+]
 
 // 配置常量菜单
 export const constantMenu = [
@@ -159,7 +179,7 @@ router.beforeEach(async (to, from, next) => {
 	// token存在的情况
 	if (userStore.token) {
 		if (to.path === '/login') {
-			next('/home')
+			next(constant.loginPage)
 		} else {
 			// 用户信息不存在，则重新拉取
 			if (!userStore.user.id) {
@@ -274,6 +294,7 @@ export const generateRoutes = (menuList: any): RouteRecordRaw[] => {
 				url: menu.url,
 				cache: true,
 				newOpen: menu.openStyle === 1,
+				affix: menu.affix,
 				breadcrumb: []
 			}
 		}
