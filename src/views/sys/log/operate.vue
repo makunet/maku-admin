@@ -1,28 +1,34 @@
 <template>
-	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-			<el-form-item>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			<el-form-item prop="realName">
 				<el-input v-model="state.queryForm.realName" placeholder="用户"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="module">
 				<el-input v-model="state.queryForm.module" placeholder="模块名"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="reqUri">
 				<el-input v-model="state.queryForm.reqUri" placeholder="请求URI"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="status">
 				<fast-select v-model="state.queryForm.status" placeholder="操作状态" dict-type="success_fail" clearable> </fast-select>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList()">查询</el-button>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
+			</el-form-item>
+			<el-form-item>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
 			</el-form-item>
 		</el-form>
+	</el-card>
+
+	<el-card>
 		<el-table
 			v-loading="state.dataListLoading"
 			show-overflow-tooltip
 			:data="state.dataList"
 			border
-			style="width: 100%"
+			class="layout-table"
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -75,10 +81,11 @@ const state: IHooksOptions = reactive({
 	}
 })
 
+const queryRef = ref()
 const detailRef = ref()
 const detailHandle = (row: any) => {
 	detailRef.value.init(row)
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, reset } = useCrud(state)
 </script>
