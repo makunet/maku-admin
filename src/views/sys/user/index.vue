@@ -1,46 +1,55 @@
 <template>
-	<el-row :gutter="6">
+	<el-row :gutter="10">
 		<el-col :span="5">
 			<el-card>
 				<OrgTree @node-click="handleOrgClick" />
 			</el-card>
 		</el-col>
 		<el-col :span="19">
-			<el-card>
-				<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-					<el-form-item>
-						<el-input v-model="state.queryForm.username" placeholder="用户名" clearable></el-input>
+			<el-card class="layout-query">
+				<el-form ref="queryRef" :inline="true" :model="state.queryForm">
+					<el-form-item prop="username">
+						<el-input v-model="state.queryForm.username" placeholder="用户名"></el-input>
+					</el-form-item>
+					<el-form-item prop="mobile">
+						<el-input v-model="state.queryForm.mobile" placeholder="手机号"></el-input>
+					</el-form-item>
+					<el-form-item prop="gender">
+						<fast-select v-model="state.queryForm.gender" dict-type="user_gender" clearable placeholder="性别"></fast-select>
 					</el-form-item>
 					<el-form-item>
-						<el-input v-model="state.queryForm.mobile" placeholder="手机号" clearable></el-input>
-					</el-form-item>
-					<!--					<el-form-item>-->
-					<!--						<fast-select v-model="state.queryForm.gender" dict-type="user_gender" clearable placeholder="性别"></fast-select>-->
-					<!--					</el-form-item>-->
-					<el-form-item>
-						<el-button @click="getDataList()">查询</el-button>
+						<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 					</el-form-item>
 					<el-form-item>
-						<el-button v-auth="'sys:user:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-					</el-form-item>
-					<el-form-item>
-						<el-button v-auth="'sys:user:delete'" type="danger" @click="deleteBatchHandle()">删除</el-button>
-					</el-form-item>
-					<el-form-item v-auth="'sys:user:import'">
-						<el-upload :action="uploadUserExcelUrl" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
-							<el-button type="info">导入</el-button>
-						</el-upload>
-					</el-form-item>
-					<el-form-item>
-						<el-button v-auth="'sys:user:export'" type="success" @click="downloadExcel()">导出</el-button>
+						<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
 					</el-form-item>
 				</el-form>
+			</el-card>
+
+			<el-card>
+				<el-space>
+					<el-space>
+						<el-button v-auth="'sys:user:save'" icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+					</el-space>
+					<el-space v-auth="'sys:user:import'">
+						<el-upload :action="uploadUserExcelUrl" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
+							<el-button plain icon="Upload">导入</el-button>
+						</el-upload>
+					</el-space>
+					<el-space>
+						<el-button v-auth="'sys:user:export'" plain icon="Download" @click="downloadExcel()">导出</el-button>
+					</el-space>
+					<el-space>
+						<el-button v-auth="'sys:user:delete'" icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
+					</el-space>
+				</el-space>
+
 				<el-table
 					v-loading="state.dataListLoading"
 					show-overflow-tooltip
 					:data="state.dataList"
 					border
-					style="width: 100%"
+					class="layout-table"
 					@selection-change="selectionChangeHandle"
 				>
 					<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -97,12 +106,13 @@ const state: IHooksOptions = reactive({
 	}
 })
 
+const queryRef = ref()
 const addOrUpdateRef = ref()
 const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
 }
 
-const handleOrgClick = (orgId: number) => {
+const handleOrgClick = (orgId: any) => {
 	state.queryForm.orgId = orgId
 	getDataList()
 }
@@ -137,5 +147,5 @@ const beforeUpload: UploadProps['beforeUpload'] = file => {
 	return true
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, downloadHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, downloadHandle, reset } = useCrud(state)
 </script>
