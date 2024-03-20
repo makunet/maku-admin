@@ -1,29 +1,38 @@
 <template>
-	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-			<el-form-item>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			<el-form-item prop="jobName">
 				<el-input v-model="state.queryForm.jobName" placeholder="任务名称"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="jobGroup">
 				<fast-select v-model="state.queryForm.jobGroup" dict-type="schedule_group" clearable placeholder="任务组名"></fast-select>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="status">
 				<fast-select v-model="state.queryForm.status" dict-type="schedule_status" clearable placeholder="任务状态"></fast-select>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList()">查询</el-button>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button v-auth="'schedule:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button v-auth="'schedule:delete'" type="danger" @click="deleteBatchHandle()">删除</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button v-auth="'schedule:log'" @click="logHandle()">日志</el-button>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
 			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
+	</el-card>
+
+	<el-card>
+		<el-space>
+			<el-space>
+				<el-button v-auth="'schedule:save'" icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+			</el-space>
+			<el-space>
+				<el-button v-auth="'schedule:log'" icon="Document" plain @click="logHandle()">任务日志</el-button>
+			</el-space>
+			<el-space>
+				<el-button v-auth="'schedule:delete'" icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
+			</el-space>
+		</el-space>
+
+		<el-table v-loading="state.dataListLoading" :data="state.dataList" border class="layout-table" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="jobName" label="任务名称" header-align="center" align="center"></el-table-column>
@@ -124,10 +133,11 @@ const logHandle = () => {
 	logVisible.value = true
 }
 
+const queryRef = ref()
 const addOrUpdateRef = ref()
 const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, reset } = useCrud(state)
 </script>
