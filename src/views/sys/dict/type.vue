@@ -1,28 +1,37 @@
 <template>
-	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList">
-			<el-form-item>
-				<el-input v-model="state.queryForm.dictType" placeholder="字典类型" clearable></el-input>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList">
+			<el-form-item prop="dictType">
+				<el-input v-model="state.queryForm.dictType" placeholder="字典类型"></el-input>
+			</el-form-item>
+			<el-form-item prop="dictName">
+				<el-input v-model="state.queryForm.dictName" placeholder="字典名称"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-input v-model="state.queryForm.dictName" placeholder="字典名称" clearable></el-input>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList">查询</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="danger" @click="deleteBatchHandle()">删除</el-button>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
 			</el-form-item>
 		</el-form>
+	</el-card>
+
+	<el-card>
+		<el-space>
+			<el-space>
+				<el-button icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+			</el-space>
+			<el-space>
+				<el-button icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
+			</el-space>
+		</el-space>
+
 		<el-table
 			v-loading="state.dataListLoading"
 			:data="state.dataList"
 			border
 			show-overflow-tooltip
-			style="width: 100%"
+			class="layout-table"
 			@selection-change="selectionChangeHandle"
 			@sort-change="sortChangeHandle"
 		>
@@ -106,10 +115,11 @@ const showDataSqlHandle = (row: any) => {
 	dataSqlTitle.value = '动态数据 - ' + row.dictType
 }
 
+const queryRef = ref()
 const addOrUpdateRef = ref()
 const addOrUpdateHandle = (id?: Number) => {
 	addOrUpdateRef.value.init(id)
 }
 
-const { getDataList, sizeChangeHandle, selectionChangeHandle, sortChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, sizeChangeHandle, selectionChangeHandle, sortChangeHandle, currentChangeHandle, deleteBatchHandle, reset } = useCrud(state)
 </script>
