@@ -1,31 +1,39 @@
 <template>
-	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-			<el-form-item>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			<el-form-item prop="paramKey">
 				<el-input v-model="state.queryForm.paramKey" placeholder="参数键"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="paramValue">
 				<el-input v-model="state.queryForm.paramValue" placeholder="参数值"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="paramType">
 				<fast-select v-model="state.queryForm.paramType" dict-type="params_type" placeholder="系统参数" clearable></fast-select>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList()">查询</el-button>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="addOrUpdateHandle()"> 新增 </el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="danger" @click="deleteBatchHandle()"> 删除 </el-button>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
 			</el-form-item>
 		</el-form>
+	</el-card>
+
+	<el-card>
+		<el-space>
+			<el-space>
+				<el-button icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+			</el-space>
+			<el-space>
+				<el-button icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
+			</el-space>
+		</el-space>
 		<el-table
 			v-loading="state.dataListLoading"
 			show-overflow-tooltip
 			:data="state.dataList"
 			border
-			style="width: 100%"
+			class="layout-table"
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -54,7 +62,7 @@
 		</el-pagination>
 
 		<!-- 弹窗, 新增 / 修改 -->
-		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+		<add-or-update ref="addOrUpdateRef" @refresh-data-list="getDataList"></add-or-update>
 	</el-card>
 </template>
 
@@ -74,10 +82,11 @@ const state: IHooksOptions = reactive({
 	}
 })
 
+const queryRef = ref()
 const addOrUpdateRef = ref()
 const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, reset } = useCrud(state)
 </script>
