@@ -1,6 +1,6 @@
 <template>
 	<el-radio-group :model-value="modelValue + ''" @change="$emit('update:modelValue', $event)">
-		<el-radio v-for="data in dataList" :key="data.dictValue" :label="data.dictValue">{{ data.dictLabel }}</el-radio>
+		<el-radio v-for="data in dataList" :key="data.dictValue" :value="data.dictValue">{{ data.dictLabel }}</el-radio>
 	</el-radio-group>
 </template>
 
