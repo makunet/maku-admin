@@ -1,16 +1,14 @@
 <template>
 	<el-card>
-		<el-form :inline="true" :model="state.queryForm">
-			<el-form-item>
-				<el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
-			</el-form-item>
-		</el-form>
+		<el-space>
+			<el-button icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+		</el-space>
 		<el-table
 			v-loading="state.dataListLoading"
 			:data="state.dataList"
 			border
 			show-overflow-tooltip
-			style="width: 100%"
+			class="layout-table"
 			@selection-change="selectionChangeHandle"
 			@sort-change="sortChangeHandle"
 		>
