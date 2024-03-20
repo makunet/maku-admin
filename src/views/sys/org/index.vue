@@ -1,10 +1,10 @@
 <template>
 	<el-card>
-		<el-form :inline="true">
-			<el-form-item>
-				<el-button v-auth="'sys:org:save'" type="primary" @click="addOrUpdateHandle(false, null)">新增</el-button>
-			</el-form-item>
-			<el-form-item>
+		<el-space>
+			<el-space>
+				<el-button v-auth="'sys:org:save'" type="primary" icon="Plus" @click="addOrUpdateHandle(false, null)">新增</el-button>
+			</el-space>
+			<el-space>
 				<el-button plain @click="toggleExpandAll()">
 					<template v-if="!isExpandAll">
 						全部展开&nbsp;<el-icon><ArrowDown /></el-icon>
@@ -13,8 +13,8 @@
 						全部收起&nbsp;<el-icon><ArrowUp /></el-icon>
 					</template>
 				</el-button>
-			</el-form-item>
-		</el-form>
+			</el-space>
+		</el-space>
 		<el-table
 			v-if="refreshTable"
 			v-loading="state.dataListLoading"
@@ -22,7 +22,7 @@
 			:data="state.dataList"
 			row-key="id"
 			border
-			style="width: 100%"
+			class="layout-table"
 		>
 			<el-table-column prop="name" label="名称" header-align="center"></el-table-column>
 			<el-table-column prop="parentName" label="上级" header-align="center" align="center"></el-table-column>
