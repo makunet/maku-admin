@@ -11,7 +11,7 @@
 				<fast-select v-model="state.queryForm.jobGroup" dict-type="schedule_group" clearable placeholder="任务组名"></fast-select>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList()">查询</el-button>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 			</el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
