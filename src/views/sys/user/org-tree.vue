@@ -9,6 +9,7 @@
 			:props="{ label: 'name', children: 'children' }"
 			highlight-current
 			node-key="id"
+			:current-node-key="currentNodeKey"
 			@node-click="handleNodeClick"
 		/>
 	</div>
@@ -22,6 +23,7 @@ import { onMounted, ref, watch } from 'vue'
 const orgList = ref()
 const orgName = ref()
 const treeRef = ref()
+const currentNodeKey = ref()
 
 onMounted(async () => {
 	await getOrgList()
@@ -47,7 +49,12 @@ const filterNode = (name: string, data: any) => {
 const emits = defineEmits(['nodeClick'])
 // 处理点击事件
 const handleNodeClick = (row: any) => {
-	emits('nodeClick', row.id)
+	if (currentNodeKey.value === row.id) {
+		currentNodeKey.value = null
+	} else {
+		currentNodeKey.value = row.id
+	}
+	emits('nodeClick', currentNodeKey.value)
 }
 </script>
 
