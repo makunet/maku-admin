@@ -71,11 +71,23 @@ a:hover {
     width: 100%;
     background-color: var(--theme-main-bg-color);
     .layout-card{
-      min-height: calc(100vh - 70px - var(--theme-header-height));
+      min-height: calc(100vh - 60px - var(--theme-header-height));
     }
   }
   .layout-scrollbar {
     //width: 100%;
-    padding: 15px;
+    padding: 10px;
   }
+
+  .layout-query{
+    margin-bottom: 10px;
+    .el-card__body{
+      padding-bottom: 0;
+    }
+  }
+  .layout-table{
+    width: 100%; margin-top: 15px
+  }
+
 }
+
