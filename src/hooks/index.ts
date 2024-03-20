@@ -197,6 +197,12 @@ export const useCrud = (options: IHooksOptions) => {
 		}
 	}
 
+	const reset = (queryRef: ref<any>) => {
+		queryRef.resetFields()
+
+		getDataList()
+	}
+
 	return {
 		getDataList,
 		sizeChangeHandle,
@@ -205,6 +211,7 @@ export const useCrud = (options: IHooksOptions) => {
 		sortChangeHandle,
 		deleteHandle,
 		deleteBatchHandle,
-		downloadHandle
+		downloadHandle,
+		reset
 	}
 }
