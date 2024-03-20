@@ -1,16 +1,24 @@
 <template>
-	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-			<el-form-item>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			<el-form-item prop="name">
 				<el-input v-model="state.queryForm.name" placeholder="附件名称"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="platform">
 				<el-input v-model="state.queryForm.platform" placeholder="存储平台"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList()">查询</el-button>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 			</el-form-item>
-			<el-form-item v-auth="'sys:attachment:save'">
+			<el-form-item>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
+			</el-form-item>
+		</el-form>
+	</el-card>
+
+	<el-card>
+		<el-space>
+			<el-space>
 				<el-upload
 					:action="constant.uploadUrl"
 					:headers="{ Authorization: cache.getToken() }"
@@ -18,19 +26,19 @@
 					:on-success="handleSuccess"
 					:show-file-list="false"
 				>
-					<el-button type="primary">上传</el-button>
+					<el-button v-auth="'sys:attachment:save'" icon="Plus" type="primary">上传</el-button>
 				</el-upload>
-			</el-form-item>
-			<el-form-item>
-				<el-button v-auth="'sys:attachment:delete'" type="danger" @click="deleteBatchHandle()">删除</el-button>
-			</el-form-item>
-		</el-form>
+			</el-space>
+			<el-space>
+				<el-button v-auth="'sys:attachment:delete'" icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
+			</el-space>
+		</el-space>
 		<el-table
 			v-loading="state.dataListLoading"
 			show-overflow-tooltip
 			:data="state.dataList"
 			border
-			style="width: 100%"
+			class="layout-table"
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -65,7 +73,7 @@
 
 <script setup lang="ts" name="SysAttachmentIndex">
 import { useCrud } from '@/hooks'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import constant from '@/utils/constant'
 import cache from '@/utils/cache'
 import { convertSizeFormat } from '@/utils/tool'
@@ -83,6 +91,7 @@ const state: IHooksOptions = reactive({
 	}
 })
 
+const queryRef = ref()
 const dataForm = reactive({
 	name: '',
 	platform: '',
@@ -117,5 +126,5 @@ const beforeUpload: UploadProps['beforeUpload'] = file => {
 	return true
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, downloadHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, downloadHandle, reset } = useCrud(state)
 </script>
