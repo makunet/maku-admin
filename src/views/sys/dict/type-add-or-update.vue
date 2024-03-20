@@ -15,8 +15,8 @@
 			</el-form-item>
 			<el-form-item label="数据来源" prop="dictSource">
 				<el-radio-group v-model="dataForm.dictSource">
-					<el-radio-button :label="0">字典数据</el-radio-button>
-					<el-radio-button :label="1">动态SQL</el-radio-button>
+					<el-radio-button :value="0">字典数据</el-radio-button>
+					<el-radio-button :value="1">动态SQL</el-radio-button>
 				</el-radio-group>
 			</el-form-item>
 			<el-form-item v-if="dataForm.dictSource === 1" prop="dictSql" label="动态SQL">
