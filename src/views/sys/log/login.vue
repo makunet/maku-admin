@@ -1,28 +1,34 @@
 <template>
-	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-			<el-form-item>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			<el-form-item prop="username">
 				<el-input v-model="state.queryForm.username" placeholder="用户名"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="address">
 				<el-input v-model="state.queryForm.address" placeholder="登录地点"></el-input>
 			</el-form-item>
-			<el-form-item>
+			<el-form-item prop="status">
 				<fast-select v-model="state.queryForm.status" dict-type="success_fail" placeholder="登录状态" clearable></fast-select>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList()">查询</el-button>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="downloadExcel()">导出</el-button>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
 			</el-form-item>
 		</el-form>
+	</el-card>
+
+	<el-card>
+		<el-space>
+			<el-button icon="Download" @click="downloadExcel()">导出</el-button>
+		</el-space>
 		<el-table
 			v-loading="state.dataListLoading"
 			show-overflow-tooltip
 			:data="state.dataList"
 			border
-			style="width: 100%"
+			class="layout-table"
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
@@ -50,7 +56,7 @@
 
 <script setup lang="ts" name="SysLogLogin">
 import { useCrud } from '@/hooks'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useLogLoginExportApi } from '@/api/sys/log'
 import { IHooksOptions } from '@/hooks/interface'
 
@@ -63,10 +69,11 @@ const state: IHooksOptions = reactive({
 	}
 })
 
+const queryRef = ref()
 const downloadExcel = () => {
 	useLogLoginExportApi()
 	return
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, reset } = useCrud(state)
 </script>
