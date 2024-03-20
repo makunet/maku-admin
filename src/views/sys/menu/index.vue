@@ -1,10 +1,10 @@
 <template>
 	<el-card class="mod__menu">
-		<el-form :inline="true">
-			<el-form-item>
-				<el-button v-auth="'sys:menu:save'" type="primary" @click="addOrUpdateHandle(false, null)">新增</el-button>
-			</el-form-item>
-			<el-form-item>
+		<el-space>
+			<el-space>
+				<el-button v-auth="'sys:menu:save'" icon="Plus" type="primary" @click="addOrUpdateHandle(false, null)">新增</el-button>
+			</el-space>
+			<el-space>
 				<el-button plain @click="toggleExpandAll()">
 					<template v-if="!isExpandAll">
 						全部展开&nbsp;<el-icon><ArrowDown /></el-icon>
@@ -13,8 +13,9 @@
 						全部收起&nbsp;<el-icon><ArrowUp /></el-icon>
 					</template>
 				</el-button>
-			</el-form-item>
-		</el-form>
+			</el-space>
+		</el-space>
+
 		<el-table
 			v-if="refreshTable"
 			v-loading="state.dataListLoading"
@@ -23,7 +24,7 @@
 			show-overflow-tooltip
 			row-key="id"
 			border
-			style="width: 100%"
+			class="layout-table"
 		>
 			<el-table-column prop="name" label="名称" header-align="center" min-width="150"></el-table-column>
 			<el-table-column prop="icon" label="图标" header-align="center" align="center">
