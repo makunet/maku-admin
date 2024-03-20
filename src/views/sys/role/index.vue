@@ -1,20 +1,29 @@
 <template>
-	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-			<el-form-item>
-				<el-input v-model="state.queryForm.name" placeholder="名称" clearable></el-input>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			<el-form-item prop="name">
+				<el-input v-model="state.queryForm.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="getDataList()">查询</el-button>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button v-auth="'sys:role:save'" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button v-auth="'sys:role:delete'" type="danger" @click="deleteBatchHandle()">删除</el-button>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
 			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
+	</el-card>
+
+	<el-card>
+		<el-space>
+			<el-space>
+				<el-button v-auth="'sys:role:save'" icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+			</el-space>
+			<el-space>
+				<el-button v-auth="'sys:role:delete'" icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
+			</el-space>
+		</el-space>
+
+		<el-table v-loading="state.dataListLoading" :data="state.dataList" border class="layout-table" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="name" label="名称" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="roleCode" label="编码" header-align="center" align="center"></el-table-column>
@@ -74,6 +83,7 @@ const state: IHooksOptions = reactive({
 	}
 })
 
+const queryRef = ref()
 const addOrUpdateRef = ref()
 const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
@@ -93,7 +103,7 @@ const handleCommand = (command: string, row: any) => {
 	}
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, reset } = useCrud(state)
 </script>
 
 <style scoped>
