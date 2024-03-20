@@ -1,19 +1,19 @@
 <template>
 	<el-card>
-		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
-			<el-form-item>
-				<el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="danger" @click="deleteBatchHandle()">删除</el-button>
-			</el-form-item>
-		</el-form>
+		<el-space>
+			<el-space>
+				<el-button type="primary" icon="Plus" @click="addOrUpdateHandle()">新增</el-button>
+			</el-space>
+			<el-space>
+				<el-button type="danger" icon="Delete" plain @click="deleteBatchHandle()">批量删除</el-button>
+			</el-space>
+		</el-space>
 		<el-table
 			v-loading="state.dataListLoading"
 			:data="state.dataList"
 			show-overflow-tooltip
 			border
-			style="width: 100%"
+			class="layout-table"
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
