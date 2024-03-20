@@ -88,8 +88,13 @@
   border-bottom: 1px solid var(--el-border-color);
   color: var(--el-text-color-primary);
 }
+
 .el-card.is-always-shadow{
   box-shadow: none !important;
+}
+
+.el-button{
+  border-radius: 2px;
 }
 
 .el-form--inline {
