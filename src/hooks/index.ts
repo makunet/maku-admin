@@ -197,7 +197,7 @@ export const useCrud = (options: IHooksOptions) => {
 		}
 	}
 
-	const reset = (queryRef: ref<any>) => {
+	const reset = (queryRef: any) => {
 		queryRef.resetFields()
 
 		getDataList()
