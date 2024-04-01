@@ -8,6 +8,10 @@ export const useUserInfoSubmitApi = (dataForm: any) => {
 	return service.put('/sys/user/info', dataForm)
 }
 
+export const useUserAvatarApi = (dataForm: any) => {
+	return service.put('/sys/user/avatar', dataForm)
+}
+
 export const updatePasswordApi = (data: any) => {
 	return service.put('/sys/user/password', data)
 }
