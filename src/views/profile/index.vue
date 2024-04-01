@@ -3,7 +3,14 @@
 		<el-col :span="8">
 			<el-card class="profile-card">
 				<template #header> 个人信息 </template>
-				<!--				<div>头像</div>-->
+				<div class="avatar">
+					<UploadImg v-model:image-url="userStore.user.avatar" :drag="false" border-radius="50%" @success="handleSuccess">
+						<template #empty>
+							<el-icon><Avatar /></el-icon>
+							<span>请上传头像</span>
+						</template>
+					</UploadImg>
+				</div>
 				<ul>
 					<li>
 						<svg-icon icon="icon-user" /> 用户名 <span>{{ userStore.user.username }}</span>
@@ -51,16 +58,34 @@
 <script setup lang="ts" name="ProfileIndex">
 import { ref } from 'vue'
 import { useUserStore } from '@/store/modules/user'
+import UploadImg from '@/components/upload/img.vue'
 import Password from '@/views/profile/password.vue'
 import UserInfo from '@/views/profile/user-info.vue'
 import ThirdLogin from '@/views/profile/third-login.vue'
+import { useUserAvatarApi } from '@/api/sys/user'
+import { ElMessage } from 'element-plus'
 
 const userStore = useUserStore()
 const activeName = ref('info')
+
+const handleSuccess = (data: any) => {
+	const dataForm = {
+		avatar: data.url
+	}
+	// 修改登录用户头像
+	useUserAvatarApi(dataForm).then(() => {
+		ElMessage.success('修改成功')
+	})
+}
 </script>
 
 <style scoped lang="scss">
 .profile-card {
+	.avatar {
+		display: flex;
+		justify-content: space-around;
+		margin-bottom: 20px;
+	}
 	ul {
 		list-style: none;
 		padding: 0;
