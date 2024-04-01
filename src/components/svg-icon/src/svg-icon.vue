@@ -1,5 +1,5 @@
 <template>
-	<div class="svg-icon">
+	<div v-if="icon" class="svg-icon">
 		<svg :class="`${className}`" :style="`color:${color};width: ${size};height: ${size}`" aria-hidden="true">
 			<use :xlink:href="iconName" />
 		</svg>
