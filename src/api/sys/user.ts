@@ -16,7 +16,7 @@ export const updatePasswordApi = (data: any) => {
 	return service.put('/sys/user/password', data)
 }
 
-export const useUserApi = (id: number) => {
+export const useUserApi = (id: number | string) => {
 	return service.get('/sys/user/' + id)
 }
 
