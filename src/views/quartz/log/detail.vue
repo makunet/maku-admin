@@ -16,7 +16,7 @@
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="任务组名" prop="jobGroup">
-						<fast-select v-model="dataForm.jobGroup" dict-type="schedule_group" disabled style="width: 100%"></fast-select>
+						<ma-dict-select v-model="dataForm.jobGroup" dict-type="schedule_group" disabled style="width: 100%"></ma-dict-select>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
