@@ -11,7 +11,7 @@
 				<el-input v-model="state.queryForm.reqUri" placeholder="请求URI"></el-input>
 			</el-form-item>
 			<el-form-item prop="status">
-				<fast-select v-model="state.queryForm.status" placeholder="操作状态" dict-type="success_fail" clearable> </fast-select>
+				<ma-dict-select v-model="state.queryForm.status" placeholder="操作状态" dict-type="success_fail" clearable> </ma-dict-select>
 			</el-form-item>
 			<el-form-item>
 				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
@@ -37,11 +37,11 @@
 			<el-table-column prop="reqUri" label="请求URI" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="reqMethod" label="请求方法" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="address" label="登录地点" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="operateType" label="操作类型" dict-type="log_operate_type" header-align="center" align="center"></fast-table-column>
+			<ma-dict-column prop="operateType" label="操作类型" dict-type="log_operate_type" header-align="center" align="center"></ma-dict-column>
 			<el-table-column prop="duration" label="执行时长" header-align="center" align="center">
 				<template #default="scope"> {{ scope.row.duration }}ms </template>
 			</el-table-column>
-			<fast-table-column prop="status" label="操作状态" dict-type="success_fail"></fast-table-column>
+			<ma-dict-column prop="status" label="操作状态" dict-type="success_fail"></ma-dict-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="80">
 				<template #default="scope">
