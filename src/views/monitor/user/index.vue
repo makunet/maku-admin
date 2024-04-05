@@ -12,7 +12,7 @@
 			<el-table-column prop="accessToken" label="会话编号" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="gender" label="性别" dict-type="user_gender"></fast-table-column>
+			<ma-dict-column prop="gender" label="性别" dict-type="user_gender"></ma-dict-column>
 			<el-table-column prop="email" label="邮箱" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
