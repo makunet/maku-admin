@@ -10,7 +10,7 @@
 			<el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
 		</el-form-item>
 		<el-form-item prop="gender" label="性别">
-			<fast-radio-group v-model="dataForm.gender" dict-type="user_gender"></fast-radio-group>
+			<ma-dict-radio v-model="dataForm.gender" dict-type="user_gender"></ma-dict-radio>
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="handleDataForm">{{ $t('confirm') }}</el-button>
