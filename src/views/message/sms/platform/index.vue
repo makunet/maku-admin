@@ -2,7 +2,7 @@
 	<el-card class="layout-query">
 		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
 			<el-form-item prop="platform">
-				<fast-select v-model="state.queryForm.platform" dict-type="sms_platform" clearable placeholder="平台类型"></fast-select>
+				<ma-dict-select v-model="state.queryForm.platform" dict-type="sms_platform" clearable placeholder="平台类型"></ma-dict-select>
 			</el-form-item>
 			<el-form-item prop="signName">
 				<el-input v-model="state.queryForm.signName" placeholder="短信签名"></el-input>
@@ -28,10 +28,10 @@
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border class="layout-table" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="platform" label="平台类型" dict-type="sms_platform"></fast-table-column>
+			<ma-dict-column prop="platform" label="平台类型" dict-type="sms_platform"></ma-dict-column>
 			<el-table-column prop="signName" label="短信签名" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="templateId" label="短信模板" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="status" label="状态" dict-type="enable_disable"></fast-table-column>
+			<ma-dict-column prop="status" label="状态" dict-type="enable_disable"></ma-dict-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="160">
 				<template #default="scope">
