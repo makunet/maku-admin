@@ -47,14 +47,8 @@ const dataForm = reactive({
 	avatar: '',
 	birthday: '',
 	gender: '',
-	openid: '',
-	lastLoginIp: '',
-	lastLoginTime: '',
 	remark: '',
-	status: '',
-	version: '',
-	deleted: '',
-	createTime: ''
+	status: ''
 })
 
 const init = (id?: number) => {
