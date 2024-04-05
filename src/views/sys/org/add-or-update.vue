@@ -5,16 +5,10 @@
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item prop="pid" label="上级机构">
-				<el-tree-select
-					v-model="dataForm.pid"
-					:data="orgList"
-					value-key="id"
-					check-strictly
-					:render-after-expand="false"
-					:props="{ label: 'name', children: 'children' }"
-					style="width: 100%"
-					clearable
-				/>
+				<ma-org-select v-model="dataForm.pid" placeholder="请选择"></ma-org-select>
+			</el-form-item>
+			<el-form-item prop="leaderId" label="负责人">
+				<ma-user-input v-model="dataForm.leaderId" placeholder="机构负责人"></ma-user-input>
 			</el-form-item>
 			<el-form-item prop="sort" label="排序">
 				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" label="排序"></el-input-number>
@@ -30,12 +24,13 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useOrgListApi, useOrgSubmitApi } from '@/api/sys/orgs'
+import { useOrgSubmitApi } from '@/api/sys/orgs'
+import MaUserInput from '@/components/ma-user/ma-user-input/index.vue'
+import MaOrgSelect from '@/components/ma-org/ma-org-select/index.vue'
 
 const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
-const orgList = ref([])
 const dataFormRef = ref()
 
 const dataForm = reactive({
@@ -43,6 +38,7 @@ const dataForm = reactive({
 	name: '',
 	pid: '',
 	parentName: '',
+	leaderId: '',
 	sort: 0
 })
 
@@ -58,18 +54,13 @@ const init = (isUpdate: boolean, row: any) => {
 	if (row) {
 		getOrg(isUpdate, row)
 	} else {
+		dataForm.id = ''
 		dataForm.pid = ''
 		dataForm.parentName = ''
+		dataForm.name = ''
+		dataForm.sort = 0
+		dataForm.leaderId = ''
 	}
-
-	// 机构列表
-	getOrgList()
-}
-
-// 获取机构列表
-const getOrgList = async () => {
-	const res = await useOrgListApi()
-	orgList.value = res.data
 }
 
 // 获取信息
@@ -114,14 +105,3 @@ defineExpose({
 	init
 })
 </script>
-
-<style lang="scss" scoped>
-.org-list {
-	::v-deep(.el-input__inner) {
-		cursor: pointer;
-	}
-	::v-deep(.el-input__suffix) {
-		cursor: pointer;
-	}
-}
-</style>
