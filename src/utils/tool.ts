@@ -80,7 +80,7 @@ export const getDictLabelClass = (dictList: any[], dictType: string, dictValue: 
 	}
 }
 
-export const getDictLabelList = (dictType: string, dictValue: string): string => {
+export const getDictLabelList = (dictType: string, dictValue: any): string => {
 	if (Number.isInteger(dictValue)) {
 		dictValue = dictValue + ''
 	}
@@ -92,7 +92,7 @@ export const getDictLabelList = (dictType: string, dictValue: string): string =>
 	const appStore = useAppStore()
 
 	let result = ''
-	dictValue.split(',').forEach(value => {
+	dictValue.split(',').forEach((value: string) => {
 		const classStyle = getDictLabelClass(appStore.dictList, dictType, value)
 		const label = getDictLabel(appStore.dictList, dictType, value)
 
