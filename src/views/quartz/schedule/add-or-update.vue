@@ -9,7 +9,7 @@
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="任务组名" prop="jobGroup">
-						<fast-select v-model="dataForm.jobGroup" dict-type="schedule_group" placeholder="任务组名" style="width: 100%"></fast-select>
+						<ma-dict-select v-model="dataForm.jobGroup" dict-type="schedule_group" placeholder="任务组名" style="width: 100%"></ma-dict-select>
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -41,8 +41,8 @@
 				<el-col :span="12">
 					<el-form-item label="是否并发" prop="concurrent">
 						<el-radio-group v-model="dataForm.concurrent">
-							<el-radio-button :label="1">允许</el-radio-button>
-							<el-radio-button :label="0"> 禁止 </el-radio-button>
+							<el-radio-button :value="1">允许</el-radio-button>
+							<el-radio-button :value="0"> 禁止 </el-radio-button>
 						</el-radio-group>
 					</el-form-item>
 				</el-col>
