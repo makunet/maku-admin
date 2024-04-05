@@ -14,7 +14,7 @@
 				<el-input v-model="dataForm.remark" placeholder="备注"></el-input>
 			</el-form-item>
 			<el-form-item label="系统参数" prop="paramType">
-				<fast-radio-group v-model="dataForm.paramType" dict-type="params_type"></fast-radio-group>
+				<ma-dict-radio v-model="dataForm.paramType" dict-type="params_type"></ma-dict-radio>
 			</el-form-item>
 		</el-form>
 		<template #footer>
