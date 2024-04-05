@@ -8,7 +8,7 @@
 				<el-input v-model="state.queryForm.address" placeholder="登录地点"></el-input>
 			</el-form-item>
 			<el-form-item prop="status">
-				<fast-select v-model="state.queryForm.status" dict-type="success_fail" placeholder="登录状态" clearable></fast-select>
+				<ma-dict-select v-model="state.queryForm.status" dict-type="success_fail" placeholder="登录状态" clearable></ma-dict-select>
 			</el-form-item>
 			<el-form-item>
 				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
@@ -37,8 +37,8 @@
 			<el-table-column prop="ip" label="登录IP" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="address" label="登录地点" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="userAgent" label="User Agent" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="status" label="登录状态" dict-type="success_fail"></fast-table-column>
-			<fast-table-column prop="operation" label="操作信息" dict-type="login_operation"></fast-table-column>
+			<ma-dict-column prop="status" label="登录状态" dict-type="success_fail"></ma-dict-column>
+			<ma-dict-column prop="operation" label="操作信息" dict-type="login_operation"></ma-dict-column>
 			<el-table-column prop="createTime" label="登录时间" header-align="center" align="center" width="165"></el-table-column>
 		</el-table>
 		<el-pagination
