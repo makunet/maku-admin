@@ -5,10 +5,10 @@
 				<el-input v-model="state.queryForm.jobName" placeholder="任务名称"></el-input>
 			</el-form-item>
 			<el-form-item prop="jobGroup">
-				<fast-select v-model="state.queryForm.jobGroup" dict-type="schedule_group" clearable placeholder="任务组名"></fast-select>
+				<ma-dict-select v-model="state.queryForm.jobGroup" dict-type="schedule_group" clearable placeholder="任务组名"></ma-dict-select>
 			</el-form-item>
 			<el-form-item prop="status">
-				<fast-select v-model="state.queryForm.status" dict-type="schedule_status" clearable placeholder="任务状态"></fast-select>
+				<ma-dict-select v-model="state.queryForm.status" dict-type="schedule_status" clearable placeholder="任务状态"></ma-dict-select>
 			</el-form-item>
 			<el-form-item>
 				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
@@ -36,12 +36,12 @@
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="jobName" label="任务名称" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="jobGroup" label="任务组名" dict-type="schedule_group"></fast-table-column>
+			<ma-dict-column prop="jobGroup" label="任务组名" dict-type="schedule_group"></ma-dict-column>
 			<el-table-column prop="beanName" label="执行方法" dict-type="schedule_group">
 				<template #default="scope"> {{ scope.row.beanName }}.{{ scope.row.method }}() </template>
 			</el-table-column>
 			<el-table-column prop="cronExpression" label="Cron表达式" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="status" label="状态" dict-type="schedule_status"></fast-table-column>
+			<ma-dict-column prop="status" label="状态" dict-type="schedule_status"></ma-dict-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="200">
 				<template #default="scope">
 					<el-button v-auth="'schedule:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
