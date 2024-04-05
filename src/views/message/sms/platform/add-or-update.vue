@@ -2,7 +2,7 @@
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
 			<el-form-item label="平台类型" prop="platform">
-				<fast-select v-model="dataForm.platform" dict-type="sms_platform" placeholder="平台类型" style="width: 100%"></fast-select>
+				<ma-dict-select v-model="dataForm.platform" dict-type="sms_platform" placeholder="平台类型" style="width: 100%"></ma-dict-select>
 			</el-form-item>
 			<el-form-item v-if="dataForm.platform == 3" label="接入地址" prop="url">
 				<el-input v-model="dataForm.url" placeholder="APP接入地址"></el-input>
@@ -29,7 +29,7 @@
 				<el-input v-model="dataForm.senderId" placeholder="通道号必填"></el-input>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
-				<fast-radio-group v-model="dataForm.status" dict-type="enable_disable"></fast-radio-group>
+				<ma-dict-radio v-model="dataForm.status" dict-type="enable_disable"></ma-dict-radio>
 			</el-form-item>
 		</el-form>
 		<template #footer>
