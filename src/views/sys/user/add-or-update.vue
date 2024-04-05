@@ -7,15 +7,7 @@
 						<el-input v-model="dataForm.username" placeholder="用户名"></el-input>
 					</el-form-item>
 					<el-form-item prop="orgId" label="所属机构">
-						<el-tree-select
-							v-model="dataForm.orgId"
-							:data="orgList"
-							value-key="id"
-							check-strictly
-							:render-after-expand="false"
-							:props="{ label: 'name', children: 'children' }"
-							style="width: 100%"
-						/>
+						<ma-org-select v-model="dataForm.orgId" placeholder="请选择"></ma-org-select>
 					</el-form-item>
 					<el-form-item prop="mobile" label="手机号">
 						<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
@@ -35,7 +27,7 @@
 						<el-input v-model="dataForm.realName" placeholder="姓名"></el-input>
 					</el-form-item>
 					<el-form-item prop="gender" label="性别">
-						<fast-radio-group v-model="dataForm.gender" dict-type="user_gender"></fast-radio-group>
+						<ma-dict-radio v-model="dataForm.gender" dict-type="user_gender"></ma-dict-radio>
 					</el-form-item>
 					<el-form-item prop="email" label="邮箱">
 						<el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
@@ -46,7 +38,7 @@
 						</el-select>
 					</el-form-item>
 					<el-form-item prop="status" label="状态">
-						<fast-radio-group v-model="dataForm.status" dict-type="user_status"></fast-radio-group>
+						<ma-dict-radio v-model="dataForm.status" dict-type="user_status"></ma-dict-radio>
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -61,7 +53,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useOrgListApi } from '@/api/sys/orgs'
 import { useUserApi, useUserSubmitApi } from '@/api/sys/user'
 import { usePostListApi } from '@/api/sys/post'
 import { useRoleListApi } from '@/api/sys/role'
@@ -71,7 +62,6 @@ const emit = defineEmits(['refreshDataList'])
 const visible = ref(false)
 const postList = ref<any[]>([])
 const roleList = ref<any[]>([])
-const orgList = ref([])
 const dataFormRef = ref()
 
 const dataForm = reactive({
@@ -79,7 +69,6 @@ const dataForm = reactive({
 	username: '',
 	realName: '',
 	orgId: '',
-	orgName: '',
 	password: '',
 	gender: 0,
 	email: '',
@@ -103,30 +92,20 @@ const init = (id?: number) => {
 		getUser(id)
 	}
 
-	getOrgList()
 	getPostList()
 	getRoleList()
 }
 
 // 获取岗位列表
-const getPostList = () => {
-	return usePostListApi().then(res => {
-		postList.value = res.data
-	})
+const getPostList = async () => {
+	let res = await usePostListApi()
+	postList.value = res.data
 }
 
 // 获取角色列表
-const getRoleList = () => {
-	return useRoleListApi().then(res => {
-		roleList.value = res.data
-	})
-}
-
-// 获取机构列表
-const getOrgList = () => {
-	return useOrgListApi().then(res => {
-		orgList.value = res.data
-	})
+const getRoleList = async () => {
+	let res = await useRoleListApi()
+	roleList.value = res.data
 }
 
 // 获取信息
