@@ -1,19 +1,15 @@
 <template>
-	<el-select :model-value="modelValue + ''" :placeholder="placeholder" :clearable="clearable" @change="$emit('update:modelValue', $event)">
+	<el-select v-model="model" :placeholder="placeholder" :clearable="clearable">
 		<el-option v-for="data in dataList" :key="data.dictValue" :label="data.dictLabel" :value="data.dictValue">{{ data.dictLabel }}</el-option>
 	</el-select>
 </template>
 
-<script setup lang="ts" name="FastSelect">
+<script setup lang="ts" name="MaDictSelect">
 import { getDictDataList } from '@/utils/tool'
 import { useAppStore } from '@/store/modules/app'
 
 const appStore = useAppStore()
 const props = defineProps({
-	modelValue: {
-		type: [Number, String],
-		required: true
-	},
 	dictType: {
 		type: String,
 		required: true
@@ -29,6 +25,8 @@ const props = defineProps({
 		default: () => ''
 	}
 })
+
+const model = defineModel<number | string>()
 
 const dataList = getDictDataList(appStore.dictList, props.dictType)
 </script>
