@@ -16,7 +16,7 @@
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="平台类型" prop="platform">
-						<fast-select v-model="dataForm.platform" dict-type="sms_platform" disabled style="width: 100%"></fast-select>
+						<ma-dict-select v-model="dataForm.platform" dict-type="sms_platform" disabled style="width: 100%"></ma-dict-select>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">
