@@ -9,14 +9,12 @@
 		:class-name="className"
 	>
 		<template #default="scope">
-			<span v-html="getDictLabelList(props.dictType, scope.row[props.prop])"></span>
+			<ma-dict-label :dict-type="props.dictType" :dict-value="scope.row[props.prop]" />
 		</template>
 	</el-table-column>
 </template>
 
-<script setup lang="ts" name="FastTableColumn">
-import { getDictLabelList } from '@/utils/tool'
-
+<script setup lang="ts" name="MaDictColumn">
 const props = defineProps({
 	prop: {
 		type: String,
