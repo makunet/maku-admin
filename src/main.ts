@@ -18,11 +18,7 @@ import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
 
-import FastTableColumn from '@/components/fast-table-column'
-import FastRadioGroup from '@/components/fast-radio-group'
-import FastSelect from '@/components/fast-select'
-import FastUser from '@/components/fast-user'
-import SvgIcon from '@/components/svg-icon'
+import MaComponent from '@/components/index'
 
 VXETable.config({
 	zIndex: 3000,
@@ -46,11 +42,7 @@ app.use(MakuFormDesign)
 directive(app)
 app.use(i18n)
 app.use(router)
-app.use(FastTableColumn)
-app.use(FastRadioGroup)
-app.use(FastSelect)
-app.use(FastUser)
-app.use(SvgIcon)
+app.use(MaComponent)
 app.use(ElementPlus)
 app.use(VXETable)
 app.mount('#app')
