@@ -2,7 +2,7 @@
 	<el-dialog v-model="visible" title="发送短信测试" :close-on-click-modal="false" :width="500">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
 			<el-form-item label="平台类型" prop="platform">
-				<fast-select v-model="dataForm.platform" dict-type="sms_platform" placeholder="平台类型" style="width: 100%" disabled></fast-select>
+				<ma-dict-select v-model="dataForm.platform" dict-type="sms_platform" placeholder="平台类型" style="width: 100%" disabled></ma-dict-select>
 			</el-form-item>
 			<el-form-item label="手机号" prop="mobile">
 				<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
