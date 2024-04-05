@@ -11,7 +11,7 @@
 				<el-input-number v-model="dataForm.sort" :min="0"></el-input-number>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
-				<fast-radio-group v-model="dataForm.status" dict-type="post_status"></fast-radio-group>
+				<ma-dict-radio v-model="dataForm.status" dict-type="post_status"></ma-dict-radio>
 			</el-form-item>
 		</el-form>
 		<template #footer>
