@@ -1,6 +1,6 @@
 <template>
 	<div class="navbar-search">
-		<svg-icon icon="icon-search" @click="openSearch"></svg-icon>
+		<ma-icon icon="icon-search" @click="openSearch"></ma-icon>
 		<el-dialog v-model="visible" :width="280" :destroy-on-close="true" :modal="false" fullscreen :show-close="false">
 			<el-autocomplete
 				ref="menuAutocompleteRef"
@@ -13,7 +13,7 @@
 				@blur="handleBlur"
 			>
 				<template #default="{ item }">
-					<svg-icon :icon="item.meta.icon" />
+					<ma-icon :icon="item.meta.icon" />
 					{{ item.meta.title }}
 				</template>
 			</el-autocomplete>
