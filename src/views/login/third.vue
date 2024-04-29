@@ -2,10 +2,10 @@
 	<div class="login-third">
 		<el-divider>其他登录方式</el-divider>
 		<div class="third-btn">
-			<el-button link title="企业微信" @click="thirdLogin('wechat_work')"><svg-icon icon="icon-workweixin" size="24" /></el-button>
-			<el-button link title="钉钉" @click="thirdLogin('dingtalk')"><svg-icon icon="icon-dingding" size="24" /></el-button>
-			<el-button link title="飞书" @click="thirdLogin('feishu')"><svg-icon icon="icon-feishu" size="24" /></el-button>
-			<el-button link title="微信" @click="thirdLogin('wechat_open')"><svg-icon icon="icon-weixin" size="24" /></el-button>
+			<el-button link title="企业微信" @click="thirdLogin('wechat_work')"><ma-icon icon="icon-workweixin" size="24" /></el-button>
+			<el-button link title="钉钉" @click="thirdLogin('dingtalk')"><ma-icon icon="icon-dingding" size="24" /></el-button>
+			<el-button link title="飞书" @click="thirdLogin('feishu')"><ma-icon icon="icon-feishu" size="24" /></el-button>
+			<el-button link title="微信" @click="thirdLogin('wechat_open')"><ma-icon icon="icon-weixin" size="24" /></el-button>
 		</div>
 	</div>
 </template>
