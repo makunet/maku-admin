@@ -15,7 +15,7 @@
 	</div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="MaEditor">
 import '@wangeditor/editor/dist/css/style.css'
 import { onBeforeUnmount, shallowRef } from 'vue'
 import constant from '@/utils/constant'
@@ -26,7 +26,7 @@ import cache from '@/utils/cache'
 const props = defineProps({
 	modelValue: {
 		type: String,
-		required: true
+		default: ''
 	},
 	mode: {
 		type: String,
