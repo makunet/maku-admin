@@ -3,10 +3,10 @@
 		<el-table-column type="index" label="序号" width="100" align="center" />
 		<el-table-column prop="openType" label="平台类型" align="center">
 			<template #default="scope">
-				<el-text v-if="scope.row.openType === 'wechat_work'"><svg-icon icon="icon-workweixin" size="16" /> 企业微信</el-text>
-				<el-text v-else-if="scope.row.openType === 'dingtalk'"><svg-icon icon="icon-dingding" size="16" /> 钉钉</el-text>
-				<el-text v-else-if="scope.row.openType === 'feishu'"><svg-icon icon="icon-feishu" size="16" /> 飞书</el-text>
-				<el-text v-else-if="scope.row.openType === 'wechat_open'"><svg-icon icon="icon-weixin" size="16" /> 微信</el-text>
+				<el-text v-if="scope.row.openType === 'wechat_work'"><ma-icon icon="icon-workweixin" size="16" /> 企业微信</el-text>
+				<el-text v-else-if="scope.row.openType === 'dingtalk'"><ma-icon icon="icon-dingding" size="16" /> 钉钉</el-text>
+				<el-text v-else-if="scope.row.openType === 'feishu'"><ma-icon icon="icon-feishu" size="16" /> 飞书</el-text>
+				<el-text v-else-if="scope.row.openType === 'wechat_open'"><ma-icon icon="icon-weixin" size="16" /> 微信</el-text>
 			</template>
 		</el-table-column>
 		<el-table-column prop="username" label="昵称" align="center" />
