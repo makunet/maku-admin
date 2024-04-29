@@ -1,6 +1,6 @@
 <template>
 	<el-dropdown trigger="click" @command="languageChange">
-		<svg-icon icon="icon-translate"></svg-icon>
+		<ma-icon icon="icon-translate"></ma-icon>
 		<template #dropdown>
 			<el-dropdown-menu>
 				<el-dropdown-item v-for="language in languages" :key="language" :disabled="locale === language" :command="language">
