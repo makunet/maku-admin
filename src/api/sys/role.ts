@@ -12,6 +12,10 @@ export const useRoleListApi = () => {
 	return service.get('/sys/role/list')
 }
 
+export const useRoleNameListApi = (idList: number[]) => {
+	return service.post('/sys/role/nameList', idList)
+}
+
 export const useRoleSubmitApi = (dataForm: any) => {
 	if (dataForm.id) {
 		return service.put('/sys/role', dataForm)
