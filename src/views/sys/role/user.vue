@@ -78,7 +78,8 @@ const state: IHooksOptions = reactive({
 	}
 })
 
-const userHandle = (userIdList: number[]) => {
+const userHandle = (users: any[]) => {
+	const userIdList = users.map((item: any) => item.id)
 	useRoleUserSubmitApi(props.roleId, userIdList).then(() => {
 		ElMessage.success({
 			message: '操作成功',
