@@ -30,4 +30,5 @@ export interface IHooksOptions {
 	dataListLoading?: boolean
 	// 数据列表，多选项
 	dataListSelections?: any[]
+	dataListSelectionKeys?: any[]
 }
