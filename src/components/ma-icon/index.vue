@@ -1,18 +1,18 @@
 <template>
-	<div v-if="icon" class="svg-icon">
+	<div v-if="icon" class="ma-icon">
 		<svg :class="`${className}`" :style="`color:${color};width: ${size};height: ${size}`" aria-hidden="true">
 			<use :xlink:href="iconName" />
 		</svg>
 	</div>
 </template>
 
-<script setup lang="ts" name="SvgIcon">
+<script setup lang="ts" name="MaIcon">
 import { computed } from 'vue'
 
 const props = defineProps({
 	icon: {
 		type: String,
-		required: true
+		default: ''
 	},
 	color: {
 		type: String,
@@ -33,7 +33,7 @@ const iconName = computed(() => `#icon-${props.icon.replace('icon-', '')}`)
 </script>
 
 <style lang="scss" scoped>
-.svg-icon {
+.ma-icon {
 	display: inline-block;
 	svg {
 		width: 1em;
