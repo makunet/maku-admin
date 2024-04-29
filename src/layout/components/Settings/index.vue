@@ -1,6 +1,6 @@
 <template>
 	<div class="navbar-settings">
-		<svg-icon icon="icon-ellipsis-v" @click="visible = true"></svg-icon>
+		<ma-icon icon="icon-ellipsis-v" @click="visible = true"></ma-icon>
 		<el-drawer v-model="visible" :title="$t('settings.title')" :destroy-on-close="true" :size="280">
 			<el-scrollbar class="settings-container">
 				<el-space direction="vertical" alignment="flex-start">
