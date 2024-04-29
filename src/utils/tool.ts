@@ -1,4 +1,3 @@
-import type { App, Plugin } from 'vue'
 import constant from '@/utils/constant'
 import { useAppStore } from '@/store/modules/app'
 
@@ -116,14 +115,50 @@ export function getDictDataList(dictList: any[], dictType: string) {
 	}
 }
 
-// 全局组件安装
-export const withInstall = <T>(component: any, alias?: string) => {
-	const comp = component as any
-	comp.install = (app: App) => {
-		app.component(comp.name || comp.displayName, component)
-		if (alias) {
-			app.config.globalProperties[alias] = component
-		}
+// 生成数字字母混合字符串
+export const getRandom = (num: number) => {
+	const chars = [
+		'0',
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+		'8',
+		'9',
+		'a',
+		'b',
+		'c',
+		'd',
+		'e',
+		'f',
+		'g',
+		'h',
+		'i',
+		'j',
+		'k',
+		'l',
+		'm',
+		'n',
+		'o',
+		'p',
+		'q',
+		'r',
+		's',
+		't',
+		'u',
+		'v',
+		'w',
+		'x',
+		'y',
+		'z'
+	]
+	let res = ''
+	for (let i = 0; i < num; i++) {
+		const id = Math.floor(Math.random() * 36)
+		res += chars[id]
 	}
-	return component as T & Plugin
+	return res
 }
