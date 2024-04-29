@@ -3,7 +3,7 @@ import { ITheme } from '@/store/theme/interface'
 export const themeConfig: ITheme = {
 	sidebarStyle: 'dark',
 	headerStyle: 'light',
-	primaryColor: '#17B3A3',
+	primaryColor: '#409eff',
 	layout: 'vertical',
 	uniqueOpened: true,
 	isLogo: true,
