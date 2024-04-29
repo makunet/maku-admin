@@ -1,11 +1,10 @@
 <template>
 	<div>
-		<MdEditor v-model="editorValue" height="500px"></MdEditor>
+		<ma-markdown v-model="editorValue" height="500px"></ma-markdown>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import MdEditor from '@/components/md-editor/index.vue'
 import { ref } from 'vue'
 
 const editorValue = ref('maku')
