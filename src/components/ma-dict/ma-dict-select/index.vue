@@ -1,5 +1,5 @@
 <template>
-	<el-select v-model="model" :placeholder="placeholder" :clearable="clearable">
+	<el-select v-model="modelAsString" :placeholder="placeholder" :clearable="clearable">
 		<el-option v-for="data in dataList" :key="data.dictValue" :label="data.dictLabel" :value="data.dictValue">{{ data.dictLabel }}</el-option>
 	</el-select>
 </template>
@@ -7,6 +7,7 @@
 <script setup lang="ts" name="MaDictSelect">
 import { getDictDataList } from '@/utils/tool'
 import { useAppStore } from '@/store/modules/app'
+import { computed } from 'vue'
 
 const appStore = useAppStore()
 const props = defineProps({
@@ -27,6 +28,14 @@ const props = defineProps({
 })
 
 const model = defineModel<number | string>()
+const modelAsString = computed({
+	get() {
+		return model.value ? model.value.toString() : ''
+	},
+	set(value) {
+		model.value = value
+	}
+})
 
 const dataList = getDictDataList(appStore.dictList, props.dictType)
 </script>
