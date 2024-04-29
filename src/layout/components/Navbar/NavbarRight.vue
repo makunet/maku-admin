@@ -3,13 +3,13 @@
 		<Lang />
 		<ComponentSize />
 		<a href="https://maku.net" target="_blank">
-			<svg-icon icon="icon-earth"></svg-icon>
+			<ma-icon icon="icon-earth"></ma-icon>
 		</a>
 		<a href="https://github.com/makunet/maku-admin" target="_blank">
-			<svg-icon icon="icon-github-fill"></svg-icon>
+			<ma-icon icon="icon-github-fill"></ma-icon>
 		</a>
 		<a href="https://gitee.com/makunet/maku-admin" target="_blank">
-			<svg-icon icon="icon-gitee-fill-round"></svg-icon>
+			<ma-icon icon="icon-gitee-fill-round"></ma-icon>
 		</a>
 		<Search />
 		<Fullscreen />
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import Lang from '@/components/lang/index.vue'
+import Lang from './components/Lang.vue'
 import Search from './components/Search.vue'
 import ComponentSize from './components/ComponentSize.vue'
 import Fullscreen from './components/Fullscreen.vue'
