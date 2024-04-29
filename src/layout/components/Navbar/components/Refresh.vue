@@ -1,5 +1,5 @@
 <template>
-	<svg-icon icon="icon-reload" @click="refresh"></svg-icon>
+	<ma-icon icon="icon-reload" @click="refresh"></ma-icon>
 </template>
 
 <script setup lang="ts">
