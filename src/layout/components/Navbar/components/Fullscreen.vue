@@ -1,5 +1,5 @@
 <template>
-	<svg-icon :icon="isFullscreen ? 'icon-compress' : 'icon-expend'" @click="toggle" />
+	<ma-icon :icon="isFullscreen ? 'icon-compress' : 'icon-expend'" @click="toggle" />
 </template>
 
 <script setup lang="ts">
