@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<v-md-editor :model-value="modelValue" :height="height" @change="handleChange"></v-md-editor>
+		<v-md-editor :model-value="model" :height="height"></v-md-editor>
 	</div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="MaMarkdown">
 import VMdEditor from '@kangc/v-md-editor'
 import githubTheme from '@kangc/v-md-editor/lib/theme/github.js'
 import '@kangc/v-md-editor/lib/style/base-editor.css'
@@ -16,20 +16,12 @@ VMdEditor.use(githubTheme, {
 	Hljs: hljs
 })
 
-const props = defineProps({
-	modelValue: {
-		type: String,
-		required: true
-	},
+defineProps({
 	height: {
 		type: String,
 		default: '400px'
 	}
 })
 
-// 编辑器change事件触发
-const emit = defineEmits(['update:modelValue'])
-const handleChange = (text: string, html: string) => {
-	emit('update:modelValue', text)
-}
+const model = defineModel<string>()
 </script>
