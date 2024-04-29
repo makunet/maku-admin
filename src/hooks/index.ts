@@ -21,7 +21,8 @@ export const useCrud = (options: IHooksOptions) => {
 		total: 0,
 		pageSizes: [10, 20, 50, 100, 200],
 		dataListLoading: false,
-		dataListSelections: []
+		dataListSelections: [],
+		dataListSelectionKeys: []
 	}
 
 	const mergeDefaultOptions = (options: any, props: any): IHooksOptions => {
@@ -89,7 +90,8 @@ export const useCrud = (options: IHooksOptions) => {
 
 	// 多选
 	const selectionChangeHandle = (selections: any[]) => {
-		state.dataListSelections = selections.map((item: any) => state.primaryKey && item[state.primaryKey])
+		state.dataListSelections = selections
+		state.dataListSelectionKeys = selections.map((item: any) => state.primaryKey && item[state.primaryKey])
 	}
 
 	// 排序
@@ -131,7 +133,7 @@ export const useCrud = (options: IHooksOptions) => {
 		if (key) {
 			data = [key]
 		} else {
-			data = state.dataListSelections ? state.dataListSelections : []
+			data = state.dataListSelectionKeys ? state.dataListSelectionKeys : []
 
 			if (data.length === 0) {
 				ElMessage.warning('请选择删除记录')
