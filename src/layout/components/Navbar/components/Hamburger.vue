@@ -1,6 +1,6 @@
 <template>
 	<div @click="handleClick">
-		<svg-icon :icon="icon"></svg-icon>
+		<ma-icon :icon="icon"></ma-icon>
 	</div>
 </template>
 
