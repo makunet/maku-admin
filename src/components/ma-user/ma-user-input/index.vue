@@ -4,14 +4,19 @@
 			<el-button icon="Search" @click="visible = true"></el-button>
 		</template>
 	</el-input>
-	<ma-user-dialog :key="visible" v-model:visible="visible" @select="userHandle"></ma-user-dialog>
+	<ma-user-dialog v-if="visible" :key="visible" v-model="visible" :multiple @select="userHandle"></ma-user-dialog>
 </template>
 
 <script setup lang="ts" name="MaUserInput">
 import { ref, watch } from 'vue'
-import { useUserApi } from '@/api/sys/user'
+import { useRealNameListApi } from '@/api/sys/user'
 
-defineProps({
+const props = defineProps({
+	multiple: {
+		type: Boolean,
+		required: false,
+		default: false
+	},
 	clearable: {
 		type: Boolean,
 		required: false,
@@ -24,7 +29,7 @@ defineProps({
 	}
 })
 
-const model = defineModel<number | string>()
+const model = defineModel<any | any[]>()
 const visible = ref(false)
 const userName = ref()
 
@@ -32,8 +37,11 @@ watch(
 	() => model.value,
 	async val => {
 		if (val) {
-			const { data } = await useUserApi(val as string)
-			userName.value = data.realName
+			const idList = props.multiple ? val : [val]
+			if (idList.length > 0) {
+				const { data } = await useRealNameListApi(idList)
+				userName.value = data.join(',')
+			}
 		} else {
 			userName.value = ''
 		}
@@ -43,7 +51,13 @@ watch(
 	}
 )
 
-const userHandle = (userId: number) => {
-	model.value = userId
+const emit = defineEmits(['select'])
+const userHandle = (rows: any[]) => {
+	if (props.multiple) {
+		model.value = rows.map((item: any) => item.id)
+	} else {
+		model.value = rows[0].id
+	}
+	emit('select', rows)
 }
 </script>
