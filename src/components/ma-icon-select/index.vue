@@ -1,16 +1,8 @@
 <template>
 	<div class="icon-box">
-		<el-input
-			ref="inputRef"
-			v-model="valueIcon"
-			v-bind="$attrs"
-			:placeholder="placeholder"
-			:clearable="clearable"
-			@clear="clearIcon"
-			@click="openDialog"
-		>
+		<el-input ref="inputRef" v-model="model" v-bind="$attrs" :placeholder="placeholder" :clearable="clearable" @clear="clearIcon" @click="openDialog">
 			<template #append>
-				<svg-icon :icon="iconValue"></svg-icon>
+				<ma-icon :icon="model"></ma-icon>
 			</template>
 		</el-input>
 		<el-dialog v-model="dialogVisible" :title="placeholder" top="50px" width="66%">
@@ -18,7 +10,7 @@
 			<el-scrollbar>
 				<div class="icon-list">
 					<div v-for="item in iconList" :key="item" class="icon-item" @click="selectIcon(item)">
-						<svg-icon size="36px" :icon="item"></svg-icon>
+						<ma-icon size="36px" :icon="item"></ma-icon>
 						<span>{{ item.replace('icon-', '') }}</span>
 					</div>
 				</div>
@@ -27,47 +19,37 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="MaIconSelect">
 import { ref, computed } from 'vue'
 import { getIconList } from '@/utils/tool'
-
 interface SelectIconProps {
-	iconValue: string
 	title?: string
 	clearable?: boolean
 	placeholder?: string
 }
 
 const props = withDefaults(defineProps<SelectIconProps>(), {
-	iconValue: '',
 	title: '请选择图标',
 	clearable: true,
 	placeholder: '请选择图标'
 })
 
-// 重新接收一下，防止打包后 clearable 报错
-const valueIcon = ref(props.iconValue)
+const model = defineModel<string>()
 
 // open Dialog
 const dialogVisible = ref(false)
 const openDialog = () => (dialogVisible.value = true)
 
-// 选择图标(触发更新父组件数据)
-const emit = defineEmits<{
-	'update:iconValue': [value: string]
-}>()
 const selectIcon = (item: any) => {
 	dialogVisible.value = false
-	valueIcon.value = item
-	emit('update:iconValue', item)
+	model.value = item
 	setTimeout(() => inputRef.value.blur(), 0)
 }
 
 // 清空图标
 const inputRef = ref()
 const clearIcon = () => {
-	valueIcon.value = ''
-	emit('update:iconValue', '')
+	model.value = ''
 	setTimeout(() => inputRef.value.blur(), 0)
 }
 
