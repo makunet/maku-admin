@@ -8,6 +8,10 @@ export const useOrgApi = (id: Number) => {
 	return service.get('/sys/org/' + id)
 }
 
+export const useOrgNameListApi = (idList: number[]) => {
+	return service.post('/sys/org/nameList', idList)
+}
+
 export const useOrgSubmitApi = (dataForm: any) => {
 	if (dataForm.id) {
 		return service.put('/sys/org', dataForm)
