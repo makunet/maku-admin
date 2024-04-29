@@ -42,7 +42,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="UploadImgs">
+<script setup lang="ts" name="MaUploadImages">
 import { ref, computed, inject, watch } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { uploadImg } from '@/api/sys/upload'
