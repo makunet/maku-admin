@@ -13,7 +13,7 @@
 						:class="{ active: menuPath === menu.path }"
 						@click="handleMenu(menu)"
 					>
-						<svg-icon :icon="menu.meta?.icon"></svg-icon>
+						<ma-icon :icon="menu.meta?.icon"></ma-icon>
 						<span class="title">{{ menu.meta?.title }}</span>
 					</div>
 				</div>
@@ -168,7 +168,7 @@ const layoutHeaderHeight = computed(() => {
 		&:hover {
 			background-color: var(--el-color-primary);
 		}
-		::v-deep(.svg-icon) {
+		::v-deep(.ma-icon) {
 			align-items: center;
 			cursor: pointer;
 			svg {
@@ -199,7 +199,7 @@ const layoutHeaderHeight = computed(() => {
 
 .layout-header {
 	height: var(--theme-header-height) !important;
-	border-bottom: 51px solid #8c8c8c !important;
+	border-bottom: 1px solid #8c8c8c !important;
 }
 .layout-main {
 	display: block;
@@ -241,7 +241,7 @@ const layoutHeaderHeight = computed(() => {
 	background: var(--theme-header-bg-color);
 	border-bottom: 1px solid var(--theme-border-color-light);
 	color: var(--theme-header-text-color);
-	::v-deep(.svg-icon) {
+	::v-deep(.ma-icon) {
 		align-items: center;
 		cursor: pointer;
 		height: var(--theme-header-height);
