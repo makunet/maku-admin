@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<svg-icon icon="icon-ellipsis-v" @click="themeSettingsHandle"></svg-icon>
+		<ma-icon icon="icon-ellipsis-v" @click="themeSettingsHandle"></ma-icon>
 	</div>
 </template>
 
