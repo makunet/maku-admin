@@ -29,7 +29,7 @@
 			<el-table-column prop="name" label="名称" header-align="center" min-width="150"></el-table-column>
 			<el-table-column prop="icon" label="图标" header-align="center" align="center">
 				<template #default="scope">
-					<svg-icon :icon="scope.row.icon"></svg-icon>
+					<ma-icon :icon="scope.row.icon"></ma-icon>
 				</template>
 			</el-table-column>
 			<el-table-column prop="type" label="类型" header-align="center" align="center">
