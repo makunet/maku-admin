@@ -19,10 +19,10 @@
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="openType" label="平台类型" header-align="center" align="center" width="180">
 				<template #default="scope">
-					<el-text v-if="scope.row.openType === 'wechat_work'"><svg-icon icon="icon-workweixin" size="16" /> 企业微信</el-text>
-					<el-text v-else-if="scope.row.openType === 'dingtalk'"><svg-icon icon="icon-dingding" size="16" /> 钉钉</el-text>
-					<el-text v-else-if="scope.row.openType === 'feishu'"><svg-icon icon="icon-feishu" size="16" /> 飞书</el-text>
-					<el-text v-else-if="scope.row.openType === 'wechat_open'"><svg-icon icon="icon-weixin" size="16" /> 微信</el-text>
+					<el-text v-if="scope.row.openType === 'wechat_work'"><ma-icon icon="icon-workweixin" size="16" /> 企业微信</el-text>
+					<el-text v-else-if="scope.row.openType === 'dingtalk'"><ma-icon icon="icon-dingding" size="16" /> 钉钉</el-text>
+					<el-text v-else-if="scope.row.openType === 'feishu'"><ma-icon icon="icon-feishu" size="16" /> 飞书</el-text>
+					<el-text v-else-if="scope.row.openType === 'wechat_open'"><ma-icon icon="icon-weixin" size="16" /> 微信</el-text>
 				</template>
 			</el-table-column>
 			<el-table-column prop="clientId" label="ClientID" header-align="center" align="center"></el-table-column>
