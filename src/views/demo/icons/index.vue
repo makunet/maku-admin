@@ -3,7 +3,7 @@
 		<el-row class="iconfont-row">
 			<el-col v-for="(icon, key) in iconList" :key="key" class="iconfont-item" :xs="12" :sm="8" :md="6" :lg="4" :xl="2">
 				<div class="iconfont-warp" @click="handleCopy(icon)">
-					<svg-icon :icon="icon" class-name="svg-size" />
+					<ma-icon :icon="icon" class-name="svg-size" />
 					<p>{{ icon }}</p>
 				</div>
 			</el-col>
@@ -20,7 +20,7 @@ const iconList = getIconList()
 
 const { copy } = useClipboard()
 const handleCopy = (icon: string) => {
-	const svgIcon = `<svg-icon icon="${icon}"></svg-icon>`
+	const svgIcon = `<ma-icon icon="${icon}"></ma-icon>`
 	copy(svgIcon)
 	ElMessage.success('已复制')
 }
