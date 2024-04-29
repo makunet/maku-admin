@@ -133,7 +133,7 @@ export const constantMenu = [
 			{
 				id: 1007,
 				name: '富文本编辑器',
-				url: 'demo/wangeditor/index',
+				url: 'demo/editor/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
@@ -255,11 +255,18 @@ export const getKeepAliveRoutes = (rs: RouteRecordRaw[], breadcrumb: string[]): 
 }
 
 // 加载vue组件
-const layoutModules = import.meta.glob('/src/views/**/*.vue')
+export interface ModuleMap {
+	[key: string]: any
+}
+
+export const layoutModules = () => {
+	return import.meta.glob('/src/views/**/*.vue')
+}
 
 // 根据路径，动态获取vue组件
 const getDynamicComponent = (path: string): any => {
-	return layoutModules[`/src/views/${path}.vue`]
+	const modules: ModuleMap = layoutModules()
+	return modules[`/src/views/${path}.vue`]
 }
 
 // 根据菜单列表，生成路由数据
