@@ -57,7 +57,7 @@ const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'he
 			background: var(--theme-header-hover-color) !important;
 		}
 	}
-	::v-deep(.svg-icon) {
+	::v-deep(.ma-icon) {
 		align-items: center;
 		cursor: pointer;
 		height: var(--theme-header-height);
@@ -76,7 +76,7 @@ const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'he
 		align-items: center;
 		flex-direction: row;
 		margin-left: 20px;
-		::v-deep(.svg-icon) {
+		::v-deep(.ma-icon) {
 			&:hover {
 				background: none !important;
 			}
