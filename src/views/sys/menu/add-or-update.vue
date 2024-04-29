@@ -39,7 +39,7 @@
 				<el-input v-model="dataForm.authority" placeholder="多个用逗号分隔，如：sys:menu:save,sys:menu:update"></el-input>
 			</el-form-item>
 			<el-form-item v-if="dataForm.type === 0" prop="icon" label="图标" class="popover-list">
-				<SelectIcon v-model:icon-value="dataForm.icon" />
+				<SelectIcon v-model="dataForm.icon" />
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -52,7 +52,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import SelectIcon from '@/components/select-icon/index.vue'
+import SelectIcon from '@/components/ma-icon-select/index.vue'
 import { useMenuListApi, useMenuSubmitApi } from '@/api/sys/menu'
 
 const emit = defineEmits(['refreshDataList'])
