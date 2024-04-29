@@ -47,7 +47,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="MaUploadImage">
 import { ref, computed, inject } from 'vue'
 import { ElNotification, formContextKey, formItemContextKey } from 'element-plus'
 import type { UploadProps, UploadRequestOptions } from 'element-plus'
