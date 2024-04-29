@@ -4,34 +4,34 @@
 			<el-card class="profile-card">
 				<template #header> 个人信息 </template>
 				<div class="avatar">
-					<UploadImg v-model:image-url="userStore.user.avatar" :drag="false" border-radius="50%" @success="handleSuccess">
+					<ma-upload-image v-model:image-url="userStore.user.avatar" :drag="false" border-radius="50%" @success="handleSuccess">
 						<template #empty>
 							<el-icon><Avatar /></el-icon>
 							<span>请上传头像</span>
 						</template>
-					</UploadImg>
+					</ma-upload-image>
 				</div>
 				<ul>
 					<li>
-						<svg-icon icon="icon-user" /> 用户名 <span>{{ userStore.user.username }}</span>
+						<ma-icon icon="icon-user" /> 用户名 <span>{{ userStore.user.username }}</span>
 					</li>
 					<li>
-						<svg-icon icon="icon-idcard" /> 姓名 <span>{{ userStore.user.realName }}</span>
+						<ma-icon icon="icon-idcard" /> 姓名 <span>{{ userStore.user.realName }}</span>
 					</li>
 					<li>
-						<svg-icon icon="icon-phone" /> 手机号码 <span>{{ userStore.user.mobile }}</span>
+						<ma-icon icon="icon-phone" /> 手机号码 <span>{{ userStore.user.mobile }}</span>
 					</li>
 					<li>
-						<svg-icon icon="icon-mail" /> 用户邮箱 <span>{{ userStore.user.email || '/' }}</span>
+						<ma-icon icon="icon-mail" /> 用户邮箱 <span>{{ userStore.user.email || '/' }}</span>
 					</li>
 					<li>
-						<svg-icon icon="icon-apartment" /> 所属机构 <span>{{ userStore.user.orgName || '/' }}</span>
+						<ma-icon icon="icon-apartment" /> 所属机构 <span>{{ userStore.user.orgName || '/' }}</span>
 					</li>
 					<li>
-						<svg-icon icon="icon-tag" /> 所属岗位 <span>{{ userStore.user.postNameList || '/' }} </span>
+						<ma-icon icon="icon-tag" /> 所属岗位 <span>{{ userStore.user.postNameList || '/' }} </span>
 					</li>
 					<li>
-						<svg-icon icon="icon-calendar-check" /> 创建日期 <span>{{ userStore.user.createTime }}</span>
+						<ma-icon icon="icon-calendar-check" /> 创建日期 <span>{{ userStore.user.createTime }}</span>
 					</li>
 				</ul>
 			</el-card>
@@ -58,7 +58,6 @@
 <script setup lang="ts" name="ProfileIndex">
 import { ref } from 'vue'
 import { useUserStore } from '@/store/modules/user'
-import UploadImg from '@/components/upload/img.vue'
 import Password from '@/views/profile/password.vue'
 import UserInfo from '@/views/profile/user-info.vue'
 import ThirdLogin from '@/views/profile/third-login.vue'
