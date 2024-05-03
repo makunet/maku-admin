@@ -100,7 +100,7 @@
 .el-form--inline {
   .el-form-item {
     & > .el-input, .el-cascader, .el-select, .el-date-editor, .el-autocomplete {
-      width: 220px;
+      min-width: 220px;
     }
   }
 }
