@@ -8,6 +8,10 @@ export const useDictTypeApi = (id: Number) => {
 	return service.get('/sys/dict/type/' + id)
 }
 
+export const useDictTypeListApi = (pid: Number) => {
+	return service.get('/sys/dict/type/list?pid=' + pid)
+}
+
 export const useDictTypeSubmitApi = (dataForm: any) => {
 	if (dataForm.id) {
 		return service.put('/sys/dict/type', dataForm)
