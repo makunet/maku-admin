@@ -32,6 +32,10 @@
 			border
 			show-overflow-tooltip
 			class="layout-table"
+			row-key="id"
+			lazy
+			:load="load"
+			:tree-props="{ children: 'children', hasChildren: 'hasChild' }"
 			@selection-change="selectionChangeHandle"
 			@sort-change="sortChangeHandle"
 		>
@@ -88,6 +92,7 @@ import AddOrUpdate from './type-add-or-update.vue'
 import DataSql from './data-sql.vue'
 import DictData from './data.vue'
 import { IHooksOptions } from '@/hooks/interface'
+import { useDictTypeListApi } from '@/api/sys/dict'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/dict/type/page',
@@ -102,9 +107,9 @@ const dictDataVisible = ref(false)
 const dictDataTitle = ref()
 const dictTypeId = ref()
 const showDictDataHandle = (row: any) => {
-	dictDataVisible.value = true
 	dictTypeId.value = row.id
 	dictDataTitle.value = '字典配置 - ' + row.dictType
+	dictDataVisible.value = true
 }
 
 const dataSqlVisible = ref(false)
@@ -113,6 +118,23 @@ const showDataSqlHandle = (row: any) => {
 	dataSqlVisible.value = true
 	dictTypeId.value = row.id
 	dataSqlTitle.value = '动态数据 - ' + row.dictType
+}
+
+// 当数据变化时，处理刷新
+const nodeMap = new Map()
+const load = (tree: any, treeNode: unknown, resolve: (data: any[]) => void) => {
+	if (!nodeMap.has(tree.id)) {
+		nodeMap.set(tree.id, { tree, treeNode, resolve })
+	}
+
+	useDictTypeListApi(tree.id).then((res: any) => {
+		if (res.data.length > 0) {
+			resolve(res.data)
+		} else {
+			resolve([])
+			// location.reload()
+		}
+	})
 }
 
 const queryRef = ref()
