@@ -1,5 +1,5 @@
 <template>
-	<el-radio-group v-model="modelAsString">
+	<el-radio-group v-model="modelAsString" :disabled="props.disabled">
 		<el-radio v-for="data in dataList" :key="data.dictValue" :value="data.dictValue">{{ data.dictLabel }}</el-radio>
 	</el-radio-group>
 </template>
@@ -14,6 +14,11 @@ const props = defineProps({
 	dictType: {
 		type: String,
 		required: true
+	},
+	disabled: {
+		type: Boolean,
+		required: false,
+		default: () => false
 	}
 })
 
