@@ -1,11 +1,11 @@
 <template>
-	<el-input v-model="roleName" :clearable="clearable" readonly :placeholder="placeholder" @clear="model = ''">
+	<el-input v-model="roleName" :clearable :disabled readonly :placeholder @clear="model = ''">
 		<template #append>
 			<el-button icon="Search" @click="visible = true"></el-button>
 		</template>
 	</el-input>
 	<ma-data-table
-		v-if="visible"
+		v-if="!disabled && visible"
 		:key="visible + ''"
 		v-model:visible="visible"
 		title="角色选择"
@@ -35,6 +35,11 @@ const props = defineProps({
 		type: Boolean,
 		required: false,
 		default: () => true
+	},
+	disabled: {
+		type: Boolean,
+		required: false,
+		default: () => false
 	},
 	placeholder: {
 		type: String,
