@@ -8,5 +8,5 @@
 import constant from '@/utils/constant'
 import cache from '@/utils/cache'
 
-const upload = constant.onlineUploadUrl + '?access_token=' + cache.getToken()
+const upload = constant.uploadUrl + '?access_token=' + cache.getToken()
 </script>
