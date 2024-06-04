@@ -1,10 +1,10 @@
 <template>
-	<el-input v-model="userName" :clearable="clearable" readonly :placeholder="placeholder" @clear="model = ''">
+	<el-input v-model="userName" :clearable :disabled :placeholder @clear="model = ''">
 		<template #append>
 			<el-button icon="Search" @click="visible = true"></el-button>
 		</template>
 	</el-input>
-	<ma-user-dialog v-if="visible" :key="visible" v-model="visible" :multiple @select="userHandle"></ma-user-dialog>
+	<ma-user-dialog v-if="!disabled && visible" :key="visible" v-model="visible" :multiple @select="userHandle"></ma-user-dialog>
 </template>
 
 <script setup lang="ts" name="MaUserInput">
@@ -21,6 +21,11 @@ const props = defineProps({
 		type: Boolean,
 		required: false,
 		default: () => true
+	},
+	disabled: {
+		type: Boolean,
+		required: false,
+		default: () => false
 	},
 	placeholder: {
 		type: String,
