@@ -7,6 +7,9 @@
 			<el-form-item prop="dictName" label="字典名称">
 				<el-input v-model="dataForm.dictName" placeholder="字典名称"></el-input>
 			</el-form-item>
+			<el-form-item prop="pid" label="上级节点">
+				<ma-data-tree-select v-model="dataForm.pid" url="/sys/dict/type/list" placeholder="请选择上级"></ma-data-tree-select>
+			</el-form-item>
 			<el-form-item prop="sort" label="排序">
 				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" aria-label="排序"></el-input-number>
 			</el-form-item>
@@ -23,7 +26,8 @@
 				<el-input
 					v-model="dataForm.dictSql"
 					type="textarea"
-					placeholder="如：select id as dictValue, name as dictLabel, 'info' as labelClass from sys_role where deleted = 0"
+					:rows="6"
+					placeholder="如：select id as dictValue, name as dictLabel from sys_role where deleted = 0"
 				></el-input>
 			</el-form-item>
 		</el-form>
@@ -48,6 +52,7 @@ const dataForm = reactive({
 	dictType: '',
 	dictName: '',
 	sort: 0,
+	pid: '',
 	dictSource: 0,
 	dictSql: '',
 	remark: ''
