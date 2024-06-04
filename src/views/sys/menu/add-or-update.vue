@@ -27,7 +27,7 @@
 				<el-input v-model="dataForm.url" placeholder="路由"></el-input>
 			</el-form-item>
 			<el-form-item prop="sort" label="排序">
-				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" label="排序"></el-input-number>
+				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" aria-label="排序"></el-input-number>
 			</el-form-item>
 			<el-form-item v-if="dataForm.type === 0" prop="openStyle" label="打开方式">
 				<el-radio-group v-model="dataForm.openStyle">
