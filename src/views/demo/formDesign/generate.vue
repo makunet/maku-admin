@@ -1,12 +1,17 @@
 <template>
 	<el-card>
-		<generate-form ref="generateFormRef" :data="widgetForm"> </generate-form>
+		<generate-form ref="generateFormRef" :data="widgetForm" :upload="upload"> </generate-form>
 		<el-button type="primary" @click="handleSubmit">提交</el-button>
 	</el-card>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import constant from '@/utils/constant'
+import cache from '@/utils/cache'
+
+// 上传路径
+const upload = constant.onlineUploadUrl + '?access_token=' + cache.getToken()
 
 const generateFormRef = ref()
 const widgetForm = {
@@ -65,7 +70,7 @@ const widgetForm = {
 							type: 'input',
 							label: '邮箱',
 							options: {
-								defaultValue: 'sunlightcs@gmail.com',
+								defaultValue: 'babamu@126.com',
 								width: '',
 								maxlength: null,
 								placeholder: null,
