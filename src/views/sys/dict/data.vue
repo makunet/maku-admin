@@ -13,9 +13,9 @@
 	>
 		<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 		<el-table-column prop="dictValue" label="字典值" header-align="center" align="center"></el-table-column>
-		<el-table-column prop="dictLabel" label="字典标签" header-align="center" align="center">
+		<el-table-column prop="labelClass" label="字典标签" header-align="center" align="center">
 			<template #default="scope">
-				<el-tag v-if="scope.row.labelClass" :type="scope.row.labelClass === 'primary' ? '' : scope.row.labelClass">
+				<el-tag v-if="scope.row.labelClass" :type="scope.row.labelClass">
 					{{ scope.row.dictLabel }}
 				</el-tag>
 				<span v-else>
