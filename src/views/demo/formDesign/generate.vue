@@ -11,7 +11,7 @@ import constant from '@/utils/constant'
 import cache from '@/utils/cache'
 
 // 上传路径
-const upload = constant.onlineUploadUrl + '?access_token=' + cache.getToken()
+const upload = constant.uploadUrl + '?access_token=' + cache.getToken()
 
 const generateFormRef = ref()
 const widgetForm = {
