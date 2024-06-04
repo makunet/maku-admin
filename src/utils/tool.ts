@@ -106,13 +106,35 @@ export const getDictLabelList = (dictType: string, dictValue: any): string => {
 }
 
 // 获取字典数据列表
-export function getDictDataList(dictList: any[], dictType: string) {
+export const getDictDataList = (dictList: any[], dictType: string) => {
 	const type = dictList.find((element: any) => element.dictType === dictType)
 	if (type) {
 		return type.dataList
 	} else {
 		return []
 	}
+}
+
+// 树形数据转换
+export const treeDataTranslate = (data: any[], id?: string, pid?: string): any[] => {
+	const res: any[] = []
+	const temp: any = {}
+	id = id || 'id'
+	pid = pid || 'pid'
+	for (let i = 0; i < data.length; i++) {
+		temp[data[i][id]] = data[i]
+	}
+	for (let k = 0; k < data.length; k++) {
+		if (!temp[data[k][pid]] || data[k][id] === data[k][pid]) {
+			res.push(data[k])
+			continue
+		}
+		if (!temp[data[k][pid]]['children']) {
+			temp[data[k][pid]]['children'] = []
+		}
+		temp[data[k][pid]]['children'].push(data[k])
+	}
+	return res
 }
 
 // 生成数字字母混合字符串
