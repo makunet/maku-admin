@@ -40,7 +40,7 @@
 			@sort-change="sortChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="dictType" label="字典类型" header-align="center" align="center"> </el-table-column>
+			<el-table-column prop="dictType" label="字典类型" header-align="center"> </el-table-column>
 			<el-table-column prop="dictName" label="字典名称" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="remark" label="备注" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="dictSource" label="数据来源" header-align="center" align="center">
