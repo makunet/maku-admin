@@ -30,7 +30,7 @@ const props = defineProps({
 const model = defineModel<number | string>()
 const modelAsString = computed({
 	get() {
-		return model.value ? model.value.toString() : ''
+		return model.value != undefined ? model.value.toString() : ''
 	},
 	set(value) {
 		model.value = value
