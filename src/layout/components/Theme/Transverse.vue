@@ -1,10 +1,12 @@
 <template>
 	<el-container class="layout-container layout-transverse">
 		<el-header class="navbar-container" :class="headerClass">
-			<Logo v-if="theme.isLogo" />
-			<el-menu :default-active="defaultActive" background-color="transparent" :collapse-transition="false" mode="horizontal">
-				<menu-item v-for="menu in routerStore.menuRoutes" :key="menu.path" :menu="menu"></menu-item>
-			</el-menu>
+			<div style="display: flex">
+				<Logo v-if="theme.isLogo" />
+				<el-menu :default-active="defaultActive" background-color="transparent" :collapse-transition="false" mode="horizontal">
+					<menu-item v-for="menu in routerStore.menuRoutes" :key="menu.path" :menu="menu"></menu-item>
+				</el-menu>
+			</div>
 			<NavbarRight />
 		</el-header>
 		<Tabs v-if="theme.isTabsView" />
@@ -42,13 +44,14 @@ const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'he
 	width: 100%;
 	height: 100%;
 	.el-header {
-		padding-right: 0 !important;
+		padding: 0 !important;
 	}
 }
 .navbar-container {
 	height: var(--theme-header-height);
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	background: var(--theme-header-bg-color);
 	border-bottom: 1px solid var(--theme-border-color-light);
 	color: var(--theme-header-text-color);
@@ -71,11 +74,13 @@ const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'he
 		}
 	}
 	.el-menu {
-		width: 100%;
+		max-width: 800px;
+		height: var(--theme-header-height);
+		line-height: var(--theme-header-height);
 		display: flex;
 		align-items: center;
 		flex-direction: row;
-		margin-left: 20px;
+		//margin-left: 20px;
 		::v-deep(.ma-icon) {
 			&:hover {
 				background: none !important;
