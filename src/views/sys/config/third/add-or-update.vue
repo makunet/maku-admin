@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
+	<el-drawer v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :size="800">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
 			<el-form-item label="平台类型" prop="openType">
 				<el-select v-model="dataForm.openType" placeholder="请选择" style="width: 100%">
@@ -26,7 +26,7 @@
 			<el-button @click="visible = false">取消</el-button>
 			<el-button type="primary" @click="submitHandle()">确定</el-button>
 		</template>
-	</el-dialog>
+	</el-drawer>
 </template>
 
 <script setup lang="ts">

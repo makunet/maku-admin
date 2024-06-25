@@ -1,5 +1,5 @@
 <template>
-	<el-card>
+	<div style="margin-top: 10px">
 		<el-space>
 			<el-space>
 				<el-button type="primary" icon="Plus" @click="addOrUpdateHandle()">新增</el-button>
@@ -48,7 +48,7 @@
 
 		<!-- 弹窗, 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
-	</el-card>
+	</div>
 </template>
 
 <script setup lang="ts">
