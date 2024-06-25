@@ -1,9 +1,13 @@
 <template>
-	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
+	<el-drawer v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :size="800">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
 			<el-form-item label="平台类型" prop="platform">
 				<ma-dict-select v-model="dataForm.platform" dict-type="sms_platform" placeholder="平台类型" style="width: 100%"></ma-dict-select>
 			</el-form-item>
+			<el-form-item label="分组名称" prop="groupName">
+				<el-input v-model="dataForm.groupName" placeholder="分组名称相同的配置，会轮询发送短信"></el-input>
+			</el-form-item>
+			<el-divider></el-divider>
 			<el-form-item v-if="dataForm.platform == 3" label="接入地址" prop="url">
 				<el-input v-model="dataForm.url" placeholder="APP接入地址"></el-input>
 			</el-form-item>
@@ -36,13 +40,13 @@
 			<el-button @click="visible = false">取消</el-button>
 			<el-button type="primary" @click="submitHandle()">确定</el-button>
 		</template>
-	</el-dialog>
+	</el-drawer>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useSmsPlatformApi, useSmsPlatformSubmitApi } from '@/api/message/sms'
+import { useSmsConfigApi, useSmsConfigSubmitApi } from '@/api/sys/sms'
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -52,6 +56,7 @@ const dataFormRef = ref()
 const dataForm = reactive({
 	id: '',
 	platform: 0,
+	groupName: '',
 	signName: '',
 	templateId: '',
 	appId: '',
@@ -79,13 +84,14 @@ const init = (id?: number) => {
 }
 
 const getSmsPlatform = (id: number) => {
-	useSmsPlatformApi(id).then(res => {
+	useSmsConfigApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 	})
 }
 
 const dataRules = ref({
 	platform: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	groupName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	appId: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	signName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	templateId: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
@@ -101,7 +107,7 @@ const submitHandle = () => {
 			return false
 		}
 
-		useSmsPlatformSubmitApi(dataForm).then(() => {
+		useSmsConfigSubmitApi(dataForm).then(() => {
 			ElMessage.success({
 				message: '操作成功',
 				duration: 500,
