@@ -25,7 +25,7 @@ const appStore = useAppStore()
 	color: var(--theme-logo-text-color);
 	font-size: 18px;
 
-	overflow: hidden;
+	//overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 
