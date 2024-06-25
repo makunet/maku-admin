@@ -8,15 +8,7 @@
 				<el-input v-model="dataForm.dictName" placeholder="字典名称"></el-input>
 			</el-form-item>
 			<el-form-item prop="pid" label="上级节点">
-				<ma-data-tree-select
-					v-model="dataForm.pid"
-					:props="{
-						label: 'dictType',
-						children: 'children'
-					}"
-					url="/sys/dict/type/list"
-					placeholder="请选择上级"
-				></ma-data-tree-select>
+				<ma-data-tree-select v-model="dataForm.pid" url="/sys/dict/type/list" placeholder="请选择上级"></ma-data-tree-select>
 			</el-form-item>
 			<el-form-item prop="sort" label="排序">
 				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" aria-label="排序"></el-input-number>
