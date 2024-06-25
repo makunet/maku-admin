@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="visible" title="日志详情" :close-on-click-modal="false" draggable>
+	<el-drawer v-model="visible" title="短信日志详情" :size="1000">
 		<el-form label-width="100px">
 			<el-row>
 				<el-col :span="12">
@@ -48,7 +48,7 @@
 		<template #footer>
 			<el-button type="primary" @click="visible = false">关闭</el-button>
 		</template>
-	</el-dialog>
+	</el-drawer>
 </template>
 
 <script setup lang="ts">

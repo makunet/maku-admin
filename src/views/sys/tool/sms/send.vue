@@ -1,8 +1,20 @@
 <template>
-	<el-dialog v-model="visible" title="发送短信测试" :close-on-click-modal="false" :width="500">
+	<el-drawer v-model="visible" title="发送短信" :size="800">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
-			<el-form-item label="平台类型" prop="platform">
-				<ma-dict-select v-model="dataForm.platform" dict-type="sms_platform" placeholder="平台类型" style="width: 100%" disabled></ma-dict-select>
+			<el-tabs v-model="dataForm.platform">
+				<el-tab-pane label="阿里云" :name="0"> </el-tab-pane>
+				<el-tab-pane label="腾讯云" :name="1"> </el-tab-pane>
+				<el-tab-pane label="七牛云" :name="2"> </el-tab-pane>
+				<el-tab-pane label="华为云" :name="3"> </el-tab-pane>
+			</el-tabs>
+			<el-form-item label="短信模板" prop="id">
+				<ma-data-select
+					:key="dataForm.platform"
+					v-model="dataForm.id"
+					:url="`/sys/sms/config/list?platform=${dataForm.platform}`"
+					:props="{ label: 'templateId', value: 'id' }"
+					placeholder="选择短信模板"
+				></ma-data-select>
 			</el-form-item>
 			<el-form-item label="手机号" prop="mobile">
 				<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
@@ -18,40 +30,38 @@
 			<el-button @click="visible = false">取消</el-button>
 			<el-button type="primary" @click="submitHandle()">发送</el-button>
 		</template>
-	</el-dialog>
+	</el-drawer>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useSmsSendApi } from '@/api/message/sms'
-
+import { useSmsSendApi } from '@/api/sys/sms'
 const emit = defineEmits(['refreshDataList'])
 
-const visible = ref(false)
+const visible = defineModel<Boolean>()
 
 const dataFormRef = ref()
 const dataForm = reactive({
-	id: 0,
+	id: '',
 	platform: 0,
 	paramKey: '',
 	paramValue: '',
 	mobile: ''
 })
 
-const init = (data?: any) => {
-	visible.value = true
-	dataForm.id = data.id
-
-	// 重置表单数据
-	if (dataFormRef.value) {
-		dataFormRef.value.resetFields()
+watch(
+	() => dataForm.platform,
+	val => {
+		// 重置表单数据
+		if (dataFormRef.value) {
+			dataFormRef.value.resetFields()
+		}
 	}
-
-	dataForm.platform = data.platform
-}
+)
 
 const dataRules = ref({
+	id: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	mobile: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
@@ -74,8 +84,4 @@ const submitHandle = () => {
 		})
 	})
 }
-
-defineExpose({
-	init
-})
 </script>
