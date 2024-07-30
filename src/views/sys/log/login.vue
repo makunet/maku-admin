@@ -21,7 +21,7 @@
 
 	<el-card>
 		<el-space>
-			<el-button icon="Download" @click="downloadExcel()">导出</el-button>
+			<el-button icon="Download" @click="downloadHandle('/sys/log/login/export')">导出</el-button>
 		</el-space>
 		<el-table
 			v-loading="state.dataListLoading"
@@ -57,7 +57,6 @@
 <script setup lang="ts" name="SysLogLogin">
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
-import { useLogLoginExportApi } from '@/api/sys/log'
 import { IHooksOptions } from '@/hooks/interface'
 
 const state: IHooksOptions = reactive({
@@ -70,10 +69,6 @@ const state: IHooksOptions = reactive({
 })
 
 const queryRef = ref()
-const downloadExcel = () => {
-	useLogLoginExportApi()
-	return
-}
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, reset } = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, downloadHandle, reset } = useCrud(state)
 </script>
