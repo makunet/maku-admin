@@ -32,12 +32,12 @@
 						<el-button v-auth="'sys:user:save'" icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
 					</el-space>
 					<el-space v-auth="'sys:user:import'">
-						<el-upload :action="uploadUserExcelUrl" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
+						<ma-upload-file action="/sys/user/import">
 							<el-button plain icon="Upload">导入</el-button>
-						</el-upload>
+						</ma-upload-file>
 					</el-space>
 					<el-space>
-						<el-button v-auth="'sys:user:export'" plain icon="Download" @click="downloadExcel()">导出</el-button>
+						<el-button v-auth="'sys:user:export'" plain icon="Download" @click="downloadHandle('/sys/user/export')">导出</el-button>
 					</el-space>
 					<el-space>
 						<el-button v-auth="'sys:user:delete'" icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
@@ -90,10 +90,7 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
-import { ElMessage, UploadProps } from 'element-plus'
 import OrgTree from './org-tree.vue'
-import cache from '@/utils/cache'
-import constant from '@/utils/constant'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/user/page',
@@ -115,36 +112,6 @@ const addOrUpdateHandle = (id?: number) => {
 const handleOrgClick = (orgId: any) => {
 	state.queryForm.orgId = orgId
 	getDataList()
-}
-
-// 导入用户excel文件
-const uploadUserExcelUrl = constant.apiUrl + '/sys/user/import?access_token=' + cache.getToken()
-
-const downloadExcel = () => {
-	downloadHandle('/sys/user/export')
-}
-
-const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
-	if (res.code !== 0) {
-		ElMessage.error('上传失败：' + res.msg)
-		return false
-	}
-
-	ElMessage.success({
-		message: '上传成功',
-		duration: 500,
-		onClose: () => {
-			getDataList()
-		}
-	})
-}
-
-const beforeUpload: UploadProps['beforeUpload'] = file => {
-	if (file.size / 1024 / 1024 / 1024 / 1024 > 1) {
-		ElMessage.error('文件大小不能超过100M')
-		return false
-	}
-	return true
 }
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, downloadHandle, reset } = useCrud(state)
