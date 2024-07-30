@@ -22,6 +22,7 @@ import MaRoleInput from '@/components/ma-role-input/index.vue'
 import MaPostInput from '@/components/ma-post-input/index.vue'
 import MaUploadImage from '@/components/ma-upload/ma-upload-image/index.vue'
 import MaUploadImages from '@/components/ma-upload/ma-upload-images/index.vue'
+import MaUploadFile from '@/components/ma-upload/ma-upload-file/index.vue'
 
 const components = [
 	MaEditor,
@@ -45,7 +46,8 @@ const components = [
 	MaRoleInput,
 	MaPostInput,
 	MaUploadImage,
-	MaUploadImages
+	MaUploadImages,
+	MaUploadFile
 ]
 
 const MaComponent: Plugin = {
