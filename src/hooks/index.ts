@@ -19,7 +19,7 @@ export const useCrud = (options: IHooksOptions) => {
 		page: 1,
 		limit: 10,
 		total: 0,
-		pageSizes: [10, 20, 50, 100, 200],
+		pageSizes: [10, 20, 50, 100, 200, 500, 1000],
 		dataListLoading: false,
 		dataListSelections: [],
 		dataListSelectionKeys: []
