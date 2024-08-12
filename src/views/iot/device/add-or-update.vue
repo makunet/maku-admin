@@ -13,6 +13,9 @@
 			<el-form-item label="唯一标识码" prop="uid">
 				<el-input v-model="dataForm.uid" placeholder="唯一标识码"></el-input>
 			</el-form-item>
+      <el-form-item label="通信协议" prop="protocolType">
+        <ma-dict-select v-model="dataForm.protocolType" dict-type="device_protocol_type" placeholder="通信协议" clearable></ma-dict-select>
+      </el-form-item>
 			<el-form-item label="设备密钥" prop="secret">
 				<el-input v-model="dataForm.secret" placeholder="设备密钥"></el-input>
 			</el-form-item>
@@ -43,6 +46,7 @@ const dataForm = reactive({
 	name: '',
 	type: '',
 	uid: '',
+  protocolType:'',
 	secret: '',
 	status: '1'
 })
@@ -73,7 +77,8 @@ const dataRules = ref({
 	type: [{ required: true, message: '设备类型不能为空', trigger: 'blur' }],
 	uid: [{ required: true, message: '唯一标识码不能为空', trigger: 'blur' }],
 	secret: [{ required: true, message: '设备密钥不能为空', trigger: 'blur' }],
-	status: [{ required: true, message: '状态不能为空', trigger: 'blur' }]
+	status: [{ required: true, message: '状态不能为空', trigger: 'blur' }],
+  protocolType: [{ required: true, message: '通信协议不能为空', trigger: 'blur' }]
 })
 
 // 表单提交

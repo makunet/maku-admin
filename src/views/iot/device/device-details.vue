@@ -11,7 +11,7 @@
 				<DeviceEvent :device-id="props.deviceId" />
 			</el-tab-pane>
 			<el-tab-pane v-auth="'iot:device:update'" label="调试" name="debug">
-				<DeviceDebug :device-id="props.deviceId" />
+				<DeviceDebug :device-id="props.deviceId" :protocol-type="props.protocolType" />
 			</el-tab-pane>
 		</el-tabs>
 	</el-card>
@@ -29,7 +29,11 @@ const props = defineProps({
 	deviceId: {
 		type: Number,
 		required: true
-	}
+	},
+  protocolType: {
+    type: String,
+    required: true
+   }
 })
 
 // 默认显示的标签页名称

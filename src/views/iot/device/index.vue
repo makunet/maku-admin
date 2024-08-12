@@ -42,6 +42,7 @@
 			<el-table-column prop="name" label="名称" header-align="center" align="center"></el-table-column>
 			<ma-dict-column prop="type" label="设备类型" dict-type="device_type"></ma-dict-column>
 			<el-table-column prop="uid" label="唯一标识码" header-align="center" align="center"></el-table-column>
+      <el-table-column prop="protocolType" label="通信协议" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="secret" label="设备密钥" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="appVersion" label="App版本" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="batteryPercent" label="电池电量" header-align="center" align="center"></el-table-column>
@@ -69,7 +70,7 @@
 		<!-- 弹窗, 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refresh-data-list="getDataList"></add-or-update>
 		<el-drawer v-if="deviceDetailsVisible" v-model="deviceDetailsVisible" :title="deviceDetailsTitle" :size="1000" :close-on-press-escape="false">
-			<device-details :device-id="deviceId"></device-details>
+			<device-details :device-id="deviceId" :protocol-type="protocolType"></device-details>
 		</el-drawer>
 	</el-card>
 </template>
@@ -93,11 +94,14 @@ const addOrUpdateRef = ref()
 const deviceDetailsVisible = ref(false)
 const deviceDetailsTitle = ref()
 const deviceId = ref()
+const protocolType = ref()
 const showDeviceDetailsHandle = (row: any) => {
 	deviceId.value = row.id
+  protocolType.value = row.protocolType
 	deviceDetailsTitle.value = '设备 - ' + row.code + '-' + row.name
 	deviceDetailsVisible.value = true
 }
+
 const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
 }

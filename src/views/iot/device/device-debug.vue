@@ -6,12 +6,7 @@
 			<el-row :gutter="30">
 				<el-col :span="8">
 					<el-form-item label="接入协议" prop="accessProtocol">
-						<el-select v-model="serviceDebugDataForm.accessProtocol">
-							<el-option label="MQTT" value="MQTT" />
-							<el-option label="CoAP" value="CoAP" disabled />
-							<el-option label="LwM2M" value="LwM2M" disabled />
-							<el-option label="HTTP" value="HTTP" disabled />
-						</el-select>
+            <el-input v-model="propertyDataForm.accessProtocol" disabled />
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
@@ -52,12 +47,7 @@
 			<el-row :gutter="30">
 				<el-col :span="8">
 					<el-form-item label="接入协议" prop="accessProtocol">
-						<el-select v-model="propertyDataForm.accessProtocol">
-							<el-option label="MQTT" value="MQTT" />
-							<el-option label="CoAP" value="CoAP" disabled />
-							<el-option label="LwM2M" value="LwM2M" disabled />
-							<el-option label="HTTP" value="HTTP" disabled />
-						</el-select>
+            <el-input v-model="propertyDataForm.accessProtocol" disabled />
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
@@ -108,12 +98,16 @@ const props = defineProps({
 	deviceId: {
 		type: Number,
 		required: true
-	}
+	},
+  protocolType: {
+    type: String,
+    required: true
+   }
 })
 
 const serviceDebugDataForm = reactive({
 	deviceId: props.deviceId,
-	accessProtocol: 'MQTT',
+	accessProtocol: props.protocolType,
 	command: 'LOCK',
 	payload: '',
 	waitResponse: '0'
@@ -122,7 +116,7 @@ const serviceDebugDataForm = reactive({
 //设备属性上报表单
 const propertyDataForm = reactive({
 	deviceId: props.deviceId,
-	accessProtocol: 'MQTT',
+	accessProtocol: props.protocolType,
 	propertyType: 'RUNNING_STATUS',
 	command: 'LOCK',
 	payload: '0'
