@@ -20,7 +20,7 @@
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="eventUid" label="事件ID" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="eventUid" label="关联服务ID" header-align="center" align="center"></el-table-column>
 			<ma-dict-column prop="eventTypeEnum" label="事件类型" dict-type="device_event_type"></ma-dict-column>
 			<el-table-column prop="eventPayload" label="事件内容" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="eventTime" label="事件时间" header-align="center" align="center"></el-table-column>
