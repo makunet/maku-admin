@@ -14,7 +14,13 @@
 				<el-input v-model="dataForm.uid" placeholder="唯一标识码"></el-input>
 			</el-form-item>
       <el-form-item label="通信协议" prop="protocolType">
-        <ma-dict-select v-model="dataForm.protocolType" dict-type="device_protocol_type" placeholder="通信协议" clearable></ma-dict-select>
+        <el-select v-model="dataForm.protocolType" placeholder="通信协议" style="width: 100%">
+          <el-option label="MQTT" value="MQTT"></el-option>
+          <el-option label="TCP" value="TCP"></el-option>
+          <el-option label="Modbus" value="Modbus" disabled></el-option>
+          <el-option label="CoAP" value="CoAP" disabled></el-option>
+          <el-option label="LwM2M" value="LwM2M" disabled></el-option>
+        </el-select>
       </el-form-item>
 			<el-form-item label="设备密钥" prop="secret">
 				<el-input v-model="dataForm.secret" placeholder="设备密钥"></el-input>
