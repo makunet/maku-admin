@@ -94,6 +94,23 @@ export const useCrud = (options: IHooksOptions) => {
 		state.dataListSelectionKeys = selections.map((item: any) => state.primaryKey && item[state.primaryKey])
 	}
 
+	// 单选值
+	const singleSelectionHandle = () => {
+		const selectionKeys = state.dataListSelectionKeys ? state.dataListSelectionKeys : []
+
+		if (selectionKeys.length === 0) {
+			ElMessage.warning('请选择一条记录')
+			return
+		}
+
+		if (selectionKeys.length > 1) {
+			ElMessage.warning('只能选择一条记录')
+			return
+		}
+
+		return selectionKeys[0]
+	}
+
 	// 排序
 	const sortChangeHandle = (data: any) => {
 		const { prop, order } = data
@@ -210,6 +227,7 @@ export const useCrud = (options: IHooksOptions) => {
 		sizeChangeHandle,
 		currentChangeHandle,
 		selectionChangeHandle,
+		singleSelectionHandle,
 		sortChangeHandle,
 		deleteHandle,
 		deleteBatchHandle,
