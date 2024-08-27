@@ -13,15 +13,15 @@
 			<el-form-item label="唯一标识码" prop="uid">
 				<el-input v-model="dataForm.uid" placeholder="唯一标识码"></el-input>
 			</el-form-item>
-      <el-form-item label="通信协议" prop="protocolType">
-        <el-select v-model="dataForm.protocolType" placeholder="通信协议" style="width: 100%">
-          <el-option label="MQTT" value="MQTT"></el-option>
-          <el-option label="TCP" value="TCP"></el-option>
-          <el-option label="Modbus" value="Modbus" disabled></el-option>
-          <el-option label="CoAP" value="CoAP" disabled></el-option>
-          <el-option label="LwM2M" value="LwM2M" disabled></el-option>
-        </el-select>
-      </el-form-item>
+			<el-form-item label="通信协议" prop="protocolType">
+				<el-select v-model="dataForm.protocolType" placeholder="通信协议" style="width: 100%">
+					<el-option label="MQTT" value="MQTT"></el-option>
+					<el-option label="TCP" value="TCP"></el-option>
+					<el-option label="Modbus" value="Modbus" disabled></el-option>
+					<el-option label="CoAP" value="CoAP" disabled></el-option>
+					<el-option label="LwM2M" value="LwM2M" disabled></el-option>
+				</el-select>
+			</el-form-item>
 			<el-form-item label="设备密钥" prop="secret">
 				<el-input v-model="dataForm.secret" placeholder="设备密钥"></el-input>
 			</el-form-item>
@@ -52,7 +52,7 @@ const dataForm = reactive({
 	name: '',
 	type: '',
 	uid: '',
-  protocolType:'',
+	protocolType: '',
 	secret: '',
 	status: '1'
 })
@@ -84,7 +84,7 @@ const dataRules = ref({
 	uid: [{ required: true, message: '唯一标识码不能为空', trigger: 'blur' }],
 	secret: [{ required: true, message: '设备密钥不能为空', trigger: 'blur' }],
 	status: [{ required: true, message: '状态不能为空', trigger: 'blur' }],
-  protocolType: [{ required: true, message: '通信协议不能为空', trigger: 'blur' }]
+	protocolType: [{ required: true, message: '通信协议不能为空', trigger: 'blur' }]
 })
 
 // 表单提交

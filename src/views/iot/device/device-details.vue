@@ -30,10 +30,10 @@ const props = defineProps({
 		type: Number,
 		required: true
 	},
-  protocolType: {
-    type: String,
-    required: true
-   }
+	protocolType: {
+		type: String,
+		required: true
+	}
 })
 
 // 默认显示的标签页名称

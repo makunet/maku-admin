@@ -6,7 +6,7 @@
 			<el-row :gutter="30">
 				<el-col :span="8">
 					<el-form-item label="接入协议" prop="accessProtocol">
-            <el-input v-model="propertyDataForm.accessProtocol" disabled />
+						<el-input v-model="propertyDataForm.accessProtocol" disabled />
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
@@ -47,7 +47,7 @@
 			<el-row :gutter="30">
 				<el-col :span="8">
 					<el-form-item label="接入协议" prop="accessProtocol">
-            <el-input v-model="propertyDataForm.accessProtocol" disabled />
+						<el-input v-model="propertyDataForm.accessProtocol" disabled />
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
@@ -99,10 +99,10 @@ const props = defineProps({
 		type: Number,
 		required: true
 	},
-  protocolType: {
-    type: String,
-    required: true
-   }
+	protocolType: {
+		type: String,
+		required: true
+	}
 })
 
 const serviceDebugDataForm = reactive({
@@ -146,7 +146,6 @@ const serviceDebugHandle = (serviceDebugDataForm: any) => {
 }
 
 //设备属性上报
-
 const deviceReportAttributeDataHandle = (propertyDataForm: any) => {
 	useIotDeviceSimulateDeviceReportAttributeDataApi(propertyDataForm).then(() => {
 		ElMessage.success({

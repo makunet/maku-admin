@@ -42,25 +42,20 @@
 			<el-table-column prop="name" label="名称" header-align="center" align="center"></el-table-column>
 			<ma-dict-column prop="type" label="设备类型" dict-type="device_type"></ma-dict-column>
 			<el-table-column prop="uid" label="唯一标识码" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="protocolType" label="通信协议" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="protocolType" label="通信协议" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="secret" label="设备密钥" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="appVersion" label="App版本" header-align="center" align="center"></el-table-column>
-      <el-table-column
-        prop="batteryPercent"
-        label="电池电量"
-        header-align="center"
-        align="center"
-      >
-        <template #default="scope">
-          <el-progress
-            :percentage="formatBatteryPercentage(scope.row.batteryPercent)"
-            type="circle"
-            :format="batteryFormat"
-            :color="getBatteryColor(scope.row.batteryPercent)"
-            :width="75"
-          />
-        </template>
-      </el-table-column>
+			<el-table-column prop="batteryPercent" label="电池电量" header-align="center" align="center">
+				<template #default="scope">
+					<el-progress
+						:percentage="formatBatteryPercentage(scope.row.batteryPercent)"
+						type="circle"
+						:format="batteryFormat"
+						:color="getBatteryColor(scope.row.batteryPercent)"
+						:width="75"
+					/>
+				</template>
+			</el-table-column>
 
 			<el-table-column prop="temperature" label="温度" header-align="center" align="center"></el-table-column>
 			<ma-dict-column prop="runningStatus" label="运行状态" dict-type="device_running_status"></ma-dict-column>
@@ -113,7 +108,7 @@ const deviceId = ref()
 const protocolType = ref()
 const showDeviceDetailsHandle = (row: any) => {
 	deviceId.value = row.id
-  protocolType.value = row.protocolType
+	protocolType.value = row.protocolType
 	deviceDetailsTitle.value = '设备 - ' + row.code + '-' + row.name
 	deviceDetailsVisible.value = true
 }
@@ -125,18 +120,23 @@ const addOrUpdateHandle = (id?: number) => {
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, reset } = useCrud(state)
 
 const batteryFormat = (percentage: number) => {
-  return percentage === 100 ? '满' : `${percentage}%`
+	return percentage === 100 ? '满' : `${percentage}%`
 }
-
 
 const formatBatteryPercentage = (percentage: number | undefined) => {
-  return percentage !== undefined ? percentage : 0
+	return percentage !== undefined ? percentage : 0
 }
 
-const getBatteryColor = (percentage) => {
-  if (percentage >= 80) return '#67C23A' // Green
-  if (percentage >= 60) return '#409EFF' // Blue
-  if (percentage >= 30) return '#E6A23C' // Yellow
-  return '#F56C6C' // Red
+const getBatteryColor = (percentage: any) => {
+	if (percentage >= 80) {
+		return '#67C23A'
+	} // Green
+	if (percentage >= 60) {
+		return '#409EFF'
+	} // Blue
+	if (percentage >= 30) {
+		return '#E6A23C'
+	} // Yellow
+	return '#F56C6C' // Red
 }
 </script>

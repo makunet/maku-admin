@@ -49,29 +49,29 @@
 			</el-col>
 		</el-row>
 		<el-row :gutter="30">
-      <el-col :span="12">
-        <el-form-item label="通信协议">
-          <el-input v-model="dataForm.protocolType" disabled />
-        </el-form-item>
-      </el-col>
+			<el-col :span="12">
+				<el-form-item label="通信协议">
+					<el-input v-model="dataForm.protocolType" disabled />
+				</el-form-item>
+			</el-col>
 			<el-col :span="12">
 				<el-form-item label="设备版本">
 					<el-input v-model="dataForm.appVersion" disabled />
 				</el-form-item>
 			</el-col>
-    </el-row>
-    <el-row :gutter="30">
-      <el-col :span="12">
-        <el-form-item label="电池电量">
-          <el-input v-model="dataForm.batteryPercent" disabled />
-        </el-form-item>
-      </el-col>
+		</el-row>
+		<el-row :gutter="30">
+			<el-col :span="12">
+				<el-form-item label="电池电量">
+					<el-input v-model="dataForm.batteryPercent" disabled />
+				</el-form-item>
+			</el-col>
 			<el-col :span="12">
 				<el-form-item label="设备温度">
 					<el-input v-model="dataForm.temperature" disabled />
 				</el-form-item>
 			</el-col>
-    </el-row>
+		</el-row>
 		<el-divider content-position="left">创建信息</el-divider>
 		<el-row :gutter="30">
 			<el-col :span="12">
@@ -105,7 +105,7 @@ const dataForm = reactive({
 	appVersion: '',
 	batteryPercent: '',
 	temperature: '',
-  protocolType: '',
+	protocolType: '',
 	status: '',
 	runningStatus: '',
 	upTime: '',
