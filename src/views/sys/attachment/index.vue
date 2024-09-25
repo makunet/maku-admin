@@ -119,7 +119,7 @@ const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
 }
 
 const beforeUpload: UploadProps['beforeUpload'] = file => {
-	if (file.size / 1024 / 1024 / 1024 / 1024 > 1) {
+	if (file.size / 1024 / 1024 / 100 > 1) {
 		ElMessage.error('文件大小不能超过100M')
 		return false
 	}
