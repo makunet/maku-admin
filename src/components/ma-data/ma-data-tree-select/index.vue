@@ -18,6 +18,8 @@ import { PropType, ref, watch } from 'vue'
 import { useDataApi } from '@/api/common'
 import { treeDataTranslate } from '@/utils/tool'
 interface Prop {
+	value: string
+	pid: string
 	label: string
 	children: string
 }
@@ -34,6 +36,8 @@ const prop = defineProps({
 		type: Object as PropType<Prop>,
 		required: false,
 		default: () => ({
+			value: 'id',
+			pid: 'pid',
 			label: 'name',
 			children: 'children'
 		})
@@ -72,7 +76,7 @@ const getDataList = async () => {
 		return
 	}
 	const data = await useDataApi(prop.url)
-	dataList.value = treeDataTranslate(data)
+	dataList.value = treeDataTranslate(data, prop.props.value, prop.props.pid)
 }
 
 getDataList()
