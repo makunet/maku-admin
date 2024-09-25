@@ -17,6 +17,7 @@
 				highlight-current-row
 				show-overflow-tooltip
 				:row-key="rowKey"
+				@row-dblclick="handleRowClick"
 				@selection-change="selectionChangeHandle"
 				@current-change="currentChange"
 			>
@@ -125,6 +126,11 @@ const submitHandle = () => {
 	}
 	handleClose()
 	emit('select', [currentRow.value])
+}
+
+const handleRowClick = (row: any) => {
+	handleClose()
+	emit('select', [row])
 }
 
 const handleClose = () => {
