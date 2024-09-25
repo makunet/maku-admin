@@ -1,9 +1,7 @@
 <template>
 	<el-row :gutter="10">
 		<el-col :span="5">
-			<el-card>
-				<OrgTree @node-click="handleOrgClick" />
-			</el-card>
+			<ma-data-tree-left url="/sys/org/list" title="机构列表" tree-data @click="handleClick" @manage="treeVisible = true" />
 		</el-col>
 		<el-col :span="19">
 			<el-card class="layout-query">
@@ -32,9 +30,9 @@
 						<el-button v-auth="'sys:user:save'" icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
 					</el-space>
 					<el-space v-auth="'sys:user:import'">
-						<ma-upload-file action="/sys/user/import">
+						<ma-upload-excel action="/sys/user/import">
 							<el-button plain icon="Upload">导入</el-button>
-						</ma-upload-file>
+						</ma-upload-excel>
 					</el-space>
 					<el-space>
 						<el-button v-auth="'sys:user:export'" plain icon="Download" @click="downloadHandle('/sys/user/export')">导出</el-button>
@@ -90,7 +88,7 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
-import OrgTree from './org-tree.vue'
+import emit, { MittEvent } from '@/utils/emits'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/user/page',
@@ -99,7 +97,7 @@ const state: IHooksOptions = reactive({
 		username: '',
 		mobile: '',
 		gender: '',
-		orgId: ''
+		orgId: []
 	}
 })
 
@@ -109,10 +107,12 @@ const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
 }
 
-const handleOrgClick = (orgId: any) => {
+const handleClick = (orgId: any[]) => {
 	state.queryForm.orgId = orgId
 	getDataList()
 }
+
+const treeVisible = ref(false)
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, downloadHandle, reset } = useCrud(state)
 </script>
