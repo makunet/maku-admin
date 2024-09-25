@@ -1,11 +1,12 @@
 <template>
 	<div class="upload-box">
 		<el-upload
-			v-model:file-list="_fileList"
+			v-model:file-list="fileList"
 			action="#"
 			list-type="picture-card"
-			:class="['upload', self_disabled ? 'disabled' : '', drag ? 'no-border' : '']"
+			:class="['upload', self_disabled ? 'disabled' : '', drag ? 'no-border' : '', isUploadLimit ? 'hide' : '']"
 			:multiple="true"
+			:headers="{ Authorization: cache.getToken() }"
 			:disabled="self_disabled"
 			:limit="limit"
 			:http-request="handleHttpUpload"
@@ -26,11 +27,9 @@
 				<div class="upload-handle" @click.stop>
 					<div class="handle-icon" @click="handlePictureCardPreview(file)">
 						<el-icon><ZoomIn /></el-icon>
-						<span>查看</span>
 					</div>
 					<div v-if="!self_disabled" class="handle-icon" @click="handleRemove(file)">
 						<el-icon><Delete /></el-icon>
-						<span>删除</span>
 					</div>
 				</div>
 			</template>
@@ -46,15 +45,15 @@
 import { ref, computed, inject, watch } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { uploadImg } from '@/api/sys/upload'
-import type { UploadProps, UploadFile, UploadUserFile, UploadRequestOptions } from 'element-plus'
-import { ElNotification, formContextKey, formItemContextKey } from 'element-plus'
+import { UploadProps, UploadFile, UploadUserFile, UploadRequestOptions } from 'element-plus'
+import { ElNotification, formContextKey } from 'element-plus'
+import cache from '@/utils/cache'
 
 interface UploadFileProps {
-	fileList: UploadUserFile[]
 	drag?: boolean // 是否支持拖拽上传 ==> 非必传（默认为 true）
 	disabled?: boolean // 是否禁用上传组件 ==> 非必传（默认为 false）
 	limit?: number // 最大图片上传数 ==> 非必传（默认为 5张）
-	fileSize?: number // 图片大小限制 ==> 非必传（默认为 5M）
+	size?: number // 图片大小限制 ==> 非必传（默认为 5M）
 	fileType?: any[] // 图片类型限制 ==> 非必传（默认为 ["image/jpeg", "image/png", "image/gif"]）
 	height?: string // 组件高度 ==> 非必传（默认为 150px）
 	width?: string // 组件宽度 ==> 非必传（默认为 150px）
@@ -62,33 +61,44 @@ interface UploadFileProps {
 }
 
 const props = withDefaults(defineProps<UploadFileProps>(), {
-	fileList: () => [],
 	drag: true,
 	disabled: false,
-	limit: 5,
-	fileSize: 5,
+	limit: 3,
+	size: 5,
 	fileType: () => ['image/jpeg', 'image/png', 'image/gif'],
-	height: '150px',
-	width: '150px',
-	borderRadius: '8px'
+	height: '100px',
+	width: '100px',
+	borderRadius: '5px'
 })
 
 // 获取 el-form 组件上下文
 const formContext = inject(formContextKey, void 0)
-// 获取 el-form-item 组件上下文
-const formItemContext = inject(formItemContextKey, void 0)
 // 判断是否禁用上传和删除
 const self_disabled = computed(() => {
 	return props.disabled || formContext?.disabled
 })
 
-const _fileList = ref<UploadUserFile[]>(props.fileList)
+const model = defineModel<any>()
+const isUploadLimit = computed(() => fileList.value.length >= props.limit)
+const fileList = ref<UploadUserFile[]>([])
 
-// 监听 props.fileList 列表默认值改变
 watch(
-	() => props.fileList,
-	(n: UploadUserFile[]) => {
-		_fileList.value = n
+	() => model.value,
+	async val => {
+		if (val && val.length > 0) {
+			const urls = model.value.split(',')
+			fileList.value = urls.map((url: string) => {
+				return {
+					name: url.substring(url.lastIndexOf('/') + 1),
+					url: url
+				} as UploadUserFile
+			})
+		} else {
+			fileList.value = []
+		}
+	},
+	{
+		immediate: true
 	}
 )
 
@@ -97,7 +107,7 @@ watch(
  * @param rawFile 选择的文件
  * */
 const beforeUpload: UploadProps['beforeUpload'] = rawFile => {
-	const imgSize = rawFile.size / 1024 / 1024 < props.fileSize
+	const imgSize = rawFile.size / 1024 / 1024 < props.size
 	const imgType = props.fileType.includes(rawFile.type)
 	if (!imgType) {
 		ElNotification({
@@ -110,7 +120,7 @@ const beforeUpload: UploadProps['beforeUpload'] = rawFile => {
 		setTimeout(() => {
 			ElNotification({
 				title: '温馨提示',
-				message: `上传图片大小不能超过 ${props.fileSize}M！`,
+				message: `上传图片大小不能超过 ${props.size}MB！`,
 				type: 'warning'
 			})
 		}, 0)
@@ -138,22 +148,18 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
  * @param response 上传响应结果
  * @param uploadFile 上传的文件
  * */
-const emit = defineEmits<{
-	'update:fileList': [value: UploadUserFile[]]
-}>()
+const emit = defineEmits<{ 'update:fileList': [value: UploadUserFile[]] }>()
 const uploadSuccess = (response: { url: string } | undefined, uploadFile: UploadFile) => {
 	if (!response) {
 		return
 	}
 	uploadFile.url = response.url
-	emit('update:fileList', _fileList.value)
-	// 调用 el-form 内部的校验方法（可自动校验）
-	formItemContext?.prop && formContext?.validateField([formItemContext.prop as string])
-	ElNotification({
-		title: '温馨提示',
-		message: '图片上传成功！',
-		type: 'success'
-	})
+
+	if (model.value) {
+		model.value = model.value + ',' + response.url
+	} else {
+		model.value = response.url
+	}
 }
 
 /**
@@ -161,8 +167,16 @@ const uploadSuccess = (response: { url: string } | undefined, uploadFile: Upload
  * @param file 删除的文件
  * */
 const handleRemove = (file: UploadFile) => {
-	_fileList.value = _fileList.value.filter(item => item.url !== file.url || item.name !== file.name)
-	emit('update:fileList', _fileList.value)
+	fileList.value = fileList.value.filter(item => item.url !== file.url || item.name !== file.name)
+	const files = fileList.value.map((file: any) => {
+		return file.url
+	})
+
+	if (files.length === 0) {
+		model.value = ''
+	} else {
+		model.value = files.join(',')
+	}
 }
 
 /**
@@ -226,6 +240,11 @@ const handlePictureCardPreview: UploadProps['onPreview'] = file => {
 	.no-border {
 		:deep(.el-upload--picture-card) {
 			border: none !important;
+		}
+	}
+	.hide {
+		:deep(.el-upload--picture-card) {
+			display: none !important;
 		}
 	}
 	:deep(.upload) {
