@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { useAppStore } from '@/store/modules/app'
@@ -37,7 +37,7 @@ const constantRoutes: RouteRecordRaw[] = [
 const asyncRoutes: RouteRecordRaw = {
 	path: '/',
 	component: () => import('../layout/index.vue'),
-	redirect: '/dashboard/index',
+	redirect: '/dashboard/workbench',
 	children: [
 		{
 			path: '/profile',
@@ -161,7 +161,7 @@ export const errorRoute: RouteRecordRaw = {
 }
 
 export const router = createRouter({
-	history: createWebHashHistory(),
+	history: createWebHistory(),
 	routes: constantRoutes
 })
 
