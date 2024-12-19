@@ -4,5 +4,6 @@ export default {
 	ComponentSizeKey: 'componentSize',
 	TokenKey: 'maToken',
 	RefreshTokenKey: 'maRefreshToken',
-	ThemeKey: 'theme'
+	ThemeKey: 'theme',
+	Redirect: 'redirect'
 }
