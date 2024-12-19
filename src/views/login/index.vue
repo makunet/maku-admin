@@ -20,16 +20,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import Account from './account.vue'
 import Mobile from './mobile.vue'
 import Third from './third.vue'
+import { useRoute } from 'vue-router'
+import cache from '@/utils/cache'
 
 // 登录类型
 const loginType = ref('account')
 const loginSwitch = (type: string) => {
 	loginType.value = type
 }
+
+// 登录跳转
+const route = useRoute()
+watch(
+	() => route,
+	value => {
+		const redirect = route?.query?.redirect as string
+		if (redirect && redirect !== '/') {
+			cache.setRedirect(redirect)
+		} else {
+			cache.setRedirect('')
+		}
+	},
+	{ immediate: true }
+)
 </script>
 
 <style lang="scss" scoped>
