@@ -56,6 +56,14 @@ class Cache {
 	removeTheme = () => {
 		SessionStorage.removeItem(CacheKey.ThemeKey)
 	}
+
+	getRedirect = (): string => {
+		return Storage.getItem(CacheKey.Redirect)
+	}
+
+	setRedirect = (value: string) => {
+		Storage.setItem(CacheKey.Redirect, value)
+	}
 }
 
 export default new Cache()
