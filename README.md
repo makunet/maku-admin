@@ -7,7 +7,7 @@
 ## maku-boot | 单体低代码开发平台
 - Gitee仓库：https://gitee.com/makunet/maku-boot
 - Github仓库：https://github.com/makunet/maku-boot
-- 演示环境：https://demo.maku.net/maku-boot
+- 演示环境：https://demo.maku.net
 
 
 ## maku-cloud | 微服务低代码开发平台
