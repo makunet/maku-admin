@@ -150,6 +150,13 @@ export const constantMenu = [
 				url: 'demo/echarts/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1010,
+				name: 'WebSocket',
+				url: 'demo/websocket/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
 			}
 		]
 	}
@@ -223,7 +230,11 @@ router.beforeEach(async (to, from, next) => {
 		if (whiteList.indexOf(to.path) > -1) {
 			next()
 		} else {
-			next(`/login?redirect=${to.fullPath}`)
+			if (to.fullPath === '/') {
+				next('/login')
+			} else {
+				next(`/login?redirect=${to.fullPath}`)
+			}
 		}
 	}
 })
