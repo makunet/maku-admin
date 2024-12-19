@@ -2,7 +2,7 @@
 	<el-container class="layout-container layout-columns">
 		<el-aside class="layout-sidebar aside-expend" :class="sidebarClass">
 			<div class="sidebar-logo">
-				<el-avatar src="./favicon.ico"></el-avatar>
+				<el-avatar src="/favicon.ico"></el-avatar>
 			</div>
 			<el-scrollbar>
 				<div class="columns-menu">
