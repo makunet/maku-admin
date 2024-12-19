@@ -25,6 +25,7 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import constant from '@/utils/constant'
 import { sm2Encrypt } from '@/utils/smCrypto'
+import cache from '@/utils/cache'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -88,7 +89,7 @@ const onLogin = () => {
 		userStore
 			.accountLoginAction(loginData)
 			.then(() => {
-				router.push({ path: constant.loginPage })
+				router.push({ path: cache.getRedirect() || constant.loginPage })
 			})
 			.catch(() => {
 				if (captchaVisible.value) {
