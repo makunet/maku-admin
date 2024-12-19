@@ -14,6 +14,7 @@
 import constant from '@/utils/constant'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/modules/user'
+import cache from '@/utils/cache'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -31,7 +32,7 @@ const thirdLogin = (openType: string) => {
 
 		// 第三方登录
 		userStore.thirdLoginAction(e.data).then(() => {
-			router.push({ path: constant.loginPage })
+			router.push({ path: cache.getRedirect() || constant.loginPage })
 		})
 	}
 }
