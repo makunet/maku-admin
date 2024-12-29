@@ -106,6 +106,11 @@ const tableData = [
 		intro: 'maku-boot和maku-cloud的前端工程，采用Vue3、TypeScript、ElementPlus、Vite等开发。'
 	},
 	{
+		name: 'maku-app',
+		url: 'https://gitee.com/makunet/maku-app',
+		intro: '微信小程序端，采用微信原生小程序开发，使用门槛极低。'
+	},
+	{
 		name: 'maku-generator',
 		url: 'https://gitee.com/makunet/maku-generator',
 		intro: '代码生成器，可根据自定义模板内容，快速生成代码。'
