@@ -7,8 +7,6 @@ import { directive } from './utils/directive'
 import { router } from './router'
 import { i18n } from './i18n'
 import 'virtual:svg-icons-register'
-import MakuFormDesign from 'maku-form-design'
-import 'maku-form-design/lib/style.css'
 
 import '@/icons/iconfont/iconfont'
 import 'element-plus/dist/index.css'
@@ -34,9 +32,6 @@ app.use(createPinia())
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 	app.component(key, component)
 }
-
-// 表单设计器
-app.use(MakuFormDesign)
 
 // 注册 自定义指令
 directive(app)
