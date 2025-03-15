@@ -97,62 +97,48 @@ export const constantMenu = [
 			},
 			{
 				id: 1002,
-				name: '表单设计器',
-				url: 'demo/formDesign/form',
-				openStyle: 0,
-				icon: 'icon-unorderedlist'
-			},
-			{
-				id: 1003,
-				name: '表单生成器',
-				url: 'demo/formDesign/generate',
-				openStyle: 0,
-				icon: 'icon-unorderedlist'
-			},
-			{
-				id: 1004,
 				name: '二维码生成',
 				url: 'demo/qrcode/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1005,
+				id: 1003,
 				name: '页面打印',
 				url: 'demo/printJs/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1006,
+				id: 1004,
 				name: '图片裁剪',
 				url: 'demo/cropper/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1007,
+				id: 1005,
 				name: '富文本编辑器',
 				url: 'demo/editor/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1008,
+				id: 1006,
 				name: 'Markdown',
 				url: 'demo/markdown/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1009,
+				id: 1007,
 				name: 'ECharts图表',
 				url: 'demo/echarts/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
 			},
 			{
-				id: 1010,
+				id: 1008,
 				name: 'WebSocket',
 				url: 'demo/websocket/index',
 				openStyle: 0,
