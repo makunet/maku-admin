@@ -25,4 +25,10 @@ const breadcrumb = computed(() => route.meta.breadcrumb)
 	}
 	padding-left: 10px;
 }
+
+@media only screen and (max-width: 1200px) {
+	.navbar-breadcrumb {
+		display: none;
+	}
+}
 </style>
