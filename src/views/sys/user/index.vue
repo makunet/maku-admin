@@ -51,8 +51,8 @@
 					@selection-change="selectionChangeHandle"
 				>
 					<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-					<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 					<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
+					<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 					<ma-dict-column prop="gender" label="性别" dict-type="user_gender"></ma-dict-column>
 					<el-table-column prop="mobile" label="手机号" header-align="center" align="center"></el-table-column>
 					<el-table-column prop="orgName" label="所属机构" header-align="center" align="center"></el-table-column>
@@ -88,7 +88,6 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
-import emit, { MittEvent } from '@/utils/emits'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/user/page',
