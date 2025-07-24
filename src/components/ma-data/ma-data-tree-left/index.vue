@@ -194,7 +194,7 @@ function getChildrenIdsRecursively(node: any): any[] {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	:deep(.el-tree-node__content) {
-		padding: 20px 0;
+		padding: 10px 0;
 	}
 	:deep(.el-card__header) {
 		padding: 15px 12px;
