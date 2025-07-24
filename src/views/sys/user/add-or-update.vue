@@ -9,6 +9,9 @@
 					<el-form-item prop="orgId" label="所属机构">
 						<ma-org-select v-model="dataForm.orgId" placeholder="请选择"></ma-org-select>
 					</el-form-item>
+					<el-form-item prop="leaderId" label="直属主管">
+						<ma-user-input v-model="dataForm.leaderId" placeholder="请选择"></ma-user-input>
+					</el-form-item>
 					<el-form-item prop="mobile" label="手机号">
 						<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
 					</el-form-item>
@@ -56,6 +59,7 @@ import { ElMessage } from 'element-plus/es'
 import { useUserApi, useUserSubmitApi } from '@/api/sys/user'
 import { usePostListApi } from '@/api/sys/post'
 import { useRoleListApi } from '@/api/sys/role'
+import MaUserInput from '@/components/ma-user/ma-user-input/index.vue'
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -69,6 +73,7 @@ const dataForm = reactive({
 	username: '',
 	realName: '',
 	orgId: '',
+	leaderId: '',
 	password: '',
 	gender: 0,
 	email: '',
