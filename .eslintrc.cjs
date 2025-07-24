@@ -14,6 +14,7 @@ module.exports = {
 	},
 	rules: {
 		curly: 'error', // 控制语句需要大括号
-		'vue/multi-word-component-names': 'off'
+		'vue/multi-word-component-names': 'off',
+		'vue/require-prop-types': 'off'
 	}
 }
