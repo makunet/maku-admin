@@ -31,3 +31,7 @@ export const useUserSubmitApi = (dataForm: any) => {
 		return service.post('/sys/user', dataForm)
 	}
 }
+
+export const useOrgUserListApi = (orgId: number) => {
+	return service.get(`/sys/user/orgUserList/${orgId}`)
+}
