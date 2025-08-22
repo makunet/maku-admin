@@ -5,5 +5,6 @@ export default {
 	TokenKey: 'maToken',
 	RefreshTokenKey: 'maRefreshToken',
 	ThemeKey: 'theme',
+	TenantId: 'tenantId',
 	Redirect: 'redirect'
 }

@@ -13,6 +13,14 @@ class Cache {
 		Storage.setItem(CacheKey.TokenKey, value)
 	}
 
+	getTenantId = (): string => {
+		return Storage.getItem(CacheKey.TenantId) || ''
+	}
+
+	setTenantId = (value: string) => {
+		Storage.setItem(CacheKey.TenantId, value)
+	}
+
 	getRefreshToken = (): string => {
 		return Storage.getItem(CacheKey.RefreshTokenKey) || ''
 	}
