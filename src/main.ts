@@ -12,18 +12,7 @@ import '@/icons/iconfont/iconfont'
 import 'element-plus/dist/index.css'
 import '@/styles/index.scss'
 
-import 'xe-utils'
-import VXETable from 'vxe-table'
-import 'vxe-table/lib/style.css'
-
 import MaComponent from '@/components/index'
-
-VXETable.config({
-	zIndex: 3000,
-	select: {
-		transfer: true
-	}
-})
 
 const app = createApp(App)
 app.use(createPinia())
@@ -39,5 +28,4 @@ app.use(i18n)
 app.use(router)
 app.use(MaComponent)
 app.use(ElementPlus)
-app.use(VXETable)
 app.mount('#app')
