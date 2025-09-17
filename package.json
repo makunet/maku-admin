@@ -15,7 +15,7 @@
     "@vueuse/core": "10.9.0",
     "@wangeditor/editor": "5.1.23",
     "@wangeditor/editor-for-vue": "5.1.12",
-    "axios": "1.8.3",
+    "axios": "1.12.2",
     "cropperjs": "1.6.1",
     "echarts": "5.5.0",
     "element-plus": "2.11.2",
@@ -29,9 +29,7 @@
     "sortablejs": "^1.15.2",
     "vue": "3.5.13",
     "vue-i18n": "11.1.2",
-    "vue-router": "4.3.0",
-    "vxe-table": "4.5.21",
-    "xe-utils": "3.5.22"
+    "vue-router": "4.3.0"
   },
   "devDependencies": {
     "@babel/types": "7.24.0",
@@ -49,10 +47,10 @@
     "eslint-plugin-vue": "9.23.0",
     "prettier": "3.2.5",
     "sass": "1.72.0",
-    "typescript": "5.4.2",
+    "typescript": "5.9.2",
     "vite": "6.3.6",
     "vite-plugin-svg-icons": "2.0.1",
     "vite-plugin-vue-setup-extend": "0.4.0",
-    "vue-tsc": "2.2.8"
+    "vue-tsc": "2.2.12"
   }
 }
