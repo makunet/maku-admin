@@ -50,7 +50,7 @@
     "prettier": "3.2.5",
     "sass": "1.72.0",
     "typescript": "5.4.2",
-    "vite": "6.3.5",
+    "vite": "6.3.6",
     "vite-plugin-svg-icons": "2.0.1",
     "vite-plugin-vue-setup-extend": "0.4.0",
     "vue-tsc": "2.2.8"
