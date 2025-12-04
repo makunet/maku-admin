@@ -18,7 +18,7 @@
 		"axios": "1.12.2",
 		"cropperjs": "1.6.1",
 		"echarts": "5.5.0",
-		"element-plus": "2.11.2",
+		"element-plus": "2.11.9",
 		"mitt": "3.0.1",
 		"nprogress": "0.2.0",
 		"pinia": "2.3.1",
