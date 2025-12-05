@@ -12,6 +12,10 @@ export const useUserAvatarApi = (dataForm: any) => {
 	return service.put('/sys/user/avatar', dataForm)
 }
 
+export const useUserSignatureApi = (dataForm: any) => {
+	return service.put('/sys/user/signature', dataForm)
+}
+
 export const updatePasswordApi = (data: any) => {
 	return service.put('/sys/user/password', data)
 }
