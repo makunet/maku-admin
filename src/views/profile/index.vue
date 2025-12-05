@@ -46,6 +46,9 @@
 					<el-tab-pane label="修改密码" name="password">
 						<Password />
 					</el-tab-pane>
+					<el-tab-pane label="个人签名" name="signature" lazy>
+						<Signature />
+					</el-tab-pane>
 					<el-tab-pane label="第三方登录" name="third" lazy>
 						<ThirdLogin />
 					</el-tab-pane>
@@ -60,6 +63,7 @@ import { ref } from 'vue'
 import { useUserStore } from '@/store/modules/user'
 import Password from '@/views/profile/password.vue'
 import UserInfo from '@/views/profile/user-info.vue'
+import Signature from '@/views/profile/signature.vue'
 import ThirdLogin from '@/views/profile/third-login.vue'
 import { useUserAvatarApi } from '@/api/sys/user'
 import { ElMessage } from 'element-plus'
