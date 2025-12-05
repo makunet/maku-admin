@@ -70,4 +70,22 @@ const detailHandle = (row: any) => {
 }
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle } = useCrud(state)
+
+// 供父组件（定时任务列表）调用，按任务过滤日志
+const init = (row?: any) => {
+	if (row) {
+		state.queryForm.jobId = row.id
+		state.queryForm.jobName = row.jobName
+		state.queryForm.jobGroup = row.jobGroup
+	} else {
+		state.queryForm.jobId = ''
+		state.queryForm.jobName = ''
+		state.queryForm.jobGroup = ''
+	}
+	getDataList()
+}
+
+defineExpose({
+	init
+})
 </script>

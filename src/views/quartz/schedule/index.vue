@@ -42,12 +42,13 @@
 			</el-table-column>
 			<el-table-column prop="cronExpression" label="Cron表达式" header-align="center" align="center"></el-table-column>
 			<ma-dict-column prop="status" label="状态" dict-type="schedule_status"></ma-dict-column>
-			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="200">
+			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="260">
 				<template #default="scope">
 					<el-button v-auth="'schedule:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
 					<el-button v-if="scope.row.status === 0" v-auth="'schedule:update'" type="primary" link @click="statusHandle(scope.row, 1)">恢复</el-button>
 					<el-button v-if="scope.row.status === 1" v-auth="'schedule:update'" type="primary" link @click="statusHandle(scope.row, 0)">暂停</el-button>
 					<el-button v-auth="'schedule:run'" type="primary" link @click="runHandle(scope.row)">执行</el-button>
+					<el-button v-auth="'schedule:log'" type="primary" link @click="logHandle(scope.row)">日志</el-button>
 					<el-button v-auth="'schedule:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -68,14 +69,14 @@
 
 		<!-- 日志 -->
 		<el-drawer v-if="logVisible" v-model="logVisible" title="任务日志" :size="1200" :close-on-press-escape="false">
-			<log />
+			<log ref="logRef" />
 		</el-drawer>
 	</el-card>
 </template>
 
 <script setup lang="ts" name="QuartzScheduleIndex">
 import { useCrud } from '@/hooks'
-import { reactive, ref } from 'vue'
+import { reactive, ref, nextTick } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import Log from '../log/index.vue'
 import { IHooksOptions } from '@/hooks/interface'
@@ -129,8 +130,12 @@ const statusHandle = (row: any, status: any) => {
 }
 
 const logVisible = ref(false)
-const logHandle = () => {
+const logRef = ref<any>(null)
+const logHandle = (row?: any) => {
 	logVisible.value = true
+	nextTick(() => {
+		logRef.value?.init?.(row)
+	})
 }
 
 const queryRef = ref()
