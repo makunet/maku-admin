@@ -37,7 +37,7 @@ const constantRoutes: RouteRecordRaw[] = [
 const asyncRoutes: RouteRecordRaw = {
 	path: '/',
 	component: () => import('../layout/index.vue'),
-	redirect: '/dashboard/workbench',
+	redirect: '/dashboard/index',
 	children: [
 		{
 			path: '/profile',
@@ -67,13 +67,6 @@ export const dashboardMenu = [
 				openStyle: 0,
 				icon: 'icon-home',
 				affix: true
-			},
-			{
-				id: 102,
-				name: '工作台',
-				url: 'dashboard/workbench',
-				openStyle: 0,
-				icon: 'icon-appstore'
 			}
 		]
 	}
