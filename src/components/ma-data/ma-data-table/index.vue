@@ -1,7 +1,7 @@
 <template>
 	<div class="ma-data-table">
-		<el-dialog :model-value="visible" :title :close-on-click-modal="false" :width="800" draggable @close="handleClose">
-			<el-form v-if="queryParams.length > 0" :inline="true" :model="state.queryForm" style="margin-bottom: 15px">
+		<el-dialog :model-value="visible" :title :close-on-click-modal="false" :width="800" draggable append-to-body @close="handleClose">
+			<el-form v-if="queryParams.length > 0" :inline="true" :model="state.queryForm" style="margin-bottom: 15px" @submit.prevent>
 				<el-form-item v-for="(query, index) in queryParams" :key="index">
 					<el-input v-model="state.queryForm[query.field]" :placeholder="query.label"></el-input>
 				</el-form-item>
