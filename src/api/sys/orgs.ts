@@ -8,7 +8,7 @@ export const useOrgApi = (id: number) => {
 	return service.get('/sys/org/' + id)
 }
 
-export const useOrgListByPidApi = (id: number) => {
+export const useOrgListByPidApi = (id: Number) => {
 	return service.get('/sys/org/listByPid?pid=' + id)
 }
 
