@@ -16,10 +16,10 @@ export default {
 	updateTime: 'Update Time',
 	required: 'Required items cannot be empty',
 	app: {
-		title: 'Maku Admin',
+		title: 'MAKU Low Code',
 		description:
-			'The backstage management template developed based on Vue3, TypeScript, Element Plus, Vue Router, Pinia, Axios, i18n、Vite, etc., has a very low threshold for use, adopts the MIT open source protocol, is completely free and open source, and can be used for commercial projects and other scenarios for free! ',
-		logoText: 'Maku Admin',
+			'A powerful code generator that can generate both front-end and back-end code with a single click, helping Java projects solve 70% of repetitive work, allowing developers to spend more time developing business and improving development efficiency. There are many zero-code capabilities: Online form development, Online report development, Online interface development, form design, process design, etc.',
+		logoText: 'MAKU Low Code',
 		miniLogoText: 'MAKU',
 		username: 'Username',
 		password: 'Password',
