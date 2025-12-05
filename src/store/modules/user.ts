@@ -16,6 +16,7 @@ export const useUserStore = defineStore('userStore', {
 			mobile: '',
 			email: '',
 			avatar: '',
+			signature: '',
 			orgName: '',
 			postNameList: [],
 			createTime: ''
