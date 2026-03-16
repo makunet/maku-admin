@@ -68,6 +68,26 @@
 						<span>支持信创</span>
 					</div>
 				</div>
+
+				<!-- 微信小程序演示二维码 -->
+				<div class="wechat-qrcode-section">
+					<div class="qrcode-card">
+						<div class="qrcode-img-wrap">
+							<img src="/wechat.jpg" alt="微信小程序" class="qrcode-img" />
+						</div>
+						<div class="qrcode-info">
+							<div class="qrcode-title">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="wechat-icon">
+									<rect x="2" y="3" width="20" height="14" rx="2" />
+									<path d="M8 21h8" />
+									<path d="M12 17v4" />
+								</svg>
+								<span>微信小程序演示</span>
+							</div>
+							<p class="qrcode-desc">微信扫一扫<br />体验移动端功能</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -257,6 +277,7 @@ watch(
 	.brand-features {
 		display: flex;
 		gap: 32px;
+		margin-bottom: 40px;
 
 		.feature-item {
 			display: flex;
@@ -278,6 +299,74 @@ watch(
 					width: 18px;
 					height: 18px;
 				}
+			}
+		}
+	}
+
+	// 微信小程序二维码区域
+	.wechat-qrcode-section {
+		.qrcode-card {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			padding: 20px;
+			background: rgba(255, 255, 255, 0.12);
+			border-radius: 16px;
+			backdrop-filter: blur(12px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			transition: all 0.3s ease;
+
+			&:hover {
+				background: rgba(255, 255, 255, 0.18);
+				transform: translateY(-2px);
+				box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+			}
+		}
+
+		.qrcode-img-wrap {
+			flex-shrink: 0;
+			width: 100px;
+			height: 100px;
+			background: #fff;
+			border-radius: 12px;
+			padding: 6px;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+			.qrcode-img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+				border-radius: 8px;
+			}
+		}
+
+		.qrcode-info {
+			flex: 1;
+
+			.qrcode-title {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				margin-bottom: 8px;
+
+				.wechat-icon {
+					width: 20px;
+					height: 20px;
+					opacity: 0.9;
+				}
+
+				span {
+					font-size: 16px;
+					font-weight: 600;
+					letter-spacing: 0.5px;
+				}
+			}
+
+			.qrcode-desc {
+				font-size: 13px;
+				opacity: 0.75;
+				line-height: 1.6;
+				margin: 0;
 			}
 		}
 	}
@@ -445,6 +534,16 @@ watch(
 
 		.brand-title {
 			font-size: 28px;
+		}
+
+		.wechat-qrcode-section .qrcode-card {
+			padding: 16px;
+			gap: 16px;
+		}
+
+		.qrcode-img-wrap {
+			width: 85px;
+			height: 85px;
 		}
 	}
 }
