@@ -134,11 +134,7 @@ emit.on(MittEvent.LeftTree, () => {
 const emits = defineEmits(['click', 'manage'])
 // 处理点击事件
 const handleNodeClick = (row: any) => {
-	if (currentNodeKey.value === row.id) {
-		currentNodeKey.value = null
-	} else {
-		currentNodeKey.value = row.id
-	}
+	currentNodeKey.value = row.id
 	const idList = getAllChildNodeIds(currentNodeKey.value, dataList.value)
 	emits('click', idList)
 }
